@@ -1,3 +1,4 @@
+//footer.tsx
 import Link from 'next/link'
 import { Facebook, Twitter, Linkedin, Instagram, Github, Mail, Phone, MapPin } from 'lucide-react'
 
