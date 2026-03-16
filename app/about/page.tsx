@@ -1,145 +1,299 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Users, Award, Clock, Heart } from 'lucide-react'
+import {
+  Rocket,
+  Code,
+  Cpu,
+  Layers,
+  ArrowRight,
+  Sparkles,
+  Users
+} from 'lucide-react'
 import Button from '@/components/ui/Button'
 
-const stats = [
-    { icon: Users, value: '50+', label: 'Happy Clients' },
-    { icon: Award, value: '100+', label: 'Projects Completed' },
-    { icon: Clock, value: '5+', label: 'Years Experience' },
-    { icon: Heart, value: '24/7', label: 'Dedicated Support' },
+const principles = [
+{
+icon: Rocket,
+title: "Product Thinking",
+description:
+"We approach every project as a product, not just a website. Our goal is to build platforms that scale and deliver real value."
+},
+
+{
+icon: Code,
+title: "Modern Engineering",
+description:
+"We use modern frameworks and cloud infrastructure to create reliable, maintainable systems."
+},
+
+{
+icon: Cpu,
+title: "AI & Automation",
+description:
+"We design platforms ready for AI integration, automation, and intelligent workflows."
+},
+
+{
+icon: Layers,
+title: "End-to-End Delivery",
+description:
+"From idea to launch and beyond, we support the entire lifecycle of your product."
+}
 ]
 
-const team = [
-    { name: 'Rajesh Kumar', role: 'Founder & CEO', image: '/team/1.jpg' },
-    { name: 'Priya Singh', role: 'Lead Developer', image: '/team/2.jpg' },
-    { name: 'Amit Patel', role: 'UI/UX Director', image: '/team/3.jpg' },
-    { name: 'Neha Sharma', role: 'Project Manager', image: '/team/4.jpg' },
+const tech = [
+"Next.js",
+"React",
+"Node.js",
+"Python",
+"Flutter",
+"React Native",
+"PostgreSQL",
+"AWS",
+"Docker",
+"AI APIs",
 ]
 
 export default function AboutPage() {
-    return (
-        <div className="pt-20 min-h-screen">
-            {/* Hero Section */}
-            <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
-                <div className="container mx-auto px-4 text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold mb-6"
-                    >
-                        About Trident Digital Solutions
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-xl text-blue-100 max-w-3xl mx-auto"
-                    >
-                        We're a team of passionate developers and designers dedicated to transforming ideas into digital reality.
-                    </motion.p>
-                </div>
-            </section>
 
-            {/* Stats Section */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {stats.map((stat, index) => {
-                            const Icon = stat.icon
-                            return (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="text-center"
-                                >
-                                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <Icon className="w-8 h-8 text-blue-600" />
-                                    </div>
-                                    <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                                    <div className="text-gray-600">{stat.label}</div>
-                                </motion.div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </section>
+return (
 
-            {/* Story Section */}
-            <section className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-3xl font-bold mb-6"
-                        >
-                            Our Story
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-lg text-gray-600 mb-6"
-                        >
-                            Founded in 2020, Trident Digital Solutions started with a simple mission: to help businesses thrive in the digital age. What began as a small team of two developers has grown into a full-service digital agency serving clients worldwide.
-                        </motion.p>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="text-lg text-gray-600"
-                        >
-                            Today, we're proud to have completed over 100 projects and built lasting relationships with clients across industries. Our success is built on our commitment to quality, innovation, and customer satisfaction.
-                        </motion.p>
-                    </div>
-                </div>
-            </section>
+<div className="pt-24 min-h-screen">
 
-            {/* Team Section */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-center mb-12">Meet Our Team</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {team.map((member, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="text-center"
-                            >
-                                <div className="w-32 h-32 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-4xl font-bold">
-                                    {member.name.charAt(0)}
-                                </div>
-                                <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                                <p className="text-gray-600">{member.role}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+{/* HERO */}
 
-            {/* CTA Section */}
-            <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
-                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                        Let's work together to bring your ideas to life.
-                    </p>
-                    <Button href="/contact" variant="secondary" size="lg">
-                        Get in Touch
-                    </Button>
-                </div>
-            </section>
-        </div>
-    )
+<section className="py-24 bg-mesh relative overflow-hidden">
+
+<div className="container mx-auto px-6 text-center max-w-3xl">
+
+<motion.h1
+initial={{ opacity:0, y:20 }}
+animate={{ opacity:1, y:0 }}
+transition={{ duration:0.6 }}
+className="text-4xl md:text-5xl lg:text-6xl font-bold text-fg mb-6"
+>
+
+About <span className="gradient-text">Trident Square</span>
+
+</motion.h1>
+
+<motion.p
+initial={{ opacity:0, y:20 }}
+animate={{ opacity:1, y:0 }}
+transition={{ delay:0.1 }}
+className="text-xl text-muted"
+>
+
+We are a digital product studio building modern platforms,
+AI-powered tools, and scalable software for ambitious teams.
+
+</motion.p>
+
+</div>
+
+</section>
+
+
+{/* WHO WE ARE */}
+
+<section className="py-24">
+
+<div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+
+<div>
+
+<h2 className="text-3xl font-bold text-fg mb-6">
+
+Who we are
+
+</h2>
+
+<p className="text-muted mb-6 leading-relaxed">
+
+Trident Square is a digital product studio focused on building
+high-quality software platforms, web applications, and mobile products.
+
+</p>
+
+<p className="text-muted mb-6 leading-relaxed">
+
+We partner with startups, founders, and businesses to transform ideas
+into reliable digital platforms. Our team combines engineering,
+design, and product thinking to deliver systems that scale.
+
+</p>
+
+<p className="text-muted leading-relaxed">
+
+From AI-powered platforms to mobile apps and complex web systems,
+we focus on building products that are not only functional but also
+built for long-term growth.
+
+</p>
+
+</div>
+
+<div className="grid grid-cols-2 gap-6">
+
+<div className="card-subtle p-6 rounded-xl text-center">
+<h3 className="text-3xl font-bold gradient-text mb-2">AI</h3>
+<p className="text-sm text-muted">
+Voice assistants, automation, and intelligent platforms.
+</p>
+</div>
+
+<div className="card-subtle p-6 rounded-xl text-center">
+<h3 className="text-3xl font-bold gradient-text mb-2">Web</h3>
+<p className="text-sm text-muted">
+Modern scalable web platforms and SaaS products.
+</p>
+</div>
+
+<div className="card-subtle p-6 rounded-xl text-center">
+<h3 className="text-3xl font-bold gradient-text mb-2">Mobile</h3>
+<p className="text-sm text-muted">
+Cross-platform and native mobile apps.
+</p>
+</div>
+
+<div className="card-subtle p-6 rounded-xl text-center">
+<h3 className="text-3xl font-bold gradient-text mb-2">AI</h3>
+<p className="text-sm text-muted">
+Voice assistants, automation, and intelligent platforms.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+{/* PRINCIPLES */}
+
+<section className="py-24 border-y border-border bg-card/30">
+
+<div className="container mx-auto px-6">
+
+<h2 className="text-3xl font-bold text-center text-fg mb-14">
+
+How we build products
+
+</h2>
+
+<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+{principles.map((p,index)=>{
+
+const Icon = p.icon
+
+return (
+
+<motion.div
+key={index}
+initial={{ opacity:0, y:20 }}
+whileInView={{ opacity:1, y:0 }}
+viewport={{ once:true }}
+transition={{ delay:index*0.05 }}
+className="card-subtle p-6 rounded-xl"
+>
+
+<div className="w-12 h-12 flex items-center justify-center rounded-lg bg-accent/10 text-accent mb-4">
+
+<Icon className="w-6 h-6"/>
+
+</div>
+
+<h3 className="font-semibold text-fg mb-2">
+
+{p.title}
+
+</h3>
+
+<p className="text-sm text-muted">
+
+{p.description}
+
+</p>
+
+</motion.div>
+
+)
+
+})}
+
+</div>
+
+</div>
+
+</section>
+
+
+{/* TECH STACK */}
+
+<section className="py-24">
+
+<div className="container mx-auto px-6 text-center">
+
+<h2 className="text-3xl font-bold text-fg mb-10">
+
+Technologies we use
+
+</h2>
+
+<div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+
+{tech.map((t)=>(
+<span
+key={t}
+className="px-4 py-2 text-sm bg-fg/5 border border-border rounded-full text-muted"
+>
+{t}
+</span>
+))}
+
+</div>
+
+</div>
+
+</section>
+
+
+{/* CTA */}
+
+<section className="py-24 relative overflow-hidden">
+
+<div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-sky-500/10"/>
+
+<div className="container mx-auto px-6 text-center relative">
+
+<h2 className="text-3xl font-bold text-fg mb-4">
+
+Have an idea for a product?
+
+</h2>
+
+<p className="text-muted max-w-xl mx-auto mb-8">
+
+Tell us what you're building and we'll help you turn it
+into a working platform.
+
+</p>
+
+<Button href="/contact" size="lg">
+
+Start your project
+<ArrowRight className="ml-2 w-5 h-5"/>
+
+</Button>
+
+</div>
+
+</section>
+
+</div>
+
+)
 }

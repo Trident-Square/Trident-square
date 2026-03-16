@@ -2,34 +2,198 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --bg: #f5f7fa;
+    --fg: #0c1222;
+    --muted: #5c6b7c;
+    --accent: #0ea5e9;
+    --accent-soft: #e0f2fe;
+    --border: #e8ecf1;
+    --card: #ffffff;
+    --glow: rgba(14, 165, 233, 0.25);
+  }
+
+  .dark {
+    --bg: #06090f;
+    --fg: #e8ecf2;
+    --muted: #8b98a8;
+    --accent: #38bdf8;
+    --accent-soft: #0c4a6e;
+    --border: #1a2332;
+    --card: #0d1119;
+    --glow: rgba(56, 189, 248, 0.2);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+}
+
 @layer utilities {
-  .animation-delay-2000 {
-    animation-delay: 2s;
+  .animation-delay-2000 { animation-delay: 2s; }
+  .animation-delay-4000 { animation-delay: 4s; }
+  .text-balance { text-wrap: balance; }
+
+  .glass {
+    @apply backdrop-blur-xl;
   }
 
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-}
-
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
+  .card-subtle {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
   }
 
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0px, 0px) scale(1);
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 dark:from-cyan-400 dark:via-sky-400 dark:to-blue-500;
   }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+/* Soft gradient mesh */
+.bg-mesh {
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(14, 165, 233, 0.03) 0%, transparent 60%);
+}
+
+.dark .bg-mesh {
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 85% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(56, 189, 248, 0.02) 0%, transparent 60%);
+}
+
+/* Hero: layered gradient background */
+.bg-hero {
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(14, 165, 233, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 85% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
+}
+
+.dark .bg-hero {
+  background-image: 
+    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 85% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
+}
+
+/* Subtle dot pattern overlay */
+.bg-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, currentColor 0.5px, transparent 0.5px);
+  background-size: 28px 28px;
+  opacity: 0.035;
+  pointer-events: none;
+}
+.dark .bg-dots::before {
+  opacity: 0.055;
+}
+
+/* Floating orb animation */
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(8%, -5%) scale(1.02); }
+  50% { transform: translate(-5%, 8%) scale(0.98); }
+  75% { transform: translate(5%, 5%) scale(1.01); }
+}
+.animate-float-orb {
+  animation: float-orb 20s ease-in-out infinite;
+}
+.animate-float-orb-2 {
+  animation: float-orb 25s ease-in-out infinite reverse;
+}
+.animate-float-orb-3 {
+  animation: float-orb 22s ease-in-out infinite 2s;
+}
+
+/* Section transition: subtle gradient so not plain */
+.bg-section {
+  background-color: var(--bg);
+  background-image: linear-gradient(180deg, rgba(14, 165, 233, 0.02) 0%, transparent 25%, transparent 75%, rgba(59, 130, 246, 0.02) 100%);
+}
+.dark .bg-section {
+  background-image: linear-gradient(180deg, rgba(56, 189, 248, 0.02) 0%, transparent 25%, transparent 75%, rgba(59, 130, 246, 0.015) 100%);
+}
+
+/* Contact page: black/white with subtle depth */
+.bg-contact {
+  background-color: var(--bg);
+  background-image: 
+    linear-gradient(105deg, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+    linear-gradient(255deg, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+}
+.dark .bg-contact {
+  background-image: 
+    linear-gradient(105deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    linear-gradient(255deg, rgba(0, 0, 0, 0.15) 0%, transparent 40%);
+}
+
+/* Subtle vignette */
+.bg-vignette::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.03) 100%);
+}
+.dark .bg-vignette::after {
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+/* Shine on hover – subtle */
+.shine-hover {
+  position: relative;
+  overflow: hidden;
+}
+.shine-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transition: left 0.7s ease;
+}
+.shine-hover:hover::after {
+  left: 100%;
+}
+
+/* Slow gradient shift for hero / accents */
+@keyframes gradient-shift {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+.animate-gradient-shift {
+  animation: gradient-shift 8s ease-in-out infinite;
+}
+
+/* Nav link underline animation */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
 }

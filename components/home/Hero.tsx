@@ -1,93 +1,147 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles } from 'lucide-react'
-import Button from '@/components/ui/Button'
+import { motion } from "framer-motion"
+import { ArrowRight, Code2, Smartphone, Layout, Sparkles } from "lucide-react"
+import Button from "@/components/ui/Button"
 
-const stats = [
-  { value: '100+', label: 'Projects Completed' },
-  { value: '50+', label: 'Happy Clients' },
-  { value: '5+', label: 'Years Experience' },
-  { value: '24/7', label: 'Support' },
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+  },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+}
+
+const focusAreas = [
+  { icon: Layout, label: "Web Platforms" },
+  { icon: Smartphone, label: "Mobile Apps" },
+  { icon: Code2, label: "AI Products" },
+]
+
+const heroStats = [
+  { label: "Products Built", value: "Web · Mobile · AI" },
+  { label: "Tech Stack", value: "Next.js · Node · AI APIs" },
+  { label: "Approach", value: "Design → Build → Launch" },
+  { label: "Team", value: "Small & Senior" },
 ]
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <div className="absolute inset-0 w-full h-full">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-        <div className="absolute bottom-20 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-hero bg-dots">
+
+      {/* Glow background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[15%] left-[10%] w-[420px] h-[420px] bg-cyan-500/10 rounded-full blur-[120px] animate-float-orb" />
+        <div className="absolute bottom-[20%] right-[15%] w-[380px] h-[380px] bg-blue-500/10 rounded-full blur-[100px] animate-float-orb-2" />
+        <div className="absolute top-[50%] left-[50%] w-[300px] h-[300px] bg-sky-400/10 rounded-full blur-[90px] animate-float-orb-3 -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08),transparent_70%)]" />
       </div>
 
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-medium text-gray-700">Trusted by 100+ Clients Worldwide</span>
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-28">
+        <div className="max-w-4xl mx-auto text-center">
+
+          <motion.div variants={container} initial="hidden" animate="show">
+
+            {/* Top badge */}
+            <motion.div
+              variants={item}
+              className="inline-flex items-center gap-2 rounded-full bg-card/80 px-4 py-1.5 text-xs font-medium text-muted mb-6 shadow-sm"
+            >
+              <Sparkles className="w-3 h-3 text-accent" />
+              Digital product studio
+            </motion.div>
+
+            {/* Main heading */}
+            <motion.h1
+              variants={item}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-fg leading-[1.05] mb-6"
+            >
+              Build digital products
+              <br />
+              that <span className="gradient-text">scale</span>
+            </motion.h1>
+
+            {/* Subheading */}
+            <motion.p
+              variants={item}
+              className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed"
+            >
+              <span className="font-semibold text-fg">Trident Square</span> is a
+              digital product studio helping startups and businesses design,
+              build, and launch modern web, mobile, and AI-powered platforms.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              variants={item}
+              className="flex flex-col sm:flex-row gap-4 mb-12 justify-center"
+            >
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                className="shine-hover px-7 py-3"
+              >
+                Start your project
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+
+              <Button
+                href="/portfolio"
+                variant="outline"
+                size="lg"
+                className="px-7 py-3"
+              >
+                View our work
+              </Button>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              variants={item}
+              className="pt-6  grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-xs sm:text-sm text-muted"
+            >
+              {heroStats.map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-1">
+                  <span className="font-semibold text-fg/90">
+                    {stat.label}
+                  </span>
+                  <span>{stat.value}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Focus Areas */}
+            <motion.div
+              variants={item}
+              className="mt-10 flex flex-wrap gap-10 justify-center"
+            >
+              {focusAreas.map((area, index) => {
+                const Icon = area.icon
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 text-muted"
+                  >
+                    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-fg/5 text-fg/70">
+                      <Icon className="w-4 h-4" />
+                    </span>
+
+                    <span className="text-sm font-medium text-fg/90">
+                      {area.label}
+                    </span>
+                  </div>
+                )
+              })}
+            </motion.div>
+
           </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Trident
-            </span>
-            <br />
-            <span className="text-gray-900">Digital Solutions</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-          >
-            Transforming Ideas Into Digital Excellence. We provide premium web and app development services tailored to your business needs.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button href="/contact" variant="primary" size="lg">
-              Start Your Project
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button href="/portfolio" variant="outline" size="lg">
-              View Our Work
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

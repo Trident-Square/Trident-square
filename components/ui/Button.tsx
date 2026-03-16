@@ -3,19 +3,19 @@ import { cn } from '@/lib/utils'
 
 interface ButtonProps {
   href?: string
-  type?: 'button' | 'submit' | 'reset'  // यह line add करें
-  variant?: 'primary' | 'secondary' | 'outline'
+  type?: 'button' | 'submit' | 'reset'
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   children: React.ReactNode
   className?: string
   onClick?: () => void
   fullWidth?: boolean
-  disabled?: boolean  // optional: disabled prop भी add कर सकते हैं
+  disabled?: boolean
 }
 
 export default function Button({
   href,
-  type = 'button',  // default value 'button'
+  type = 'button',
   variant = 'primary',
   size = 'md',
   children,
@@ -24,12 +24,18 @@ export default function Button({
   fullWidth = false,
   disabled = false,
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200'
+  const baseStyles =
+    'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent/50'
 
   const variants = {
-    primary: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed',
-    secondary: 'bg-white text-gray-900 hover:bg-gray-50 border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed',
-    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed',
+    primary:
+      'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-accent/25 hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
+    secondary:
+      'bg-card text-fg border border-border hover:border-accent/50 hover:bg-accent-soft/50 dark:hover:bg-accent-soft/20 disabled:opacity-50 disabled:cursor-not-allowed',
+    outline:
+      'border-2 border-accent text-accent hover:bg-accent hover:text-white disabled:opacity-50 disabled:cursor-not-allowed',
+    ghost:
+      'text-fg hover:bg-accent-soft/50 dark:hover:bg-accent-soft/20 disabled:opacity-50 disabled:cursor-not-allowed',
   }
 
   const sizes = {
@@ -38,13 +44,7 @@ export default function Button({
     lg: 'px-8 py-4 text-lg',
   }
 
-  const classes = cn(
-    baseStyles,
-    variants[variant],
-    sizes[size],
-    fullWidth && 'w-full',
-    className
-  )
+  const classes = cn(baseStyles, variants[variant], sizes[size], fullWidth && 'w-full', className)
 
   if (href) {
     return (
@@ -55,12 +55,7 @@ export default function Button({
   }
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={classes}
-    >
+    <button type={type} onClick={onClick} disabled={disabled} className={classes}>
       {children}
     </button>
   )
