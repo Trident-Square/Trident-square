@@ -12,6 +12,10 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 export const metadata: Metadata = {
   title: "Trident Square — Digital Solutions",
   description: "Intelligent digital solutions. Web, app, and product development.",
+  icons: {
+    icon: [{ url: "/trident-remove-bg.png", type: "image/png" }],
+    apple: "/trident-remove-bg.png",
+  },
 };
 
 export default function RootLayout({

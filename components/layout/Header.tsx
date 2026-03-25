@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown } from 'lucide-react'
@@ -46,9 +47,19 @@ export default function Header() {
         <nav className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="flex items-center shrink-0 text-2xl sm:text-3xl font-extrabold tracking-tight text-fg hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 sm:gap-2.5 shrink-0 hover:opacity-90 transition-opacity"
           >
-            Trident <span className="gradient-text">Square</span>
+            <Image
+              src="/trident-remove-bg.png"
+              alt=""
+              width={40}
+              height={40}
+              className="h-8 w-8 sm:h-9 sm:w-9 object-contain"
+              priority
+            />
+            <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-fg">
+              Trident <span className="gradient-text">Square</span>
+            </span>
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">
