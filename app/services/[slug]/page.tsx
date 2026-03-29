@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Globe, Smartphone, ShoppingCart, Code, Palette, ArrowRight, Check } from 'lucide-react'
+import { Globe, Smartphone, ShoppingCart, Palette, ArrowRight, Check } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import Link from 'next/link'
 
@@ -49,7 +49,8 @@ const servicesData: Record<
       'App Store Optimization',
       'Maintenance & Support',
     ],
-    technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
+    // technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
+    technologies: ['React Native', 'Firebase'],
     price: 'Project based',
   },
   ecommerce: {
@@ -97,8 +98,8 @@ export default function ServicePage() {
     return (
       <div className="pt-24 min-h-screen flex items-center justify-center bg-mesh">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-fg mb-4">Service Not Found</h1>
-          <p className="text-muted mb-8">The service you&apos;re looking for doesn&apos;t exist.</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-fg mb-4">Service Not Found</h1>
+          <p className="text-sm sm:text-base text-muted mb-8">The service you&apos;re looking for doesn&apos;t exist.</p>
           <Button href="/services">Back to Services</Button>
         </div>
       </div>
@@ -109,10 +110,10 @@ export default function ServicePage() {
 
   return (
     <div className="pt-24 min-h-screen bg-mesh">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-2 lg:pt-2 pb-10">
         <Link
           href="/services"
-          className="inline-flex items-center text-accent hover:underline mb-8 font-medium"
+          className="inline-flex items-center text-sm sm:text-base text-accent hover:underline mb-8 font-medium"
         >
           <ArrowRight className="w-4 h-4 rotate-180 mr-2" />
           Back to Services
@@ -125,33 +126,39 @@ export default function ServicePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-6 shadow-lg shadow-accent/25">
-                <Icon className="w-8 h-8 text-white" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-4 sm:mb-6 shadow-lg shadow-accent/25">
+                <Icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-fg mb-6">{service.title}</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-fg mb-6">
+                {service.title}
+              </h1>
 
-              <p className="text-xl text-muted mb-8 leading-relaxed">{service.longDescription}</p>
+              <p className="text-base sm:text-lg md:text-xl text-muted mb-8 leading-relaxed">
+                {service.longDescription}
+              </p>
 
-              <div className="rounded-xl p-8 card-subtle mb-8">
-                <h2 className="text-2xl font-bold text-fg mb-6">Key Features</h2>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 card-subtle mb-8">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-fg mb-4 sm:mb-6">Key Features</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                   {service.features.map((feature, index) => (
                     <div key={index} className="flex items-start">
                       <Check className="w-5 h-5 text-cyan-500 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-fg">{feature}</span>
+                      <span className="text-sm sm:text-base text-fg">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-xl p-8 card-subtle">
-                <h2 className="text-2xl font-bold text-fg mb-6">Technologies We Use</h2>
+              <div className="rounded-xl p-5 sm:p-6 lg:p-8 card-subtle">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-fg mb-4 sm:mb-6">
+                  Technologies We Use
+                </h2>
                 <div className="flex flex-wrap gap-3">
                   {service.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 rounded-xl bg-card border border-border text-muted text-sm"
+                      className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-card border border-border text-muted text-xs sm:text-sm"
                     >
                       {tech}
                     </span>
@@ -166,30 +173,32 @@ export default function ServicePage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="rounded-xl p-8 card-subtle sticky top-24"
+              className="rounded-xl p-5 sm:p-6 lg:p-8 card-subtle sticky top-24"
             >
               <div className="mb-6">
-                <span className="text-3xl font-bold gradient-text">{service.price}</span>
+                <span className="text-2xl sm:text-3xl font-bold gradient-text">{service.price}</span>
               </div>
 
-              <p className="text-muted mb-6">Get a customized quote for your requirements.</p>
+              <p className="text-sm sm:text-base text-muted mb-6">
+                Get a customized quote for your requirements.
+              </p>
 
               <Button href="/contact" variant="primary" size="lg" fullWidth>
                 Get Started
               </Button>
 
               <div className="mt-6 pt-6 border-t border-border">
-                <h3 className="font-semibold text-fg mb-4">Why Choose Us?</h3>
+                <h3 className="text-sm sm:text-base font-semibold text-fg mb-4">Why Choose Us?</h3>
                 <ul className="space-y-3">
-                  <li className="flex items-center text-sm text-muted">
+                  <li className="flex items-center text-xs sm:text-sm text-muted">
                     <Check className="w-4 h-4 text-cyan-500 mr-2" />
                     Experienced Team
                   </li>
-                  <li className="flex items-center text-sm text-muted">
+                  <li className="flex items-center text-xs sm:text-sm text-muted">
                     <Check className="w-4 h-4 text-cyan-500 mr-2" />
                     Timely Delivery
                   </li>
-                  <li className="flex items-center text-sm text-muted">
+                  <li className="flex items-center text-xs sm:text-sm text-muted">
                     <Check className="w-4 h-4 text-cyan-500 mr-2" />
                     24/7 Support
                   </li>

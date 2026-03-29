@@ -8,7 +8,6 @@ import {
   Layers,
   Cpu,
   Sparkles,
-  CheckCircle,
   Database,
   Workflow
 } from 'lucide-react'
@@ -234,24 +233,24 @@ const active = items.find((item) => item.id === activeId) ?? items[0]
 
 return (
 
-<section className="relative py-24 bg-mesh bg-dots overflow-hidden">
+<section className="relative pb-16 lg:pb-2 bg-mesh bg-dots overflow-hidden">
 
-<div className="container mx-auto px-6">
+<div className="container mx-auto max-w-full min-w-0 px-4 sm:px-6 lg:px-8">
 
 {/* Header */}
 
-<div className="mb-16 max-w-3xl">
+<div className="mb-8 sm:mb-10 lg:mb-12 max-w-3xl">
 
-<p className="text-sm font-medium text-muted mb-2">
+<p className="text-xs sm:text-sm font-medium text-muted mb-2">
 Why Trident Square
 </p>
 
-<h2 className="text-4xl font-bold text-fg leading-tight">
+<h2 className="text-3xl sm:text-4xl font-bold text-fg leading-tight">
 End-to-end digital
 <span className="gradient-text"> product partners</span>
 </h2>
 
-<p className="text-muted mt-4 max-w-xl">
+<p className="text-muted mt-3 max-w-xl text-sm leading-relaxed">
 We help transform ideas into reliable digital products by combining
 strong engineering, thoughtful design, and scalable architecture.
 </p>
@@ -260,55 +259,68 @@ strong engineering, thoughtful design, and scalable architecture.
 
 {/* Layout */}
 
-<div className="grid lg:grid-cols-[320px_1fr] gap-12 items-stretch">
+<div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12 items-stretch min-w-0">
 
-{/* LEFT MENU */}
+{/* LEFT MENU — horizontal scroll on mobile, column on lg+ */}
 
-<div className="space-y-3">
-
-{items.map((item) => {
-
-const Icon = item.icon
-const isActive = item.id === activeId
-
-return (
-
-<button
-key={item.id}
-onClick={() => setActiveId(item.id)}
-className={`w-full text-left rounded-xl border px-4 py-4 transition-all
-${isActive
-? 'border-accent bg-card shadow'
-: 'border-border bg-card/60 hover:bg-card'
-}`}
+<div
+  className="
+    flex lg:flex-col
+    gap-2 sm:gap-3
+    overflow-x-auto lg:overflow-visible
+    px-0
+    pb-3 lg:pb-0
+    snap-x snap-mandatory lg:snap-none
+    scroll-smooth
+    [-webkit-overflow-scrolling:touch]
+  "
 >
+  {items.map((item) => {
+    const Icon = item.icon
+    const isActive = item.id === activeId
 
-<div className="flex items-center gap-3 mb-1">
+    return (
+      <button
+        key={item.id}
+        type="button"
+        onClick={() => setActiveId(item.id)}
+        className={`
+          shrink-0 snap-start
+          w-[260px] sm:w-[280px] lg:w-full
+          text-left rounded-xl border
+          px-3 sm:px-4 py-3 sm:py-4
+          transition-all duration-200
+          touch-manipulation active:scale-[0.98]
+          min-h-[80px] sm:min-h-[88px]
 
-<span
-className={`flex h-8 w-8 items-center justify-center rounded-lg
-${isActive ? 'bg-accent text-white' : 'bg-fg/5 text-fg/70'}
-`}
->
-<Icon className="h-4 w-4" />
-</span>
+          ${isActive
+            ? 'border-accent bg-card shadow-md'
+            : 'border-border bg-card/60 active:bg-card/80'}
+        `}
+      >
+        <div className="flex items-start gap-2.5 sm:gap-3 mb-1">
+          <span
+            className={`
+              flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg
+              ${isActive
+                ? 'bg-accent text-white'
+                : 'bg-fg/5 text-fg/70'}
+            `}
+          >
+            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          </span>
 
-<span className="font-semibold text-fg text-sm">
-{item.label}
-</span>
+          <span className="font-semibold text-fg text-xs sm:text-sm leading-snug">
+            {item.label}
+          </span>
+        </div>
 
-</div>
-
-<p className="text-xs text-muted pl-11">
-{item.tagline}
-</p>
-
-</button>
-
-)
-
-})}
-
+        <p className="text-[11px] sm:text-xs text-muted pl-9.5 sm:pl-11 line-clamp-2">
+          {item.tagline}
+        </p>
+      </button>
+    )
+  })}
 </div>
 
 {/* RIGHT PANEL */}
@@ -318,40 +330,40 @@ key={active.id}
 initial={{ opacity: 0, y: 10 }}
 animate={{ opacity: 1, y: 0 }}
 transition={{ duration: 0.25 }}
-className="rounded-2xl bg-card border border-border px-8 py-4 shadow-sm flex flex-col h-full"
+className="rounded-xl sm:rounded-2xl bg-card border border-border p-4 sm:p-5 lg:p-6 shadow-sm flex flex-col h-full min-w-0"
 >
 
-<div className="flex items-center gap-3 mb-4">
+<div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3 sm:mb-4 min-w-0">
 
-<span className="h-10 w-10 flex items-center justify-center rounded-lg bg-accent/10 text-accent">
-<active.icon className="h-5 w-5" />
+<span className="h-8 w-8 sm:h-9 sm:w-9 lg:h-10 lg:w-10 shrink-0 flex items-center justify-center rounded-lg bg-accent/10 text-accent">
+<active.icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 lg:h-5 lg:w-5" />
 </span>
 
-<h3 className="text-xl font-semibold text-fg">
+<h3 className="text-base sm:text-lg lg:text-xl font-semibold text-fg min-w-0 break-words">
 {active.title}
 </h3>
 
 </div>
 
-<p className="text-muted text-sm leading-relaxed mb-6">
+<p className="text-muted text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5 lg:mb-6 min-w-0">
 {active.description}
 </p>
 
 {/* Technologies */}
 
-<div className="mb-6">
+<div className="mb-4 sm:mb-5 lg:mb-6">
 
-<p className="text-xs uppercase tracking-wide text-muted mb-3">
+<p className="text-[10px] sm:text-xs uppercase tracking-wide text-muted mb-2 sm:mb-3">
 Technology Layer
 </p>
 
-<div className="flex flex-wrap gap-2">
+<div className="flex flex-wrap gap-1.5 sm:gap-2">
 
 {active.technologies.map((tech) => (
 
 <span
 key={tech}
-className="text-xs bg-fg/5 border border-border rounded-full px-3 py-1 text-muted"
+className="text-[10px] sm:text-xs bg-fg/5 border border-border rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-muted max-w-full break-words text-left"
 >
 {tech}
 </span>
@@ -364,21 +376,21 @@ className="text-xs bg-fg/5 border border-border rounded-full px-3 py-1 text-mute
 
 {/* Workflow */}
 
-<div className="mb-6">
+<div className="mb-4 sm:mb-5 lg:mb-6">
 
-<p className="text-xs uppercase tracking-wide text-muted mb-3">
+<p className="text-[10px] sm:text-xs uppercase tracking-wide text-muted mb-2 sm:mb-3">
 Typical Workflow
 </p>
 
-<ul className="space-y-2 text-sm text-muted">
+<ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-muted">
 
 {active.workflow.map((step) => (
 
-<li key={step} className="flex gap-2">
+<li key={step} className="flex gap-2 min-w-0">
 
-<Workflow className="h-4 w-4 text-accent mt-1" />
+<Workflow className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent mt-0.5 shrink-0" />
 
-{step}
+<span className="min-w-0 break-words">{step}</span>
 
 </li>
 
@@ -390,21 +402,21 @@ Typical Workflow
 
 {/* Deliverables */}
 
-<div className="mb-6">
+<div className="mb-4 sm:mb-5 lg:mb-6">
 
-<p className="text-xs uppercase tracking-wide text-muted mb-3">
+<p className="text-[10px] sm:text-xs uppercase tracking-wide text-muted mb-2 sm:mb-3">
 Deliverables
 </p>
 
-<ul className="space-y-2 text-sm text-muted">
+<ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-muted">
 
 {active.deliverables.map((d) => (
 
-<li key={d} className="flex gap-2">
+<li key={d} className="flex gap-2 min-w-0">
 
-<Database className="h-4 w-4 text-accent mt-1" />
+<Database className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent mt-0.5 shrink-0" />
 
-{d}
+<span className="min-w-0 break-words">{d}</span>
 
 </li>
 

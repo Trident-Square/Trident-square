@@ -63,7 +63,7 @@ return (
 
 {/* HERO */}
 
-<section className="py-24 bg-mesh relative overflow-hidden">
+<section className="pb-24 pt-12 bg-mesh relative overflow-hidden">
 
 <div className="container mx-auto px-6 text-center max-w-3xl">
 
@@ -97,7 +97,7 @@ AI-powered tools, and scalable software for ambitious teams.
 
 {/* WHO WE ARE */}
 
-<section className="py-24">
+<section className="pb-24 pt-12">
 
 <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 

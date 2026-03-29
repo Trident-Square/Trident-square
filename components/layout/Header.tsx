@@ -58,7 +58,7 @@ export default function Header() {
               priority
             />
             <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-fg">
-              Trident <span className="gradient-text">Square</span>
+              Trident<span className="gradient-text">Square</span>
             </span>
           </Link>
 

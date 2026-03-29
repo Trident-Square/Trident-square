@@ -74,12 +74,12 @@ export default function Services() {
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-8"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-fg">
             Our <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-muted mt-4 max-w-2xl mx-auto text-lg">
+          <p className="text-muted mt-4 max-w-2xl mx-auto text-sm lg:text-lg">
             We offer comprehensive digital solutions tailored to your business needs. Pricing is project-based and customized for each client.
           </p>
         </motion.div>

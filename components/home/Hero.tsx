@@ -23,12 +23,56 @@ const focusAreas = [
   { icon: Code2, label: "AI Products" },
 ]
 
-const heroStats = [
-  { label: "Products Built", value: "Web · Mobile · AI" },
-  { label: "What we ship", value: "MVPs · Platforms · Integrations" },
-  { label: "Approach", value: "Design → Build → Launch" },
-  { label: "Team", value: "Small & Senior" },
+const stats = [
+  { label: "Products Built", value: "Web · Mobile · AI", icon: Code2 },
+  { label: "What we ship", value: "MVPs · Platforms · Integrations", icon: Sparkles },
+  { label: "Approach", value: "Design → Build → Launch", icon: Layout },
+  { label: "Team", value: "Small & Senior", icon: Smartphone },
 ]
+
+export function StatsGrid() {
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {stats.map((stat, i) => {
+        const Icon = stat.icon
+
+        return (
+          <div
+            key={i}
+            className="group relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4 sm:p-5 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.08)]"
+          >
+            {/* Glow layer */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-cyan-400/10 via-transparent to-blue-500/10" />
+
+            {/* Content */}
+            <div className="relative flex flex-col items-center text-center gap-2">
+
+              {/* Icon */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-cyan-400/20 blur-md rounded-lg group-hover:blur-lg transition-all" />
+                <div className="relative p-2 rounded-lg bg-cyan-400/10 text-cyan-300">
+                  <Icon className="w-4 h-4" />
+                </div>
+              </div>
+
+              {/* Value */}
+              <p className="text-sm sm:text-base font-semibold text-white group-hover:text-cyan-300 transition">
+                {stat.value}
+              </p>
+
+              {/* Label */}
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-white/60">
+                <span className="w-1 h-1 bg-cyan-400/50 rounded-full" />
+                {stat.label}
+                <span className="w-1 h-1 bg-cyan-400/50 rounded-full" />
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function Hero() {
   return (
@@ -59,7 +103,7 @@ export default function Hero() {
             {/* Main heading */}
             <motion.h1
               variants={item}
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-fg leading-[1.12] sm:leading-[1.05] mb-5 sm:mb-6 px-0.5 break-words"
+              className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-fg leading-[1.12] sm:leading-[1.05] mb-5 sm:mb-6 px-0.5 break-words"
             >
               Build digital products
               <br />
@@ -101,20 +145,8 @@ export default function Hero() {
               </Button>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              variants={item}
-              className="pt-4 sm:pt-6 grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-6 sm:gap-y-6 lg:grid-cols-4 text-center text-[11px] sm:text-xs md:text-sm text-muted"
-            >
-              {heroStats.map((stat) => (
-                <div key={stat.label} className="flex flex-col gap-1 min-w-0 items-center px-0.5">
-                  <span className="font-semibold text-fg/90">
-                    {stat.label}
-                  </span>
-                  <span className="break-words hyphens-auto">{stat.value}</span>
-                </div>
-              ))}
-            </motion.div>
+{/* Stats - Premium Gradient Cards */}
+<StatsGrid />
 
             {/* Focus Areas */}
             <motion.div

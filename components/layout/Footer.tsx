@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Facebook, Twitter, Linkedin, Instagram, Github, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { getContactEmail, getContactPhoneDisplay, getTelHref } from '@/lib/contact'
 
 const mainLinks = [
   { name: 'About', href: '/about' },
@@ -19,6 +20,10 @@ const serviceLinks = [
 ]
 
 export default function Footer() {
+  const contactEmail = getContactEmail()
+  const telHref = getTelHref()
+  const phoneDisplay = getContactPhoneDisplay()
+
   return (
     <footer className="relative border-t border-border bg-card">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,8 +55,8 @@ export default function Footer() {
             viewport={{ once: true }}
             className="col-span-2 md:col-span-1"
           >
-            <Link href="/" className="text-2xl font-bold gradient-text inline-block mb-4">
-              Trident Square
+            <Link href="/" className="text-2xl font-bold inline-block mb-4">
+            Trident<span className="gradient-text">Square</span>
             </Link>
             <p className="text-muted text-sm leading-relaxed mb-6 max-w-xs">
               Intelligent digital solutions. We build products that scale.
@@ -96,20 +101,24 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm">
                 <MapPin className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-muted">PEACE HOUSE, Alpha 1, Greater Noida, Uttar Pradesh 201310, India</span>
+                <span className="text-muted">Bhutani 62 Avenue, Block - C, Phase 2, Industrial Area, Sector 62, Noida, Uttar Pradesh 201309</span>
               </li>
-              <li>
-                <a href="tel:+916388443418" className="flex items-center gap-3 text-muted hover:text-accent transition-colors text-sm">
-                  <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                  +91 6388443418
-                </a>
-              </li>
-              <li>
-                <a href="mailto:admin@trident.com" className="flex items-center gap-3 text-muted hover:text-accent transition-colors text-sm">
-                  <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                  admin@trident.com
-                </a>
-              </li>
+              {telHref && phoneDisplay ? (
+                <li>
+                  <a href={telHref} className="flex items-center gap-3 text-muted hover:text-accent transition-colors text-sm">
+                    <Phone className="w-4 h-4 text-accent flex-shrink-0" />
+                    {phoneDisplay}
+                  </a>
+                </li>
+              ) : null}
+              {contactEmail ? (
+                <li>
+                  <a href={`mailto:${contactEmail}`} className="flex items-center gap-3 text-muted hover:text-accent transition-colors text-sm">
+                    <Mail className="w-4 h-4 text-accent flex-shrink-0" />
+                    {contactEmail}
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>

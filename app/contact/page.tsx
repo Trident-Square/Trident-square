@@ -3,11 +3,20 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock, Send, Check } from 'lucide-react'
+import {
+  getContactEmail,
+  getContactPhoneDisplay,
+  getTelHref,
+} from '@/lib/contact'
 
-const OFFICE_ADDRESS = 'PEACE HOUSE, 6th Cross St, near GATE NO-4, Alpha 1, Greater Noida, Uttar Pradesh 201310, India'
-const MAP_LINK = 'https://maps.google.com/?q=PEACE+HOUSE+6th+Cross+St+Alpha+1+Greater+Noida+Uttar+Pradesh+201310'
+const OFFICE_ADDRESS = 'Bhutani 62 Avenue, Block - C, Phase 2, Industrial Area, Sector 62, Noida, Uttar Pradesh 201309'
+const MAP_LINK = 'https://maps.google.com/?q=Bhutani+62+Avenue,+Block+-+C,+Phase+2,+Industrial+Area,+Sector+62,+Noida,+Uttar+Pradesh+201309'
 
 export default function ContactPage() {
+  const contactEmail = getContactEmail()
+  const telHref = getTelHref()
+  const phoneDisplay = getContactPhoneDisplay()
+  const phonePlaceholder = phoneDisplay || 'Your phone number'
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,12 +40,12 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="pt-24 min-h-screen bg-contact">
+    <div className="pt-8 lg:pt-6 min-h-screen bg-contact">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-14"
+          className="mb-6 lg:mb-10"
         >
           <p className="text-sm font-medium text-muted tracking-wide mb-2">Get in touch</p>
           <h1 className="text-4xl md:text-5xl font-bold text-fg">
@@ -113,7 +122,7 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-xl bg-bg border border-border text-fg placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-fg/10 focus:border-fg/30 transition-all"
-                      placeholder="+91 6388443418"
+                      placeholder={phonePlaceholder}
                     />
                   </motion.div>
                   <motion.div
@@ -247,40 +256,44 @@ export default function ContactPage() {
                 </div>
               </div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <div className="flex items-start gap-4">
-                <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-fg/10 text-fg shrink-0">
-                  <Mail className="w-5 h-5" />
-                </span>
-                <div>
-                  <h3 className="font-semibold text-fg mb-1">Email</h3>
-                  <a href="mailto:admin@tridentsquare.com" className="text-muted text-sm hover:text-fg transition-colors">
-                    admin@tridentsquare.com
-                  </a>
+            {contactEmail ? (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="flex items-start gap-4">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-fg/10 text-fg shrink-0">
+                    <Mail className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-fg mb-1">Email</h3>
+                    <a href={`mailto:${contactEmail}`} className="text-muted text-sm hover:text-fg transition-colors break-all">
+                      {contactEmail}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="flex items-start gap-4">
-                <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-fg/10 text-fg shrink-0">
-                  <Phone className="w-5 h-5" />
-                </span>
-                <div>
-                  <h3 className="font-semibold text-fg mb-1">Phone</h3>
-                  <a href="tel:+916388443418" className="text-muted text-sm hover:text-fg transition-colors">
-                  +91 63884 43418
-                  </a>
+              </motion.div>
+            ) : null}
+            {telHref && phoneDisplay ? (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <div className="flex items-start gap-4">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-fg/10 text-fg shrink-0">
+                    <Phone className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-fg mb-1">Phone</h3>
+                    <a href={telHref} className="text-muted text-sm hover:text-fg transition-colors">
+                      {phoneDisplay}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ) : null}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}

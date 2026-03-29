@@ -188,12 +188,12 @@ export default function PortfolioPage() {
   }, [activeCategory])
 
   return (
-    <div className="pt-24 min-h-screen relative bg-mesh bg-dots overflow-hidden">
+    <div className="pt-8 lg:pt-10 min-h-screen relative bg-mesh bg-dots overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-16 max-w-3xl mx-auto text-center"
+          className="mb-8 lg:mb-10 max-w-3xl mx-auto text-center"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-fg">
             AI‑driven <span className="gradient-text">products & platforms</span>
@@ -208,13 +208,13 @@ export default function PortfolioPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-14 flex flex-wrap items-center justify-center gap-3"
+          className="mb-10 flex flex-wrap items-center justify-center gap-3"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 ${
+              className={`px-2.5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 ${
                 activeCategory === category
                   ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/40'
                   : 'text-muted hover:text-fg hover:bg-fg/5'

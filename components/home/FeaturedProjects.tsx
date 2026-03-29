@@ -36,7 +36,7 @@ export default function FeaturedProjects() {
   const [selected, setSelected] = useState<(typeof featured)[number] | null>(null)
 
   return (
-    <section className="py-16 lg:py-20 bg-section">
+    <section className="py-16 lg:pb-12 bg-section">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-10">
           <div>

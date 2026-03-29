@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Header />
           <main className="min-h-screen">{children}</main>
           <Footer />
+          <WhatsAppFloat />
         </ThemeProvider>
       </body>
       <Analytics />
