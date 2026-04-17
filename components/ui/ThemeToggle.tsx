@@ -1,31 +1,69 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Sun, Moon } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/components/providers/ThemeProvider'
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, preference, toggleTheme, useSystemTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const isDark = theme === 'dark'
+  const followsSystem = preference === 'system'
+
+  if (!mounted) {
+    return (
+      <div
+        className="h-9 w-9 shrink-0 rounded-lg border border-border bg-card shadow-sm"
+        aria-hidden
+      />
+    )
+  }
 
   return (
     <motion.button
       type="button"
-      onClick={toggleTheme}
-      className="relative w-9 h-9 rounded-lg flex items-center justify-center text-fg/80 hover:text-fg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:ring-offset-2 focus:ring-offset-bg"
-      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-      whileTap={{ scale: 0.92 }}
-      whileHover={{ scale: 1.05 }}
+      onClick={(e) => {
+        if (e.shiftKey) {
+          useSystemTheme()
+        } else {
+          toggleTheme()
+        }
+      }}
+      className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-card text-fg shadow-sm transition-colors hover:bg-accent-soft/60 dark:border-slate-600 dark:bg-slate-900 dark:hover:bg-slate-800"
+      aria-label={
+        followsSystem
+          ? isDark
+            ? 'Switch to light mode (currently following system: dark)'
+            : 'Switch to dark mode (currently following system: light)'
+          : isDark
+            ? 'Switch to light mode'
+            : 'Switch to dark mode'
+      }
+      title={
+        followsSystem
+          ? 'Toggle light or dark. Shift+click: keep following system appearance.'
+          : 'Toggle light or dark. Shift+click: follow system appearance again.'
+      }
+      whileTap={{ scale: 0.94 }}
+      whileHover={{ scale: 1.04 }}
     >
       <motion.span
-        initial={false}
-        animate={{ rotate: theme === 'dark' ? 0 : 0, opacity: 1 }}
-        transition={{ duration: 0.2 }}
-        className="absolute"
+        key={theme}
+        initial={{ opacity: 0, rotate: -40 }}
+        animate={{ opacity: 1, rotate: 0 }}
+        transition={{ duration: 0.18 }}
+        className="flex items-center justify-center"
       >
-        {theme === 'dark' ? (
-          <Sun className="w-5 h-5" />
+        {isDark ? (
+          <Sun className="h-[1.15rem] w-[1.15rem] text-amber-300" aria-hidden />
         ) : (
-          <Moon className="w-5 h-5" />
+          <Moon className="h-[1.15rem] w-[1.15rem] text-indigo-700" aria-hidden />
         )}
       </motion.span>
     </motion.button>

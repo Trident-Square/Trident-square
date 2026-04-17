@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
+import ContactEngagementModal from "@/components/layout/ContactEngagementModal";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -29,20 +30,23 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var d=document.documentElement,s=localStorage.getItem('trident-theme');var dark=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches);d.classList.toggle('dark',dark);})();`,
+            __html: `(function(){try{var k='trident-theme';var s=localStorage.getItem(k);var dark;if(s==='light')dark=false;else if(s==='dark')dark=true;else dark=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
           }}
         />
       </head>
-      <body className={`${outfit.variable} font-sans antialiased bg-bg text-fg bg-vignette`}>
+      <body className={`${outfit.variable} font-sans antialiased text-fg bg-vignette overflow-x-clip`}>
         <ThemeProvider>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
+          <div className="relative z-[1] flex min-h-0 w-full min-w-0 flex-col">
+            <Header />
+            <main className="w-full min-w-0">{children}</main>
+            <Footer />
+            <WhatsAppFloat />
+            <ContactEngagementModal />
+          </div>
         </ThemeProvider>
+        <Analytics />
+        <GoogleAnalytics gaId="G-5Q3QKNZVZ4" />
       </body>
-      <Analytics />
-      <GoogleAnalytics gaId="G-5Q3QKNZVZ4" />
     </html>
   );
 }

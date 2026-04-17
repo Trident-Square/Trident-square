@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { easePremium, fadeUpVariants, staggerDelay, transition } from '@/lib/motion'
 import {
   Zap,
   Shield,
@@ -226,78 +227,108 @@ benefits: [
 ]
 
 export default function WhyUs() {
+  const reduce = useReducedMotion()
+  const [activeId, setActiveId] = useState('ai')
+  const active = items.find((item) => item.id === activeId) ?? items[0]
 
-const [activeId, setActiveId] = useState('ai')
+  const headerContainer = {
+    hidden: { opacity: reduce ? 1 : 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: staggerDelay(reduce, 0.08, 0.06).staggerChildren,
+        delayChildren: staggerDelay(reduce, 0.08, 0.06).delayChildren,
+      },
+    },
+  }
+  const headerItem = fadeUpVariants(reduce, 16)
 
-const active = items.find((item) => item.id === activeId) ?? items[0]
+  const menuContainer = {
+    hidden: { opacity: reduce ? 1 : 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: staggerDelay(reduce, 0.06, 0.08).staggerChildren,
+        delayChildren: staggerDelay(reduce, 0.06, 0.08).delayChildren,
+      },
+    },
+  }
+  const menuItem = {
+    hidden: reduce ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: transition(reduce, 0.42),
+    },
+  }
 
-return (
+  return (
+    <section className="relative overflow-hidden pb-10 pt-2 sm:pt-3 lg:pb-14 lg:pt-5">
+      <div className="container mx-auto min-w-0 px-4 sm:px-6 lg:px-8">
+        <div className="w-full min-w-0">
+        <motion.div
+          className="mb-6 max-w-3xl sm:mb-8 lg:mb-10"
+          variants={headerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          <motion.p
+            variants={headerItem}
+            className="premium-eyebrow mb-4"
+          >
+            <span className="premium-eyebrow-bar" />
+            Why Trident Square
+          </motion.p>
+          <motion.h2
+            variants={headerItem}
+            className="text-3xl font-semibold leading-tight tracking-tight text-fg sm:text-4xl lg:text-[2.35rem] lg:leading-[1.15]"
+          >
+            End-to-end digital{" "}
+            <span className="gradient-text">product partners</span>
+          </motion.h2>
+          <motion.p
+            variants={headerItem}
+            className="mt-4 max-w-xl text-sm leading-relaxed text-muted"
+          >
+            We help transform ideas into reliable digital products by combining
+            strong engineering, thoughtful design, and scalable architecture.
+          </motion.p>
+        </motion.div>
 
-<section className="relative pb-16 lg:pb-2 bg-mesh bg-dots overflow-hidden">
-
-<div className="container mx-auto max-w-full min-w-0 px-4 sm:px-6 lg:px-8">
-
-{/* Header */}
-
-<div className="mb-8 sm:mb-10 lg:mb-12 max-w-3xl">
-
-<p className="text-xs sm:text-sm font-medium text-muted mb-2">
-Why Trident Square
-</p>
-
-<h2 className="text-3xl sm:text-4xl font-bold text-fg leading-tight">
-End-to-end digital
-<span className="gradient-text"> product partners</span>
-</h2>
-
-<p className="text-muted mt-3 max-w-xl text-sm leading-relaxed">
-We help transform ideas into reliable digital products by combining
-strong engineering, thoughtful design, and scalable architecture.
-</p>
-
-</div>
-
-{/* Layout */}
-
-<div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12 items-stretch min-w-0">
-
-{/* LEFT MENU — horizontal scroll on mobile, column on lg+ */}
-
-<div
-  className="
-    flex lg:flex-col
-    gap-2 sm:gap-3
-    overflow-x-auto lg:overflow-visible
-    px-0
-    pb-3 lg:pb-0
-    snap-x snap-mandatory lg:snap-none
-    scroll-smooth
-    [-webkit-overflow-scrolling:touch]
-  "
->
-  {items.map((item) => {
-    const Icon = item.icon
-    const isActive = item.id === activeId
-
-    return (
-      <button
-        key={item.id}
-        type="button"
-        onClick={() => setActiveId(item.id)}
-        className={`
+        <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12 items-stretch min-w-0">
+          <motion.div
+            className="flex lg:flex-col gap-2 sm:gap-3 overflow-x-auto lg:overflow-visible px-0 pb-3 lg:pb-0 snap-x snap-mandatory lg:snap-none scroll-smooth overscroll-x-contain [-webkit-overflow-scrolling:touch]"
+            variants={menuContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-40px' }}
+          >
+            {items.map((item) => {
+              const Icon = item.icon
+              const isActive = item.id === activeId
+              return (
+                <motion.button
+                  key={item.id}
+                  type="button"
+                  variants={menuItem}
+                  whileHover={reduce ? undefined : { scale: 1.01 }}
+                  whileTap={reduce ? undefined : { scale: 0.98 }}
+                  transition={{ duration: 0.2, ease: easePremium }}
+                  onClick={() => setActiveId(item.id)}
+                  className={`
           shrink-0 snap-start
           w-[260px] sm:w-[280px] lg:w-full
           text-left rounded-xl border
           px-3 sm:px-4 py-3 sm:py-4
-          transition-all duration-200
-          touch-manipulation active:scale-[0.98]
+          transition-[background-color,border-color,box-shadow] duration-200
+          touch-manipulation
           min-h-[80px] sm:min-h-[88px]
-
           ${isActive
-            ? 'border-accent bg-card shadow-md'
-            : 'border-border bg-card/60 active:bg-card/80'}
+            ? 'border-indigo-300 bg-card shadow-lg shadow-indigo-500/10 ring-2 ring-indigo-500/15 dark:border-indigo-500/50 dark:bg-card dark:shadow-indigo-950/40 dark:ring-indigo-400/20'
+            : 'border-slate-200/75 bg-white/65 shadow-sm backdrop-blur-md hover:border-slate-300/90 hover:bg-white/82 hover:shadow-md active:bg-white/75 dark:border-slate-600/70 dark:bg-slate-900/55 dark:backdrop-blur-md dark:hover:border-slate-500 dark:hover:bg-slate-900/75 dark:active:bg-slate-900/70'}
         `}
-      >
+                >
         <div className="flex items-start gap-2.5 sm:gap-3 mb-1">
           <span
             className={`
@@ -315,23 +346,23 @@ strong engineering, thoughtful design, and scalable architecture.
           </span>
         </div>
 
-        <p className="text-[11px] sm:text-xs text-muted pl-9.5 sm:pl-11 line-clamp-2">
-          {item.tagline}
-        </p>
-      </button>
-    )
-  })}
-</div>
+                  <p className="text-[11px] sm:text-xs text-muted pl-9.5 sm:pl-11 line-clamp-2">
+                    {item.tagline}
+                  </p>
+                </motion.button>
+              )
+            })}
+          </motion.div>
 
-{/* RIGHT PANEL */}
-
-<motion.div
-key={active.id}
-initial={{ opacity: 0, y: 10 }}
-animate={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.25 }}
-className="rounded-xl sm:rounded-2xl bg-card border border-border p-4 sm:p-5 lg:p-6 shadow-sm flex flex-col h-full min-w-0"
->
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active.id}
+              initial={reduce ? undefined : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? undefined : { opacity: 0, y: -10 }}
+              transition={transition(reduce, 0.38)}
+              className="flex h-full min-w-0 flex-col rounded-2xl border border-indigo-100/80 bg-gradient-to-br from-card via-card to-indigo-50/35 p-4 shadow-lg shadow-indigo-900/[0.05] ring-1 ring-indigo-900/[0.03] dark:border-slate-600/80 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950/90 dark:shadow-black/35 dark:ring-white/[0.05] sm:p-5 lg:p-6"
+            >
 
 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3 sm:mb-4 min-w-0">
 
@@ -363,7 +394,7 @@ Technology Layer
 
 <span
 key={tech}
-className="text-[10px] sm:text-xs bg-fg/5 border border-border rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-muted max-w-full break-words text-left"
+className="text-[10px] sm:text-xs bg-slate-100 border border-border rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-muted max-w-full break-words text-left dark:bg-slate-800/80 dark:border-slate-600 dark:text-slate-300"
 >
 {tech}
 </span>
@@ -424,17 +455,12 @@ Deliverables
 
 </ul>
 
-</div>
-
-
-</motion.div>
-
-</div>
-
-</div>
-
-</section>
-
-)
-
+            </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        </div>
+      </div>
+    </section>
+  )
 }

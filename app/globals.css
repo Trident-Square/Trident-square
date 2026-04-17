@@ -4,34 +4,99 @@
 
 @layer base {
   :root {
-    --bg: #f5f7fa;
-    --fg: #0c1222;
-    --muted: #5c6b7c;
-    --accent: #0ea5e9;
-    --accent-soft: #e0f2fe;
-    --border: #e8ecf1;
-    --card: #ffffff;
-    --glow: rgba(14, 165, 233, 0.25);
+    --bg: #dfe8fb;
+    --fg: #0a1020;
+    --muted: #4a5c7a;
+    --accent: #4338ca;
+    --accent-soft: #d0dcff;
+    --accent-2: #0d766e;
+    --accent-2-soft: #bff7ef;
+    --border: #b8c8e8;
+    --card: #f8faff;
+    --glow: rgba(67, 56, 202, 0.28);
   }
 
   .dark {
-    --bg: #06090f;
-    --fg: #e8ecf2;
-    --muted: #8b98a8;
-    --accent: #38bdf8;
-    --accent-soft: #0c4a6e;
-    --border: #1a2332;
-    --card: #0d1119;
-    --glow: rgba(56, 189, 248, 0.2);
+    --bg: #020617;
+    --fg: #eef2f7;
+    --muted: #8b9bb5;
+    --accent: #818cf8;
+    --accent-soft: rgba(24, 22, 58, 0.78);
+    --accent-2: #2dd4bf;
+    --accent-2-soft: rgba(13, 148, 136, 0.28);
+    --border: #172033;
+    --card: #0a0f1a;
+    --glow: rgba(129, 140, 248, 0.22);
   }
 
+  /* Native momentum scroll — global `smooth` here can feel sticky with wheel/trackpad */
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    color-scheme: light;
+    accent-color: var(--accent);
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  /* Text highlight: readable on both themes (browser defaults can clash with our palette) */
+  ::selection {
+    background-color: rgba(67, 56, 202, 0.22);
+    color: var(--fg);
+  }
+
+  html.dark ::selection {
+    background-color: rgba(129, 140, 248, 0.38);
+    color: #f8fafc;
+  }
+
+  /* Native <select> / <option> list: align with dark UI where the engine allows it */
+  html.dark option {
+    background-color: #0f172a;
+    color: #e2e8f0;
   }
 
   body {
     background-color: var(--bg);
     color: var(--fg);
+  }
+
+  /* Light: layered animated wash on <html> + fixed aurora (::before); body transparent */
+  html:not(.dark) {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    min-height: 100dvh;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 130% 95% at 50% -38%, rgba(99, 102, 241, 0.22) 0%, transparent 58%),
+      radial-gradient(ellipse 100% 80% at 112% 2%, rgba(45, 212, 191, 0.14) 0%, transparent 52%),
+      radial-gradient(ellipse 90% 75% at -15% 90%, rgba(59, 130, 246, 0.13) 0%, transparent 54%),
+      radial-gradient(ellipse 125% 75% at 50% 112%, rgba(129, 140, 248, 0.11) 0%, transparent 55%),
+      linear-gradient(155deg, rgba(255, 255, 255, 0.72) 0%, transparent 38%, rgba(199, 210, 254, 0.45) 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    animation: html-light-field 32s ease-in-out infinite alternate;
+  }
+
+  html:not(.dark)::before {
+    content: '';
+    position: fixed;
+    inset: -12%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 50% 46% at 72% 20%, rgba(99, 102, 241, 0.38), transparent 62%),
+      radial-gradient(ellipse 46% 42% at 16% 76%, rgba(20, 184, 166, 0.28), transparent 60%),
+      radial-gradient(ellipse 38% 34% at 50% 50%, rgba(59, 130, 246, 0.18), transparent 65%);
+    animation: light-html-aurora 22s ease-in-out infinite alternate;
+  }
+
+  html:not(.dark) body {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
   }
 }
 
@@ -51,39 +116,252 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 dark:from-cyan-400 dark:via-sky-400 dark:to-blue-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 via-blue-600 to-teal-600 dark:from-indigo-200 dark:via-sky-300 dark:to-teal-300;
+  }
+
+  .text-accent-heading {
+    @apply text-accent;
+  }
+
+  /* Shared section eyebrow — gradient bar + label rhythm */
+  .premium-eyebrow {
+    @apply inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-accent;
+  }
+
+  .premium-eyebrow-bar {
+    @apply h-4 w-1 shrink-0 rounded-full bg-gradient-to-b from-indigo-500 via-blue-500 to-teal-500 shadow-sm shadow-indigo-500/30;
   }
 }
 
 /* Soft gradient mesh */
 .bg-mesh {
-  background: 
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(14, 165, 233, 0.03) 0%, transparent 60%);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 85% 70% at 100% -10%, rgba(99, 102, 241, 0.2) 0%, transparent 52%),
+    radial-gradient(ellipse 65% 55% at 0% 100%, rgba(13, 148, 136, 0.14) 0%, transparent 48%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(59, 130, 246, 0.1) 0%, transparent 55%);
 }
 
 .dark .bg-mesh {
-  background: 
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 85% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(56, 189, 248, 0.02) 0%, transparent 60%);
-}
-
-/* Hero: layered gradient background */
-.bg-hero {
   background-color: var(--bg);
-  background-image: 
-    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(14, 165, 233, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 85% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
+  background-image:
+    radial-gradient(ellipse 85% 70% at 100% -10%, rgba(129, 140, 248, 0.14) 0%, transparent 52%),
+    radial-gradient(ellipse 65% 55% at 0% 100%, rgba(45, 212, 191, 0.08) 0%, transparent 48%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(59, 130, 246, 0.06) 0%, transparent 55%);
 }
 
-.dark .bg-hero {
-  background-image: 
-    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 85% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
+/*
+ * Homepage canvas. Grain ::after uses inset: 0 + transform only (scroll-safe).
+ * Large aurora lives in HomeAmbient.tsx (Framer), not oversized ::before.
+ */
+.home-flow-bg {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 92% 58% at 50% -14%, rgba(99, 102, 241, 0.14) 0%, transparent 56%),
+    radial-gradient(980px 500px at 91% -6%, rgba(99, 102, 241, 0.3), transparent 58%),
+    radial-gradient(680px 440px at -4% 104%, rgba(20, 184, 166, 0.19), transparent 54%),
+    radial-gradient(460px 340px at 50% 90%, rgba(59, 130, 246, 0.14), transparent 56%),
+    linear-gradient(188deg, rgba(255, 255, 255, 0.94) 0%, rgba(232, 240, 255, 0.55) 38%, rgba(224, 231, 255, 0.2) 68%, transparent 82%),
+    radial-gradient(ellipse 115% 72% at 50% -14%, rgba(99, 102, 241, 0.12) 0%, transparent 54%),
+    radial-gradient(ellipse 58% 48% at 100% 100%, rgba(45, 212, 191, 0.075) 0%, transparent 50%),
+    radial-gradient(ellipse 52% 42% at 0% 78%, rgba(67, 56, 202, 0.07) 0%, transparent 52%);
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 18% 12%, 82% 88%, 14% 92%;
+}
+
+/* Light: extra aurora sheet (transform-only, modest inset — scroll-safe) */
+html:not(.dark) .home-flow-bg::before {
+  content: '';
+  position: absolute;
+  /* inset 0 only — negative inset + overflow-y:visible was inflating page scroll height */
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.75;
+  background:
+    radial-gradient(ellipse 44% 40% at 26% 34%, rgba(99, 102, 241, 0.28), transparent 62%),
+    radial-gradient(ellipse 40% 38% at 76% 60%, rgba(45, 212, 191, 0.22), transparent 58%),
+    radial-gradient(ellipse 32% 28% at 50% 14%, rgba(59, 130, 246, 0.16), transparent 55%);
+  animation: ambient-aurora-drift 19s ease-in-out infinite alternate;
+}
+
+/* Light only: drift on the static gradient stack */
+html:not(.dark) .home-flow-bg {
+  animation: home-flow-light-shift 30s ease-in-out infinite alternate;
+}
+
+.home-flow-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: home-flow-grain 22s linear infinite;
+}
+
+html:not(.dark) .home-flow-bg::after {
+  opacity: 0.08;
+  animation-duration: 18s;
+}
+
+.dark .home-flow-bg::after {
+  mix-blend-mode: soft-light;
+  opacity: 0.07;
+  animation-duration: 26s;
+}
+
+@keyframes home-flow-grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(48px, -36px);
+  }
+}
+
+@keyframes html-light-field {
+  0% {
+    background-position: 0% 0%, 100% 6%, 0% 94%, 52% 100%, 0% 0%;
+  }
+  100% {
+    background-position: 14% 10%, 78% 22%, 18% 72%, 42% 88%, 10% 14%;
+  }
+}
+
+@keyframes light-html-aurora {
+  0% {
+    transform: translate(-6%, -4%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(5%, 6%) rotate(2.5deg) scale(1.09);
+  }
+  100% {
+    transform: translate(8%, -5%) rotate(-1.5deg) scale(1.06);
+  }
+}
+
+@keyframes home-flow-light-shift {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 18% 12%, 82% 88%, 14% 92%;
+  }
+  100% {
+    background-position: 6% -4%, -8% 6%, 8% -6%, -5% 7%, 4% 2%, 28% 18%, 74% 82%, 8% 88%;
+  }
+}
+
+.dark .home-flow-bg {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 50% at 50% -8%, rgba(99, 102, 241, 0.1) 0%, transparent 52%),
+    radial-gradient(900px 480px at 92% -5%, rgba(99, 102, 241, 0.2), transparent 55%),
+    radial-gradient(640px 400px at -5% 100%, rgba(20, 184, 166, 0.09), transparent 52%),
+    radial-gradient(420px 320px at 50% 95%, rgba(59, 130, 246, 0.075), transparent 55%),
+    linear-gradient(180deg, rgba(8, 12, 22, 0.82) 0%, rgba(2, 6, 18, 0.42) 45%, transparent 78%),
+    radial-gradient(ellipse 110% 65% at 50% -12%, rgba(99, 102, 241, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 42% at 100% 100%, rgba(45, 212, 191, 0.055) 0%, transparent 48%),
+    radial-gradient(ellipse 45% 35% at 0% 85%, rgba(59, 130, 246, 0.045) 0%, transparent 50%);
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 18% 12%, 82% 88%, 14% 92%;
+}
+
+/*
+ * Aurora + grain on section/mesh only — not on .home-flow-bg.
+ * Oversized ::before (inset: -35%) + transform animation can inflate scrollable
+ * overflow past the real page in some browsers.
+ */
+.bg-section::before,
+.bg-mesh:not(.bg-dots)::before {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background:
+    radial-gradient(ellipse 42% 38% at 25% 35%, rgba(99, 102, 241, 0.14), transparent 60%),
+    radial-gradient(ellipse 38% 36% at 78% 62%, rgba(45, 212, 191, 0.1), transparent 58%),
+    radial-gradient(ellipse 30% 28% at 55% 18%, rgba(59, 130, 246, 0.08), transparent 55%);
+  animation: ambient-aurora-drift 28s ease-in-out infinite alternate;
+}
+
+.dark .bg-section::before,
+.dark .bg-mesh:not(.bg-dots)::before {
+  opacity: 0.45;
+  background:
+    radial-gradient(ellipse 42% 38% at 28% 38%, rgba(129, 140, 248, 0.12), transparent 60%),
+    radial-gradient(ellipse 38% 36% at 72% 58%, rgba(45, 212, 191, 0.08), transparent 58%),
+    radial-gradient(ellipse 32% 30% at 50% 15%, rgba(59, 130, 246, 0.06), transparent 55%);
+  animation: ambient-aurora-drift 32s ease-in-out infinite alternate;
+}
+
+.bg-section::after,
+.bg-mesh::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain-breathe 14s ease-in-out infinite;
+}
+
+.dark .bg-section::after,
+.dark .bg-mesh::after {
+  opacity: 0.06;
+  animation: grain-breathe 18s ease-in-out infinite;
+}
+
+@keyframes ambient-aurora-drift {
+  0% {
+    transform: translate(-4%, -3%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(3%, 4%) rotate(2deg) scale(1.06);
+  }
+  100% {
+    transform: translate(5%, -2%) rotate(-1deg) scale(1.03);
+  }
+}
+
+@keyframes grain-breathe {
+  0%, 100% { opacity: 0.035; }
+  50% { opacity: 0.07; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.dark) {
+    animation: none !important;
+  }
+  html:not(.dark)::before {
+    animation: none !important;
+  }
+  html:not(.dark) .home-flow-bg {
+    animation: none !important;
+  }
+  html:not(.dark) .home-flow-bg::before {
+    animation: none !important;
+  }
+  .bg-section,
+  .bg-section::before,
+  .bg-section::after,
+  .bg-mesh:not(.bg-dots)::before,
+  .bg-mesh::after,
+  .home-flow-bg::after {
+    animation: none !important;
+  }
+  .home-flow-bg::after {
+    transform: none !important;
+  }
 }
 
 /* Subtle dot pattern overlay */
@@ -97,7 +375,11 @@
   pointer-events: none;
 }
 .dark .bg-dots::before {
-  opacity: 0.055;
+  opacity: 0.035;
+}
+
+html:not(.dark) .bg-dots::before {
+  opacity: 0.048;
 }
 
 /* Floating orb animation */
@@ -117,13 +399,49 @@
   animation: float-orb 22s ease-in-out infinite 2s;
 }
 
-/* Section transition: subtle gradient so not plain */
+/* Section: single calm wash — use for long homepage bands (no hard color breaks) */
+/* Shared with --bg for seamless hero → content (no seam in dark/light) */
 .bg-section {
+  position: relative;
+  isolation: isolate;
   background-color: var(--bg);
-  background-image: linear-gradient(180deg, rgba(14, 165, 233, 0.02) 0%, transparent 25%, transparent 75%, rgba(59, 130, 246, 0.02) 100%);
+  background-image:
+    radial-gradient(ellipse 110% 70% at 50% -15%, rgba(99, 102, 241, 0.11) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(45, 212, 191, 0.055) 0%, transparent 48%),
+    radial-gradient(ellipse 50% 40% at 0% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+  animation: bg-section-glow-shift 36s ease-in-out infinite alternate;
 }
+
 .dark .bg-section {
-  background-image: linear-gradient(180deg, rgba(56, 189, 248, 0.02) 0%, transparent 25%, transparent 75%, rgba(59, 130, 246, 0.015) 100%);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 110% 65% at 50% -12%, rgba(99, 102, 241, 0.1) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 42% at 100% 100%, rgba(45, 212, 191, 0.06) 0%, transparent 48%),
+    radial-gradient(ellipse 45% 35% at 0% 85%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+  animation: bg-section-glow-shift 55s ease-in-out infinite alternate;
+}
+
+@keyframes bg-section-glow-shift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 0% 80%;
+  }
+  100% {
+    background-position: 8% 5%, 92% 95%, 6% 88%;
+  }
+}
+
+/* Optional accent strip — prefer borders/dividers in components over full-width hue shifts */
+.bg-section-teal {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 110% 70% at 50% -15%, rgba(99, 102, 241, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(45, 212, 191, 0.045) 0%, transparent 48%);
+}
+.dark .bg-section-teal {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 110% 65% at 50% -12%, rgba(99, 102, 241, 0.1) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 42% at 100% 100%, rgba(45, 212, 191, 0.06) 0%, transparent 48%);
 }
 
 /* Contact page: black/white with subtle depth */
@@ -147,8 +465,18 @@
   pointer-events: none;
   background: radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.03) 100%);
 }
+
+html:not(.dark) .bg-vignette::after {
+  background: radial-gradient(
+    ellipse 115% 90% at 50% 42%,
+    transparent 36%,
+    rgba(67, 56, 202, 0.05) 72%,
+    rgba(15, 118, 110, 0.04) 100%
+  );
+}
+
 .dark .bg-vignette::after {
-  background: radial-gradient(ellipse 100% 80% at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.2) 100%);
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, transparent 32%, rgba(0, 0, 0, 0.48) 100%);
 }
 
 /* Shine on hover – subtle */

@@ -16,6 +16,8 @@ module.exports = {
         muted: 'var(--muted)',
         accent: 'var(--accent)',
         'accent-soft': 'var(--accent-soft)',
+        'accent-2': 'var(--accent-2)',
+        'accent-2-soft': 'var(--accent-2-soft)',
         border: 'var(--border)',
         card: 'var(--card)',
         glow: 'var(--glow)',
@@ -29,8 +31,13 @@ module.exports = {
         shimmer: 'shimmer 2.5s linear infinite',
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
         'scale-in': 'scale-in 0.5s ease-out forwards',
+        'tech-marquee': 'tech-marquee 50s linear infinite',
       },
       keyframes: {
+        'tech-marquee': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
         blob: {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
           '33%': { transform: 'translate(30px, -50px) scale(1.08)' },

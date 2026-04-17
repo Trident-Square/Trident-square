@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Facebook, Twitter, Linkedin, Instagram, Github, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
-import { getContactEmail, getContactPhoneDisplay, getTelHref } from '@/lib/contact'
+import { motion, useReducedMotion } from 'framer-motion'
+import { transition } from '@/lib/motion'
+import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react'
+import { getContactEmail, getContactPhoneDisplay, getTelHref, getWhatsAppChatUrl } from '@/lib/contact'
+import { WhatsAppIcon } from '@/components/layout/WhatsAppFloat'
 
 const mainLinks = [
   { name: 'About', href: '/about' },
@@ -19,13 +21,39 @@ const serviceLinks = [
   { name: 'UI/UX Design', href: '/services/design' },
 ]
 
+const socialExternal = [
+  {
+    href: 'https://www.linkedin.com/company/trident-square/',
+    icon: Linkedin,
+    label: 'Trident Square on LinkedIn',
+  },
+  {
+    href: 'https://www.instagram.com/tridentsquare/',
+    icon: Instagram,
+    label: 'Trident Square on Instagram',
+  },
+  {
+    href: 'https://www.facebook.com/profile.php?id=61574509445613',
+    icon: Facebook,
+    label: 'Trident Square on Facebook',
+  },
+] as const
+
 export default function Footer() {
+  const reduce = useReducedMotion()
   const contactEmail = getContactEmail()
   const telHref = getTelHref()
   const phoneDisplay = getContactPhoneDisplay()
+  const whatsappHref = getWhatsAppChatUrl()
 
   return (
-    <footer className="relative border-t border-border bg-card">
+    <motion.footer
+      className="relative shrink-0 border-t border-border bg-card"
+      initial={reduce ? undefined : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={transition(reduce, 0.5)}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top CTA strip */}
         {/* <motion.div
@@ -53,24 +81,29 @@ export default function Footer() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="col-span-2 md:col-span-1"
+            className="col-span-2 min-w-0 md:col-span-1"
           >
-            <Link href="/" className="text-2xl font-bold inline-block mb-4">
-            Trident<span className="gradient-text">Square</span>
+            <Link href="/" className="text-xl font-semibold inline-block mb-4 tracking-tight">
+            Trident
+            <span className="bg-gradient-to-r from-indigo-600 to-teal-600 bg-clip-text text-transparent dark:from-indigo-300 dark:to-teal-300">
+              Square
+            </span>
             </Link>
-            <p className="text-muted text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-muted text-sm leading-relaxed mb-5 max-w-xs">
               Intelligent digital solutions. We build products that scale.
             </p>
-            {/* <div className="flex gap-3">
-              <SocialLink href="#" icon={Facebook} />
-              <SocialLink href="#" icon={Twitter} />
-              <SocialLink href="#" icon={Linkedin} />
-              <SocialLink href="#" icon={Instagram} />
-              <SocialLink href="#" icon={Github} />
-            </div> */}
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-fg">Follow us</p>
+            <div className="flex flex-wrap gap-3">
+              {socialExternal.map(({ href, icon, label }) => (
+                <SocialLink key={href} href={href} icon={icon} label={label} />
+              ))}
+              {whatsappHref ? (
+                <SocialLink href={whatsappHref} icon={WhatsAppIcon} label="Chat on WhatsApp" />
+              ) : null}
+            </div>
           </motion.div>
 
-          <div>
+          <div className="min-w-0">
             <h4 className="text-sm font-semibold text-fg uppercase tracking-wider mb-4">Navigate</h4>
             <ul className="space-y-3">
               {mainLinks.map((link) => (
@@ -83,7 +116,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h4 className="text-sm font-semibold text-fg uppercase tracking-wider mb-4">Services</h4>
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
@@ -96,7 +129,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-2 min-w-0 md:col-span-1">
             <h4 className="text-sm font-semibold text-fg uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm">
@@ -123,25 +156,35 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="py-6 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-muted text-sm">
+        <div className="py-6 border-t border-border text-center text-muted text-sm">
           <p>&copy; {new Date().getFullYear()} Trident Square. All rights reserved.</p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 
-function SocialLink({ href, icon: Icon }: { href: string; icon: React.ComponentType<{ className?: string }> }) {
+function SocialLink({
+  href,
+  icon: Icon,
+  label,
+}: {
+  href: string
+  icon: React.ComponentType<{ className?: string }>
+  label: string
+}) {
   return (
     <motion.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ scale: 1.1 }}
+      aria-label={label}
+      title={label}
+      whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.95 }}
-      className="w-10 h-10 rounded-xl bg-accent-soft/50 dark:bg-accent-soft/20 flex items-center justify-center text-muted hover:text-accent hover:bg-accent/20 transition-colors duration-300"
+      className="flex h-5 w-5 items-center justify-center rounded-xl bg-accent-soft/50 text-muted transition-colors duration-300 hover:bg-accent/20 hover:text-accent dark:bg-accent-soft/20"
     >
-      <Icon className="w-5 h-5" />
+      <Icon className="h-5 w-5" />
     </motion.a>
   )
 }

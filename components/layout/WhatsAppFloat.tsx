@@ -15,7 +15,7 @@ const mailSubject = 'Contact from Trident Square website'
 const mailBody =
   "Hi,\n\nI'd like to get in touch about a project.\n\n"
 
-function WhatsAppIcon({ className }: { className?: string }) {
+export function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -45,13 +45,13 @@ export default function WhatsAppFloat() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 260, damping: 24, delay: 0.35 }}
-      className="fixed z-[60] flex flex-col items-end gap-2.5"
+      className="fixed z-40 flex max-w-[calc(100vw-1.5rem)] flex-col items-end gap-2.5"
       style={{
         bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))',
         right: 'max(1.25rem, env(safe-area-inset-right, 0px))',
       }}
     >
-      <p className="max-w-[11rem] rounded-xl border border-border bg-card/95 px-3.5 py-2 text-center text-xs font-semibold leading-snug text-fg shadow-lg backdrop-blur-md sm:max-w-none sm:px-4 sm:text-sm">
+      <p className="w-full max-w-[min(20rem,calc(100vw-2.75rem))] rounded-xl border border-border bg-card/95 px-3.5 py-2 text-center text-xs font-semibold leading-snug text-fg shadow-lg backdrop-blur-md sm:px-4 sm:text-sm">
         Click here to contact
       </p>
 
@@ -78,7 +78,7 @@ export default function WhatsAppFloat() {
             title="Email us"
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            className={`${fabClass} bg-gradient-to-br from-cyan-500 to-blue-600 shadow-cyan-900/20 ring-2 ring-white/25 hover:shadow-xl hover:shadow-cyan-900/25 focus-visible:ring-cyan-500`}
+            className={`${fabClass} bg-slate-800 shadow-slate-900/25 ring-2 ring-white/20 hover:bg-slate-900 hover:shadow-xl focus-visible:ring-slate-600`}
           >
             <Mail className="h-6 w-6" strokeWidth={2.25} />
           </motion.a>
