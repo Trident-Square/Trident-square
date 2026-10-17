@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 import Arrow from '@/components/site/Arrow'
 import CtaBand from '@/components/site/CtaBand'
 import JsonLd from '@/components/site/JsonLd'
-import WorkCard from '@/components/site/WorkCard'
+import MediaReveal from '@/components/site/MediaReveal'
+import PageHero from '@/components/site/PageHero'
 import { breadcrumbs, pageMetadata, projectSchema } from '@/lib/seo'
 import { getService } from '@/lib/services'
 import { getProject, projects } from '@/lib/work'
@@ -47,52 +48,63 @@ export default async function ProjectPage({ params }: Props) {
         ]}
       />
 
-      <section className="container pt-28 sm:pt-36">
-        <nav aria-label="Breadcrumb" className="eyebrow flex items-center gap-2">
-          <Link href="/work" className="hover:text-ink">Work</Link>
-          <span aria-hidden>/</span>
-          <span className="text-ink">{p.name}</span>
-        </nav>
-        <h1 className="display mt-7 text-[clamp(3rem,9vw,8rem)]">{p.name}</h1>
-        <p className="lede mt-6 max-w-3xl text-ink-2">{p.summary}</p>
+      <PageHero
+        crumbs={[{ label: 'Work', href: '/work' }, { label: p.name }]}
+        title={p.name}
+        meta={[
+          { k: 'Client', v: p.client },
+          { k: 'Industry', v: p.industry },
+          { k: 'Year', v: p.year },
+          {
+            k: 'Services',
+            v: (
+              <span className="flex flex-col lg:items-end">
+                {svc.map((s) => (
+                  <Link key={s.slug} href={`/services/${s.slug}`} className="link-underline w-fit">{s.name}</Link>
+                ))}
+              </span>
+            ),
+          },
+        ]}
+        intro={<p className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-snug tracking-[-0.015em] text-ink">{p.summary}</p>}
+      />
 
-        <dl className="mt-12 grid grid-cols-2 gap-6 border-t border-line pt-6 text-[14px] sm:grid-cols-4">
-          <div><dt className="text-muted">Client</dt><dd className="mt-1 font-medium">{p.client}</dd></div>
-          <div><dt className="text-muted">Industry</dt><dd className="mt-1 font-medium">{p.industry}</dd></div>
-          <div><dt className="text-muted">Year</dt><dd className="mt-1 font-medium">{p.year}</dd></div>
-          <div>
-            <dt className="text-muted">Services</dt>
-            <dd className="mt-1 flex flex-col font-medium">
-              {svc.map((s) => (
-                <Link key={s.slug} href={`/services/${s.slug}`} className="link-underline w-fit">{s.name}</Link>
-              ))}
-            </dd>
-          </div>
-        </dl>
-      </section>
-
-      <section className="container mt-14">
-        {p.demo ? (
-          <div className={p.orientation === 'portrait' ? 'flex justify-center bg-ink py-10' : ''}>
-            <video
-              src={encodeURI(p.demo)}
-              poster={p.poster}
-              controls
-              playsInline
-              preload="none"
-              className={
-                p.orientation === 'portrait'
-                  ? 'max-h-[78vh] '
-                  : 'aspect-video w-full bg-ink object-cover'
-              }
-            >
-              <track kind="captions" />
-            </video>
-          </div>
+      <section className="container mt-16 sm:mt-24">
+        {p.poster ? (
+          <MediaReveal
+            poster={p.poster}
+            video={p.loop}
+            alt={`${p.name} — ${p.summary}`}
+            priority
+            fit={p.orientation === 'portrait' ? 'contain' : 'cover'}
+            className="aspect-[4/3] sm:aspect-[21/10]"
+          />
         ) : (
-          <WorkCard project={p} size="lg" />
+          <div className="flex aspect-[21/10] flex-col justify-end bg-cobalt p-8 text-white sm:p-12">
+            <span className="display text-[clamp(5rem,14vw,13rem)] leading-[0.8]">{p.results[0].value}</span>
+            <span className="mt-3 text-[18px] text-white/75">{p.results[0].label}</span>
+          </div>
         )}
-        <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">Product demo — screen recording</p>
+        {p.demo ? (
+          <details className="group mt-4">
+            <summary className="btn-ghost cursor-pointer">
+              <span className="group-open:hidden">▶ Watch the full demo</span>
+              <span className="hidden group-open:inline">Hide demo</span>
+            </summary>
+            <div className={p.orientation === 'portrait' ? 'mt-4 flex justify-center bg-ink py-10' : 'mt-4'}>
+              <video
+                src={encodeURI(p.demo)}
+                poster={p.poster}
+                controls
+                playsInline
+                preload="none"
+                className={p.orientation === 'portrait' ? 'max-h-[78vh]' : 'aspect-video w-full bg-ink object-cover'}
+              >
+                <track kind="captions" />
+              </video>
+            </div>
+          </details>
+        ) : null}
       </section>
 
       <section className="container py-24 sm:py-28">
@@ -149,15 +161,25 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="border-t border-line">
-        <Link href={`/work/${next.slug}`} className="container group flex items-center justify-between gap-6 py-14">
-          <span>
-            <span className="eyebrow">Next case study</span>
-            <span className="mt-3 block text-[clamp(2rem,5vw,4rem)] display transition-colors group-hover:text-cobalt">
-              {next.name}
+      <section className="bg-paper-2/70">
+        <Link href={`/work/${next.slug}`} className="container group grid items-center gap-10 py-20 sm:py-28 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Next case study</p>
+            <p className="display mt-4 text-[clamp(3.5rem,9vw,8rem)] transition-colors group-hover:text-cobalt">{next.name}</p>
+            <p className="mt-4 max-w-md text-[16.5px] leading-relaxed text-muted">{next.summary}</p>
+            <span className="btn-primary mt-8">
+              View case <Arrow />
             </span>
-          </span>
-          <Arrow className="h-8 w-8 transition-transform group-hover:translate-x-2" />
+          </div>
+          <div className="lg:col-span-6">
+            {next.poster ? (
+              <MediaReveal poster={next.poster} video={next.loop} alt={next.name} parallax={false} fit={next.orientation === 'portrait' ? 'contain' : 'cover'} className="aspect-[16/10]" />
+            ) : (
+              <div className="flex aspect-[16/10] items-end bg-cobalt p-8 text-white">
+                <span className="display text-[clamp(4rem,9vw,8rem)] leading-[0.8]">{next.results[0].value}</span>
+              </div>
+            )}
+          </div>
         </Link>
       </section>
 

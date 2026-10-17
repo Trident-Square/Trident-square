@@ -1,4 +1,8 @@
 import CtaBand from '@/components/site/CtaBand'
+import PageHero from '@/components/site/PageHero'
+import Reveal from '@/components/site/Reveal'
+import SectionHead from '@/components/site/SectionHead'
+import WordMarquee from '@/components/site/WordMarquee'
 import JsonLd from '@/components/site/JsonLd'
 import { breadcrumbs, pageMetadata } from '@/lib/seo'
 import { absoluteUrl, site } from '@/lib/site'
@@ -33,55 +37,49 @@ export default function AboutPage() {
         ]}
       />
 
-      <section className="container pt-28 sm:pt-36">
-        <p className="eyebrow">About</p>
-        <h1 className="display mt-7 max-w-[14ch] text-[clamp(2.75rem,7.5vw,6.75rem)]">
-          A studio that <span className="mark-word text-cobalt">ships</span>.
-        </h1>
-        <div className="mt-12 grid gap-10 lg:grid-cols-12">
-          <div className="space-y-5 text-[18px] leading-relaxed text-ink-2 lg:col-span-7">
-            <p>
-              Trident Square is an AI and software engineering studio based in Sector 62, Noida. We started because we kept
-              seeing the same thing: businesses paying for impressive AI demos that never made it into daily use.
+      <PageHero
+        crumbs={[{ label: 'About' }]}
+        title={<>A studio<br />that <span className="text-cobalt">ships.</span></>}
+        meta={[
+          { k: 'Products shipped', v: site.projectsDelivered },
+          { k: 'Headquarters', v: 'Sector 62, Noida' },
+          { k: 'Working with', v: 'India · US · UK · Middle East' },
+          { k: 'Languages we build in', v: 'Hindi · English' },
+        ]}
+        intro={
+          <div className="space-y-5">
+            <p className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-snug tracking-[-0.015em] text-ink">
+              We started because we kept seeing the same thing: businesses paying for impressive demos that never made it into daily use.
             </p>
-            <p>
+            <p className="text-[17px] leading-relaxed text-muted">
               So we built the opposite kind of studio — engineers who stay close to the problem, ship working software every
               week and measure success by whether people actually use what we build. {site.projectsDelivered} products later,
-              that includes voice agents making real calls, hiring platforms used by thousands of workers and computer vision
-              running on live sports footage.
+              that includes automation systems running whole back offices, voice agents making real calls, hiring platforms
+              used by thousands of workers and computer vision on live sports footage.
             </p>
           </div>
-          <dl className="grid grid-cols-2 gap-px self-start overflow-hidden border border-line bg-line lg:col-span-4 lg:col-start-9">
-            {[
-              [site.projectsDelivered, 'products shipped'],
-              ['HI · EN', 'languages we build in'],
-              ['Noida', 'headquarters'],
-              ['Weekly', 'live demos'],
-            ].map(([v, l]) => (
-              <div key={l} className="bg-paper p-6">
-                <dt className="sr-only">{l}</dt>
-                <dd>
-                  <span className="block text-3xl display">{v}</span>
-                  <span className="mt-1 block text-[13.5px] text-muted">{l}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+        }
+      />
+
+      <div className="mt-24 sm:mt-32">
+        <WordMarquee words={['Automate', 'Integrate', 'Design', 'Engineer', 'Ship', 'Support']} />
+      </div>
 
       <section className="container py-24 sm:py-32">
-        <p className="eyebrow"><span className="text-cobalt">01 / </span>How we work</p>
-        <h2 className="h2 mt-6 max-w-[16ch]">Four things we won’t compromise on</h2>
-        <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2">
+        <Reveal>
+          <SectionHead index="01" label="How we work" title="Four things we won’t compromise on." />
+        </Reveal>
+        <ol className="mt-16 border-t border-ink">
           {principles.map((p, i) => (
-            <div key={p.title} className="border-t-2 border-ink pt-6">
-              <span className="font-mono text-[12px] text-cobalt">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em]">{p.title}</h3>
-              <p className="mt-3 max-w-md text-[16px] leading-relaxed text-muted">{p.text}</p>
-            </div>
+            <Reveal as="li" key={p.title} delay={i * 70} className="group grid gap-4 border-b border-ink/15 py-10 transition-colors sm:grid-cols-12 sm:gap-10">
+              <span className="display text-[clamp(3.5rem,7vw,6rem)] leading-[0.8] text-transparent transition-colors duration-500 group-hover:text-cobalt sm:col-span-2" style={{ WebkitTextStroke: '1.5px rgb(var(--ink))' }}>
+                0{i + 1}
+              </span>
+              <h3 className="display text-[clamp(2rem,3.6vw,3.25rem)] sm:col-span-5">{p.title}</h3>
+              <p className="max-w-md text-[17px] leading-relaxed text-muted sm:col-span-5">{p.text}</p>
+            </Reveal>
           ))}
-        </div>
+        </ol>
       </section>
 
       <CtaBand />

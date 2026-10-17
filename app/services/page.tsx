@@ -1,7 +1,9 @@
-import Link from 'next/link'
-import Arrow from '@/components/site/Arrow'
 import CtaBand from '@/components/site/CtaBand'
 import JsonLd from '@/components/site/JsonLd'
+import PageHero from '@/components/site/PageHero'
+import Reveal from '@/components/site/Reveal'
+import SectionHead from '@/components/site/SectionHead'
+import ServiceIndex from '@/components/site/ServiceIndex'
 import TridentServices from '@/components/site/TridentServices'
 import { breadcrumbs, pageMetadata } from '@/lib/seo'
 import { services } from '@/lib/services'
@@ -32,49 +34,30 @@ export default function ServicesPage() {
           },
         ]}
       />
-      <section className="container pt-32 sm:pt-40">
-        <p className="eyebrow">Services</p>
-        <h1 className="display mt-6 max-w-[14ch] text-[clamp(2.75rem,7.5vw,6.5rem)]">
-          AI and software, <span className="mark-word text-cobalt">built to last</span>
-        </h1>
-        <p className="lede mt-8 max-w-2xl">
-          Automation, AI and software under one roof — from a single workflow that saves your team ten hours a week
-          to the platform your whole business runs on.
-        </p>
+      <PageHero
+        crumbs={[{ label: 'Services' }]}
+        title={<>Ten services.<br /><span className="text-cobalt">One team.</span></>}
+        meta={[
+          { k: 'Talks', v: 'Voice AI · Chatbots' },
+          { k: 'Thinks', v: 'AI agents · Automation' },
+          { k: 'Ships', v: 'Software · Web · Mobile · E-com' },
+          { k: 'Base', v: 'Design · Cloud' },
+        ]}
+        intro="Automation, AI and every kind of software under one roof — from a single workflow that saves your team ten hours a week to the platform your whole business runs on. Hover a service to see something we shipped with it."
+      />
+
+      <section className="container py-24 sm:py-32">
+        <ServiceIndex />
       </section>
 
-      <section className="container pt-20 sm:pt-28">
-        <TridentServices />
-      </section>
-
-      <section className="container py-20 sm:py-28">
-        <h2 className="h2 mb-12">Every service, in detail</h2>
-        <div className="grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
-          {services.map((s, i) => (
-            <Link key={s.slug} href={`/services/${s.slug}`} className="group flex min-h-[320px] flex-col bg-paper p-8 transition-colors hover:bg-white sm:p-10">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[12px] text-muted">{String(i + 1).padStart(2, '0')}</span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-cobalt">{s.timeline}</span>
-              </div>
-              <h2 className="mt-12 text-3xl font-semibold tracking-[-0.03em] transition-colors group-hover:text-cobalt sm:text-4xl">
-                {s.name}
-              </h2>
-              <p className="mt-4 max-w-md text-[15.5px] leading-relaxed text-muted">{s.lede}</p>
-              <ul className="mt-auto flex flex-wrap gap-2 pt-8">
-                {s.stack.slice(0, 5).map((t) => (
-                  <li key={t} className="border border-line px-3 py-1 text-[12.5px] text-muted">{t}</li>
-                ))}
-              </ul>
-              <span className="mt-8 flex items-center gap-2 text-[15px] font-medium">
-                Learn more <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </Link>
-          ))}
-          <Link href="/contact" className="group flex min-h-[320px] flex-col justify-between bg-ink p-8 text-paper sm:p-10">
-            <span className="eyebrow text-paper/55">Not sure which?</span>
-            <span className="text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Describe the problem. We’ll tell you what to build — and what not to.</span>
-            <span className="flex items-center gap-2 text-[15px] font-medium">Book a free call <Arrow /></span>
-          </Link>
+      <section className="bg-paper-2/70 py-24 sm:py-32">
+        <div className="container">
+          <Reveal>
+            <SectionHead index="02" label="How it fits" title="Three prongs. One shaft." intro="Everything we do fits on our logo." />
+          </Reveal>
+          <Reveal className="mt-16" delay={100}>
+            <TridentServices />
+          </Reveal>
         </div>
       </section>
 

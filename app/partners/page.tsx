@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Arrow from '@/components/site/Arrow'
-import FaqList from '@/components/site/FaqList'
+import FaqSection from '@/components/site/FaqSection'
+import PageHero from '@/components/site/PageHero'
 import JsonLd from '@/components/site/JsonLd'
 import LeadForm from '@/components/site/LeadForm'
 import PartnerCalculator from '@/components/site/PartnerCalculator'
@@ -79,40 +80,30 @@ export default function PartnersPage() {
     <>
       <JsonLd data={[partnerProgramSchema(), faqSchema(faqs), breadcrumbs([{ name: 'Partner programme', path: '/partners' }])]} />
 
-      {/* HERO */}
-      <section className="container pt-28 sm:pt-36">
-        <p className="eyebrow">Partner programme</p>
-        <h1 className="display mt-7 max-w-[12ch] text-[clamp(3.5rem,11vw,10.5rem)]">
-          Bring a client. Earn <span className="text-cobalt">{pp.referral.base}–{pp.referral.boosted}%</span>.
-        </h1>
-        <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-end">
-          <p className="lede max-w-xl lg:col-span-6">
-            Know a business that needs an AI agent, an app or custom software? Introduce them. We do the selling and the
-            building — you earn {pp.referral.base}% of what they pay, and {pp.referral.boosted}% on bigger or repeat deals.
-          </p>
-          <div className="flex flex-wrap gap-3 lg:col-span-6 lg:justify-end">
-            <a href="#apply" className="btn-cobalt">Become a partner <Arrow /></a>
-            <a href="#calculator" className="btn-ghost">Calculate earnings</a>
-          </div>
-        </div>
-
-        <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden border border-line bg-line lg:grid-cols-4">
-          {[
-            [`${pp.referral.boosted}%`, 'top commission rate'],
-            [`${pp.payoutDays} days`, 'from client payment to payout'],
-            [`${pp.recurringMonths} mo`, 'recurring on retainers'],
-            ['₹0', 'to join · no targets'],
-          ].map(([v, l]) => (
-            <div key={l} className="bg-paper p-6 sm:p-8">
-              <dt className="sr-only">{l}</dt>
-              <dd>
-                <span className="block text-4xl display sm:text-5xl">{v}</span>
-                <span className="mt-2 block text-[14px] text-muted">{l}</span>
-              </dd>
+      <PageHero
+        crumbs={[{ label: 'Partner programme' }]}
+        title={<>Bring a client.<br />Earn <span className="text-cobalt">{pp.referral.base}–{pp.referral.boosted}%.</span></>}
+        meta={[
+          { k: 'Top commission', v: `${pp.referral.boosted}%` },
+          { k: 'Payout', v: `${pp.payoutDays} days after client pays` },
+          { k: 'Retainers', v: `${pp.recurringMonths} months recurring` },
+          { k: 'To join', v: '₹0 · no targets' },
+        ]}
+        intro={
+          <>
+            <p className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-snug tracking-[-0.015em] text-ink">
+              Know a business that needs automation, an AI agent, an app or custom software? Introduce them.
+            </p>
+            <p className="mt-5 text-[17px] leading-relaxed text-muted">
+              We do the selling and the building. You earn {pp.referral.base}% of what they pay — {pp.referral.boosted}% on bigger or repeat deals.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#apply" className="btn-cobalt">Become a partner <Arrow /></a>
+              <a href="#calculator" className="btn-ghost">Calculate earnings</a>
             </div>
-          ))}
-        </dl>
-      </section>
+          </>
+        }
+      />
 
       {/* TRACKS */}
       <section className="container py-24 sm:py-32">
@@ -225,22 +216,11 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="container py-24 sm:py-32">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="eyebrow">FAQ</p>
-            <h2 className="h2 mt-6">Partner questions</h2>
-          </div>
-          <div className="lg:col-span-8">
-            <FaqList faqs={faqs} />
-            <p className="mt-8 text-[13px] leading-relaxed text-muted">
-              Commission applies to new clients introduced by a registered partner and is paid on amounts received, excluding
-              taxes and pass-through costs. Full terms are in the partner agreement.
-            </p>
-          </div>
-        </div>
-      </section>
+      <FaqSection faqs={faqs} title="Partner questions." label="Partner FAQ" />
+      <p className="container -mt-16 pb-24 text-[13px] leading-relaxed text-muted lg:pl-[calc(33.333%+2.5rem)]">
+        Commission applies to new clients introduced by a registered partner and is paid on amounts received, excluding
+        taxes and pass-through costs. Full terms are in the partner agreement.
+      </p>
     </>
   )
 }

@@ -1,22 +1,23 @@
 import Link from 'next/link'
 import Arrow from '@/components/site/Arrow'
 import CtaBand from '@/components/site/CtaBand'
-import FaqList from '@/components/site/FaqList'
-import BuildBento from '@/components/site/BuildBento'
 import CountUp from '@/components/site/CountUp'
-import HeroSystem from '@/components/site/HeroSystem'
+import FaqSection from '@/components/site/FaqSection'
+import InlineMedia from '@/components/site/InlineMedia'
+import MediaReveal from '@/components/site/MediaReveal'
 import JsonLd from '@/components/site/JsonLd'
 import Reveal from '@/components/site/Reveal'
 import SectionHead from '@/components/site/SectionHead'
-import Showreel from '@/components/site/Showreel'
+import ServiceIndex from '@/components/site/ServiceIndex'
+import WordMarquee from '@/components/site/WordMarquee'
+import WorkGrid from '@/components/site/WorkGrid'
 import { faqSchema } from '@/lib/seo'
 import type { Faq } from '@/lib/services'
 import { partnerProgram } from '@/lib/site'
-import { projects } from '@/lib/work'
+import { getProject } from '@/lib/work'
 
 /** Segments are sized by how long each phase actually takes. */
-const tools = ['WhatsApp', 'Shopify', 'Tally', 'Zoho', 'HubSpot', 'Razorpay', 'Google Sheets', 'Salesforce', 'Twilio', 'Exotel', 'OpenAI', 'Claude', 'Gemini', 'Slack', 'Stripe', 'Shiprocket']
-const tools2 = ['n8n', 'Make', 'Zapier', 'AWS', 'Google Cloud', 'Firebase', 'PostgreSQL', 'Next.js', 'React Native', 'Flutter', 'Python', 'Node.js', 'WooCommerce', 'Notion', 'Gmail', 'Outlook']
+const tools = ['WhatsApp', 'Shopify', 'Tally', 'Zoho', 'HubSpot', 'Razorpay', 'Google Sheets', 'Salesforce', 'Twilio', 'Exotel', 'OpenAI', 'Claude', 'n8n', 'Zapier', 'AWS', 'Firebase']
 
 const timeline = [
   { span: 1, when: 'Day 0', title: 'Free scoping call', text: '30 minutes with an engineer. A rough plan, a price range and an honest view on whether AI is the right tool.' },
@@ -40,131 +41,175 @@ const faqs: Faq[] = [
 ]
 
 export default function Home() {
+  const gigtap = getProject('gigtap')!
+  const instabus = getProject('instabus')!
+  const trendify = getProject('trendify')!
+  const gamecam = getProject('gamecam')!
+  const work = ['gigtap', 'instabus', 'trendify', 'nowochat'].map((s) => getProject(s)!)
+
   return (
     <>
       <JsonLd data={faqSchema(faqs)} />
 
-      <HeroSystem />
+      {/* ───────── HERO ───────── */}
+      <section className="container pt-24 sm:pt-28">
+        <div className="grid grid-cols-2 border-b border-ink pb-3 font-mono text-[11px] uppercase tracking-[0.14em] sm:grid-cols-3">
+          <span>Trident Square®</span>
+          <span className="hidden text-center text-muted sm:block">Automation · AI · Software</span>
+          <span className="text-right text-muted">Noida → Worldwide</span>
+        </div>
 
-      {/* ───────── TOOLS WE CONNECT ───────── */}
-      <section aria-label="Tools we integrate with" className="border-b border-line bg-paper py-10">
-        <p className="container font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Plugs into the tools you already use</p>
-        <div className="mask-fade-x mt-6 space-y-3 overflow-hidden">
-          {[tools, tools2].map((row, r) => (
-            <ul key={r} className={`flex w-max gap-3 ${r ? 'animate-marquee-rev' : 'animate-marquee'}`}>
-              {[...row, ...row].map((t, i) => (
-                <li
-                  key={i}
-                  aria-hidden={i >= row.length}
-                  className="condensed whitespace-nowrap border border-ink/10 bg-white px-5 py-2.5 text-[17px] font-bold uppercase tracking-[0.01em] text-ink/80"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
+        <h1 className="display mt-10 text-[clamp(2.6rem,7.7vw,8.4rem)] sm:mt-14">
+          <span className="block animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_both]">
+            We build
+            <InlineMedia video={gigtap.loop!} poster={gigtap.poster!} delay={500} />
+            automation,
+          </span>
+          <span className="block animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_120ms_both]">
+            <InlineMedia video={instabus.loop!} poster={instabus.poster!} delay={700} className="ml-0" />
+            AI <span className="text-cobalt">&amp;</span> software
+            <InlineMedia video={trendify.loop!} poster={trendify.poster!} delay={900} className="w-[0.9em]" />
+          </span>
+          <span className="block animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_240ms_both] text-ink/25">
+            that runs your business.
+          </span>
+        </h1>
+
+        {/* On phones the inline windows would break the lines — show them as a strip instead. */}
+        <div className="mt-8 grid grid-cols-3 gap-2 sm:hidden" aria-hidden>
+          {[gigtap, instabus, trendify].map((p) => (
+            <div key={p.slug} className="relative aspect-[4/5] overflow-hidden bg-ink">
+              <video src={p.loop} poster={p.poster} autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" />
+            </div>
           ))}
         </div>
-      </section>
 
-      {/* ───────── NUMBERS ───────── */}
-      <section className="container py-16 sm:py-20">
-        <dl className="grid grid-cols-2 gap-y-10 lg:grid-cols-4">
-          {[
-            { v: <CountUp to={25} suffix="+" />, l: 'products shipped' },
-            { v: <CountUp to={10} />, l: 'services, one team' },
-            { v: <>&lt;<CountUp to={2} />s</>, l: 'voice agent reply time' },
-            { v: <CountUp to={partnerProgram.referral.boosted} suffix="%" />, l: 'paid to referral partners' },
-          ].map((x, i) => (
-            <Reveal key={x.l} delay={i * 90} className="border-l border-ink pl-5">
-              <dt className="sr-only">{x.l}</dt>
-              <dd>
-                <span className="display block text-[clamp(3.5rem,8vw,7rem)] leading-[0.85]">{x.v}</span>
-                <span className="mt-3 block font-mono text-[11px] uppercase tracking-[0.12em] text-muted">{x.l}</span>
-              </dd>
-            </Reveal>
-          ))}
-        </dl>
-      </section>
-
-      {/* ───────── WHAT WE BUILD ───────── */}
-      <section className="container pb-24 sm:pb-32">
-        <Reveal>
-          <SectionHead index="01" label="What we build" title="If it runs your business, we build it." intro="Automation, AI and every kind of software — one team from first call to launch." />
-        </Reveal>
-        <Reveal className="mt-14" delay={120}>
-          <BuildBento />
-        </Reveal>
-        <Reveal className="mt-8 flex flex-wrap items-center gap-2" delay={160}>
-          <span className="mr-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">Also</span>
-          {[
-            ['AI agent development', '/services/ai-agent-development'],
-            ['E-commerce', '/services/ecommerce-development'],
-            ['UI/UX design', '/services/ui-ux-design'],
-            ['Cloud & DevOps', '/services/cloud-devops'],
-          ].map(([l, h]) => (
-            <Link key={h} href={h} className="border border-ink/15 px-3.5 py-2 text-[14px] transition-colors hover:border-ink hover:bg-ink hover:text-paper">
-              {l}
+        <div className="mt-14 grid gap-10 border-t border-ink/15 pt-8 lg:grid-cols-12">
+          <p className="max-w-md text-[18px] leading-relaxed text-ink-2 lg:col-span-5">
+            One studio for everything from a single automation that saves your team ten hours a week to the platform your
+            whole company runs on. Built in Noida, shipped worldwide.
+          </p>
+          <div className="flex flex-wrap items-start gap-3 lg:col-span-4">
+            <Link href="/contact" className="btn-primary">
+              Book a free call <Arrow />
             </Link>
-          ))}
-          <Link href="/services" className="ml-auto flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.1em] hover:text-cobalt">
-            All 10 services <Arrow />
-          </Link>
-        </Reveal>
-      </section>
-
-      {/* ───────── SHOWREEL ───────── */}
-      <section className="overflow-hidden bg-paper-2/70 py-24 sm:py-32">
-        <Reveal className="container">
-          <SectionHead index="02" label="Selected work" title="Shipped. Used. Measured." intro="Real products, real screen recordings. Hover to pause, click to read the story." />
-        </Reveal>
-        <Reveal className="mt-16" delay={120}>
-          <Showreel projects={projects} />
-        </Reveal>
-        <div className="container mt-12">
-          <Link href="/work" className="btn-ghost">
-            All case studies <Arrow />
-          </Link>
+            <Link href="/work" className="btn-ghost">
+              See the work
+            </Link>
+          </div>
+          <dl className="grid grid-cols-3 gap-4 lg:col-span-3">
+            {[
+              [<CountUp key="a" to={25} suffix="+" />, 'Products shipped'],
+              [<CountUp key="b" to={10} />, 'Services'],
+              [<CountUp key="c" to={partnerProgram.referral.boosted} suffix="%" />, 'Partner payout'],
+            ].map(([v, l], i) => (
+              <div key={i}>
+                <dd className="display text-[2.4rem] leading-none">{v}</dd>
+                <dt className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.12em] text-muted">{l}</dt>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      {/* ───────── PROCESS ───────── */}
-      <section className="bg-ink py-24 text-paper sm:py-32">
+      {/* ───────── FEATURED ───────── */}
+      <section className="container mt-16 sm:mt-24">
+        <Link href={`/work/${gamecam.slug}`} className="group block">
+          <MediaReveal poster={gamecam.poster} video={gamecam.loop} alt={`${gamecam.name} — ${gamecam.summary}`} priority className="aspect-[4/3] sm:aspect-[21/9]">
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 bg-gradient-to-t from-black/70 to-transparent p-5 pt-24 text-white sm:p-8">
+              <div>
+                <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/70">Featured case — {gamecam.industry}</p>
+                <p className="display mt-2 text-[clamp(2.25rem,5vw,4.5rem)]">{gamecam.name}</p>
+                <p className="mt-1 max-w-lg text-[15px] text-white/80">{gamecam.summary}</p>
+              </div>
+              <span className="grid h-14 w-14 shrink-0 place-items-center bg-white text-ink transition-all duration-500 group-hover:rotate-[-45deg] group-hover:bg-cobalt group-hover:text-white">
+                <Arrow className="h-5 w-5" />
+              </span>
+            </div>
+          </MediaReveal>
+        </Link>
+      </section>
+
+      <div className="mt-24 sm:mt-32">
+        <WordMarquee words={['Automation', 'AI agents', 'Voice bots', 'Chatbots', 'Custom software', 'Web apps', 'Mobile apps', 'E-commerce', 'Cloud']} />
+      </div>
+
+      {/* ───────── SERVICES ───────── */}
+      <section className="container py-24 sm:py-32">
+        <Reveal>
+          <SectionHead index="01" label="What we build" title="If it runs your business, we build it." intro="Hover a service to see something we shipped with it." />
+        </Reveal>
+        <div className="mt-16">
+          <ServiceIndex />
+        </div>
+        <Reveal className="mt-14 border-t border-ink/15 pt-6">
+          <p className="font-mono text-[11px] uppercase leading-loose tracking-[0.12em] text-muted">
+            <span className="text-ink">Works with — </span>
+            {tools.join(' / ')}
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ───────── WORK ───────── */}
+      <section className="bg-paper-2/70 py-24 sm:py-32">
         <div className="container">
           <Reveal>
-            <SectionHead dark index="03" label="How we work" title="Idea to live product, measured in weeks." />
+            <SectionHead index="02" label="Selected work" title="Shipped. Used. Measured." intro="Real products and real screen recordings — no mock-ups, no stock footage." />
           </Reveal>
-          <ol className="mt-16 flex flex-col gap-10 lg:flex-row lg:gap-0">
+          <div className="mt-16 sm:mt-24">
+            <WorkGrid projects={work} />
+          </div>
+          <Reveal className="mt-20 flex justify-center">
+            <Link href="/work" className="btn-primary">
+              All case studies <Arrow />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ───────── APPROACH ───────── */}
+      <section className="container py-24 sm:py-32">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <Reveal>
+                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted"><span className="text-cobalt">03 / </span>How we work</p>
+                <h2 className="h2 mt-5 max-w-[11ch]">Idea to live product, in weeks.</h2>
+                <p className="lede mt-6 max-w-sm">Weekly demos on a live link, a fixed price before we start, and code that belongs to you from day one.</p>
+              </Reveal>
+            </div>
+          </div>
+          <ol className="lg:col-span-7">
             {timeline.map((t, i) => (
-              <Reveal as="li" key={t.title} delay={i * 120} className="lg:pr-6" style={{ flex: t.span }}>
-                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-cobalt-ink">{t.when}</p>
-                <div aria-hidden className="relative mt-3 h-3 lg:-mr-6">
-                  <span className="absolute inset-y-0 left-0 w-px bg-paper/60" />
-                  <span className="absolute left-0 right-2 top-1/2 h-px bg-paper/40" />
-                  <span className="absolute inset-y-0 right-2 w-px bg-paper/60" />
+              <Reveal as="li" key={t.title} delay={i * 60} className="grid grid-cols-[auto_1fr] gap-6 border-t border-ink py-8 sm:gap-10 sm:py-10">
+                <span className="display text-[clamp(3.5rem,7vw,6rem)] leading-[0.8] text-transparent" style={{ WebkitTextStroke: '1.5px rgb(var(--ink))' }}>
+                  0{i + 1}
+                </span>
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-cobalt">{t.when}</p>
+                  <h3 className="display mt-2 text-[clamp(1.9rem,3vw,2.75rem)]">{t.title}</h3>
+                  <p className="mt-3 max-w-md text-[16px] leading-relaxed text-muted">{t.text}</p>
                 </div>
-                <h3 className="condensed mt-6 text-2xl font-bold uppercase">{t.title}</h3>
-                <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-paper/60">{t.text}</p>
               </Reveal>
             ))}
           </ol>
+        </div>
 
-          <div className="mt-24 grid gap-px border border-paper/15 bg-paper/15 md:grid-cols-3">
-            {models.map((m, i) => (
-              <Reveal key={m.name} delay={i * 100} className="bg-ink p-7 sm:p-8">
-                <p className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-paper/45">{m.fit}</p>
-                <h3 className="display mt-4 text-[2.5rem]">{m.name}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-paper/60">{m.text}</p>
-              </Reveal>
-            ))}
-          </div>
+        <div className="mt-20 grid gap-px border border-ink bg-ink md:grid-cols-3">
+          {models.map((m, i) => (
+            <Reveal key={m.name} delay={i * 90} className="group bg-paper p-7 transition-colors duration-500 hover:bg-ink hover:text-paper sm:p-9">
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted group-hover:text-paper/50">{m.fit}</p>
+              <h3 className="display mt-6 text-[2.75rem]">{m.name}</h3>
+              <p className="mt-3 text-[15.5px] leading-relaxed text-muted group-hover:text-paper/65">{m.text}</p>
+            </Reveal>
+          ))}
         </div>
       </section>
 
       {/* ───────── PARTNERS ───────── */}
-      <section className="container py-24 sm:py-32">
+      <section className="container pb-8">
         <Reveal>
           <Link href="/partners" className="group relative block overflow-hidden bg-cobalt text-white">
-            <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 animate-glow rounded-full bg-white/20 blur-3xl" />
             <div className="relative grid lg:grid-cols-12">
               <div className="p-8 sm:p-12 lg:col-span-7 lg:p-16">
                 <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/60">Partner programme</p>
@@ -188,15 +233,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ───────── FAQ ───────── */}
-      <section className="container pb-24 sm:pb-32">
-        <Reveal>
-          <SectionHead index="04" label="FAQ" title="Asked before the first call" />
-        </Reveal>
-        <Reveal className="mt-12 lg:ml-[25%]" delay={100}>
-          <FaqList faqs={faqs} />
-        </Reveal>
-      </section>
+      <FaqSection faqs={faqs} />
 
       <CtaBand />
     </>

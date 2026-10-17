@@ -6,6 +6,7 @@ import './globals.css'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import JsonLd from '@/components/site/JsonLd'
+import SmoothScroll from '@/components/site/SmoothScroll'
 import WhatsAppFloat from '@/components/site/WhatsAppFloat'
 import { organizationGraph } from '@/lib/seo'
 import { site } from '@/lib/site'
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-IN" className={`${sans.variable} ${mono.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
         <JsonLd data={organizationGraph()} />
+        <SmoothScroll />
         <Header />
         <main id="main" className="relative z-[1]">{children}</main>
         <Footer />

@@ -15,8 +15,6 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mega, setMega] = useState(false)
-  // Over the dark home hero (until you scroll or open a menu) the header inverts.
-  const onDark = pathname === '/' && !scrolled && !mega && !open
   const closeTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   // Hover intent: open at once, close after a short grace period so moving the
@@ -68,7 +66,7 @@ export default function Header() {
         Skip to content
       </a>
       <div className="container flex h-16 items-center justify-between gap-6">
-        <Logo inverted={onDark} />
+        <Logo />
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {nav.map((item) => {
@@ -84,7 +82,7 @@ export default function Header() {
                   onClick={() => setMega((v) => !v)}
                   className={cn(
                     'flex items-center gap-1.5 px-3.5 py-2 text-[14.5px] transition-colors',
-                    onDark ? 'text-paper/70 hover:text-paper' : active || mega ? 'text-ink' : 'text-muted hover:text-ink'
+                    active || mega ? 'text-ink' : 'text-muted hover:text-ink'
                   )}
                 >
                   {item.label}
@@ -101,11 +99,11 @@ export default function Header() {
                 href={item.href}
                 onMouseEnter={closeMegaSoon}
                 aria-current={active ? 'page' : undefined}
-                className={cn('px-3.5 py-2 text-[14.5px] transition-colors', onDark ? 'text-paper/70 hover:text-paper' : active ? 'text-ink' : 'text-muted hover:text-ink')}
+                className={cn('px-3.5 py-2 text-[14.5px] transition-colors', active ? 'text-ink' : 'text-muted hover:text-ink')}
               >
                 {item.label}
                 {item.href === '/partners' ? (
-                  <span className={cn('ml-1.5 px-1.5 py-0.5 font-mono text-[10px] font-medium', onDark ? 'bg-cobalt text-white' : 'bg-cobalt/10 text-cobalt')}>35%</span>
+                  <span className="ml-1.5 bg-cobalt/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-cobalt">35%</span>
                 ) : null}
               </Link>
             )
@@ -113,7 +111,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className={cn('hidden min-h-[40px] px-5 text-[14px] sm:inline-flex', onDark ? 'btn bg-paper text-ink hover:bg-cobalt hover:text-white' : 'btn-primary')}>
+          <Link href="/contact" className="btn-primary hidden min-h-[40px] px-5 text-[14px] sm:inline-flex">
             Start a project <Arrow className="h-3.5 w-3.5" />
           </Link>
           <button
@@ -122,10 +120,10 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className={cn("relative grid h-10 w-10 place-items-center border md:hidden", onDark ? "border-paper/25" : "border-line")}
+            className="relative grid h-10 w-10 place-items-center border border-line md:hidden"
           >
-            <span className={cn('absolute h-px w-4 transition-transform', onDark ? 'bg-paper' : 'bg-ink', open ? 'rotate-45' : '-translate-y-[3px]')} />
-            <span className={cn('absolute h-px w-4 transition-transform', onDark ? 'bg-paper' : 'bg-ink', open ? '-rotate-45' : 'translate-y-[3px]')} />
+            <span className={cn('absolute h-px w-4 bg-ink transition-transform', open ? 'rotate-45' : '-translate-y-[3px]')} />
+            <span className={cn('absolute h-px w-4 bg-ink transition-transform', open ? '-rotate-45' : 'translate-y-[3px]')} />
           </button>
         </div>
       </div>
