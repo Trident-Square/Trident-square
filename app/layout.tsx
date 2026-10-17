@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Archivo, JetBrains_Mono } from 'next/font/google'
+import { Archivo, JetBrains_Mono, Kalam } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
@@ -14,6 +14,8 @@ import { site } from '@/lib/site'
 // Archivo's width axis gives us both a condensed industrial display face and a normal-width text face from one file.
 const sans = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-sans', display: 'swap' })
 const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
+// Handwriting for the sticky notes in the hero (Kalam is from the Indian Type Foundry).
+const hand = Kalam({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-hand', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -66,7 +68,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en-IN" className={`${sans.variable} ${mono.variable} ${hand.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
         <JsonLd data={organizationGraph()} />
         <SmoothScroll />

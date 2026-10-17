@@ -3,7 +3,7 @@ import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import Reveal from '@/components/site/Reveal'
 import SectionHead from '@/components/site/SectionHead'
-import ServiceIndex from '@/components/site/ServiceIndex'
+import ServiceCards from '@/components/site/ServiceCards'
 import TridentServices from '@/components/site/TridentServices'
 import { breadcrumbs, pageMetadata } from '@/lib/seo'
 import { services } from '@/lib/services'
@@ -43,11 +43,11 @@ export default function ServicesPage() {
           { k: 'Ships', v: 'Software · Web · Mobile · E-com' },
           { k: 'Base', v: 'Design · Cloud' },
         ]}
-        intro="Automation, AI and every kind of software under one roof — from a single workflow that saves your team ten hours a week to the platform your whole business runs on. Hover a service to see something we shipped with it."
+        intro="Automation, AI and every kind of software under one roof — from a single workflow that saves your team ten hours a week to the platform your whole business runs on."
       />
 
-      <section className="container py-24 sm:py-32">
-        <ServiceIndex />
+      <section className="container py-20 sm:py-28">
+        <ServiceCards />
       </section>
 
       <section className="bg-paper-2/70 py-24 sm:py-32">

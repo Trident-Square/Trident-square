@@ -70,22 +70,25 @@ export default function MediaReveal({
     }
   }, [parallax])
 
+  // The observed box is never clipped: Chrome treats a target hidden by its own
+  // clip-path as not intersecting, so the shutter lives on an inner layer.
   return (
-    <div
-      ref={box}
-      className={cn('relative overflow-hidden bg-ink transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(.7,0,.15,1)]', className)}
-      style={{ clipPath: shown ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)' }}
-    >
+    <div ref={box} className={cn('relative', className)}>
       <div
-        ref={inner}
-        className={cn('absolute inset-[-7%_0] transition-transform duration-[1600ms] ease-[cubic-bezier(.2,.75,.15,1)]', shown ? 'scale-100' : 'scale-[1.18]')}
+        className="absolute inset-0 overflow-hidden bg-ink transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(.7,0,.15,1)]"
+        style={{ clipPath: shown ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)' }}
       >
-        {poster ? <Image src={poster} alt={alt} fill sizes={sizes} priority={priority} className={fit === 'cover' ? 'object-cover' : 'object-contain'} /> : null}
-        {video ? (
-          <video ref={vid} src={video} poster={poster} muted loop playsInline preload="none" aria-hidden className={cn('absolute inset-0 h-full w-full', fit === 'cover' ? 'object-cover' : 'object-contain')} />
-        ) : null}
+        <div
+          ref={inner}
+          className={cn('absolute inset-[-7%_0] transition-transform duration-[1600ms] ease-[cubic-bezier(.2,.75,.15,1)]', shown ? 'scale-100' : 'scale-[1.18]')}
+        >
+          {poster ? <Image src={poster} alt={alt} fill sizes={sizes} priority={priority} className={fit === 'cover' ? 'object-cover' : 'object-contain'} /> : null}
+          {video ? (
+            <video ref={vid} src={video} poster={poster} muted loop playsInline preload="none" aria-hidden className={cn('absolute inset-0 h-full w-full', fit === 'cover' ? 'object-cover' : 'object-contain')} />
+          ) : null}
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   )
 }

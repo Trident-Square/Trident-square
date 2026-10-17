@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        hand: ['var(--font-hand)', 'cursive'],
       },
       colors: {
         paper: 'rgb(var(--paper) / <alpha-value>)',

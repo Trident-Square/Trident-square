@@ -193,3 +193,8 @@ details > summary::-webkit-details-marker {
   from { opacity: 0; transform: translateY(0.25em); clip-path: inset(0 0 100% 0); }
   to { opacity: 1; transform: none; clip-path: inset(0 0 -10% 0); }
 }
+
+@keyframes strike {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}

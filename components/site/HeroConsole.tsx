@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
  * dashboard underneath. It explains the company in ten seconds without a video.
  */
 
-type Tab = 'talks' | 'thinks' | 'ships'
+export type Tab = 'talks' | 'thinks' | 'ships'
 
 const TABS: { id: Tab; n: string; label: string; caption: string }[] = [
   { id: 'talks', n: '1', label: 'Talks', caption: 'Voice agent · outbound booking call' },
@@ -44,8 +44,11 @@ const ROWS = [
 const STEPS: Record<Tab, number> = { talks: CALL.length + 1, thinks: RUN.length + 2, ships: ROWS.length + 1 }
 const STEP_MS = 1100
 
-export default function HeroConsole() {
-  const [tab, setTab] = useState<Tab>('talks')
+/** Optionally controlled: pass `tab` + `onTabChange` to drive it from outside (the hero headline does). */
+export default function HeroConsole({ tab: tabProp, onTabChange }: { tab?: Tab; onTabChange?: (t: Tab) => void } = {}) {
+  const [innerTab, setInnerTab] = useState<Tab>('talks')
+  const tab = tabProp ?? innerTab
+  const setTab = (t: Tab) => (onTabChange ? onTabChange(t) : setInnerTab(t))
   const [step, setStep] = useState(0)
   const [auto, setAuto] = useState(true)
   const reduced = useRef(false)
@@ -55,7 +58,9 @@ export default function HeroConsole() {
     if (reduced.current) setStep(99)
   }, [])
 
+  // Restart the scene whenever the tab changes, from inside or outside.
   useEffect(() => {
+    setStep(reduced.current ? 99 : 0)
     if (reduced.current) return
     const id = setInterval(() => setStep((s) => s + 1), STEP_MS)
     return () => clearInterval(id)
@@ -65,13 +70,13 @@ export default function HeroConsole() {
   useEffect(() => {
     if (reduced.current || step <= STEPS[tab] + 3) return
     if (auto) setTab(TABS[(TABS.findIndex((t) => t.id === tab) + 1) % TABS.length].id)
-    setStep(0)
+    else setStep(0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, tab, auto])
 
   const choose = (t: Tab) => {
     setAuto(false)
     setTab(t)
-    setStep(reduced.current ? 99 : 0)
   }
 
   const active = TABS.find((t) => t.id === tab)!

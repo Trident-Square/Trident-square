@@ -27,7 +27,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
                 alt={`${p.name} — ${p.summary}`}
                 sizes="(min-width:1024px) 55vw, 100vw"
                 fit={p.orientation === 'portrait' ? 'contain' : 'cover'}
-                className={cn(i % 4 === 0 || i % 4 === 3 ? 'aspect-[16/11]' : 'aspect-[4/5]')}
+                className={p.orientation === 'portrait' ? 'aspect-[4/5]' : i % 4 === 0 || i % 4 === 3 ? 'aspect-[16/11]' : 'aspect-[4/3]'}
               >
                 <span className="absolute bottom-0 right-0 grid h-14 w-14 place-items-center bg-paper text-ink transition-all duration-500 group-hover:bg-cobalt group-hover:text-white">
                   <Arrow className="h-5 w-5 transition-transform duration-500 group-hover:rotate-[-45deg]" />

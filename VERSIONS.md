@@ -10,6 +10,7 @@ Every design version is saved as a git tag. To bring one back, say the number or
 | v3 | Trident Pro | v2 + full-width mega menu, automation-first positioning, 10 services | `v3-trident-pro` |
 | v4 | Trident Motion | Dark animated hero with live system map (inputs → Trident Square → your systems) and rotating Talks/Thinks/Ships headline, tools marquee, count-up numbers, animated bento grid of services, device-frame showreel, scroll reveals | `v4-trident-motion` |
 | v5 | Studio | Light premium-agency look: headline with inline live product windows, full-width featured case with shutter reveal and parallax, giant outlined word marquee, services index with sticky video preview, staggered work grid, sticky process steps, numbered FAQ with help card, smooth scrolling, one page-hero system across every inner page | `v5-studio` |
+| v6 | Trident Story | v4 home body with a new opening: "Software that talks¹, thinks² & ships³" hero where headline verb, footnotes and live console are linked; then "We automate your ___" with the draggable before/after desk; floating header with new wordmark; visual service cards on /services; fixed video reveals on work and service pages | `v6-trident-story` |
 
 ## Restore a version
 
