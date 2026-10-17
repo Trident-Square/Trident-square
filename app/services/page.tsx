@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Arrow from '@/components/site/Arrow'
 import CtaBand from '@/components/site/CtaBand'
 import JsonLd from '@/components/site/JsonLd'
+import TridentServices from '@/components/site/TridentServices'
 import { breadcrumbs, pageMetadata } from '@/lib/seo'
 import { services } from '@/lib/services'
 import { absoluteUrl } from '@/lib/site'
@@ -42,7 +43,12 @@ export default function ServicesPage() {
         </p>
       </section>
 
+      <section className="container pt-20 sm:pt-28">
+        <TridentServices />
+      </section>
+
       <section className="container py-20 sm:py-28">
+        <h2 className="h2 mb-12">Every service, in detail</h2>
         <div className="grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
           {services.map((s, i) => (
             <Link key={s.slug} href={`/services/${s.slug}`} className="group flex min-h-[320px] flex-col bg-paper p-8 transition-colors hover:bg-white sm:p-10">
