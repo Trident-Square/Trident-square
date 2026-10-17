@@ -217,3 +217,8 @@ details > summary::-webkit-details-marker {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
 }
+
+@keyframes sheet-in {
+  from { opacity: 0; transform: translate(-18px, -36px) rotate(-3deg); }
+  to { opacity: 1; transform: none; }
+}

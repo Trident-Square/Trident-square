@@ -97,7 +97,7 @@ export default function HeroBlueprint() {
             Trident Square — automation, AI &amp; software studio
           </p>
 
-          <h1 className="display mt-6 text-[clamp(3rem,5.6vw,5.75rem)]">
+          <h1 className="display mt-6 whitespace-nowrap text-[clamp(2.6rem,4.7vw,5rem)]">
             <span className="block animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_both]">You bring</span>
             <span className="block animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_80ms_both]">the problem.</span>
             <span className="block text-cobalt animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_160ms_both]">We build</span>
@@ -146,11 +146,14 @@ export default function HeroBlueprint() {
                   type="button"
                   onClick={() => pick(i)}
                   className={cn(
-                    'border px-3 py-1.5 text-[13px] transition-colors',
+                    'relative overflow-hidden border px-3 py-1.5 text-[13px] transition-colors',
                     (auto || text === p.text) && active === i ? 'border-ink bg-ink text-paper' : 'border-ink/15 hover:border-ink'
                   )}
                 >
                   {p.chip}
+                  {auto && !reduced && active === i ? (
+                    <span key={`bar-${active}`} aria-hidden className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-cobalt" style={{ animation: `progress ${CYCLE_MS}ms linear both` }} />
+                  ) : null}
                 </button>
               </li>
             ))}
@@ -170,7 +173,9 @@ export default function HeroBlueprint() {
 
         {/* ── Right: the blueprint ── */}
         <div className="lg:col-span-7">
-          <Blueprint key={slug} slug={slug} problem={shownProblem} sheet={PROBLEMS.findIndex((p) => p.slug === slug) + 1} service={service} />
+          <TiltStack>
+            <Blueprint key={slug} slug={slug} problem={shownProblem} sheet={PROBLEMS.findIndex((p) => p.slug === slug) + 1} service={service} />
+          </TiltStack>
         </div>
       </div>
     </section>
@@ -192,7 +197,7 @@ function Blueprint({
   const rise = (ms: number) => ({ style: { animationDelay: `${ms}ms` } })
 
   return (
-    <figure className="relative bg-cobalt text-white shadow-[0_40px_80px_-40px_rgb(var(--cobalt)/0.7)]">
+    <figure className="relative animate-[sheet-in_.65s_cubic-bezier(.2,.75,.15,1)_both] bg-cobalt text-white shadow-[0_40px_80px_-40px_rgb(var(--cobalt)/0.7)]">
       {/* Fine sheet border, inset like a drawing frame */}
       <div className="pointer-events-none absolute inset-2.5 border border-white/35" aria-hidden />
 
@@ -206,7 +211,7 @@ function Blueprint({
         {/* Problem, in the client's handwriting */}
         <div className="rise-in mt-5" {...rise(0)}>
           <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">01 — Your problem</p>
-          <p className="mt-1.5 min-h-[2.6em] font-hand text-[clamp(1.25rem,2vw,1.6rem)] leading-tight text-white">“{problem}”</p>
+          <p className="mt-1.5 min-h-[2.6em] font-hand text-[clamp(1.25rem,2vw,1.6rem)] leading-tight text-white">“<Marked text={problem} />”</p>
         </div>
 
         {/* Drawn arrow */}
@@ -217,12 +222,12 @@ function Blueprint({
 
         {/* Solution */}
         <div className="grid gap-6 sm:grid-cols-[1.1fr_1fr] sm:items-start">
-          <div className="rise-in" {...rise(350)}>
+          <div className="rise-in" {...rise(250)}>
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">02 — We build</p>
             <p className="display mt-2 text-[clamp(2.2rem,3.6vw,3.4rem)]">{service.name}</p>
             <p className="mt-2 text-[15px] leading-snug text-white/80">{service.hook}</p>
           </div>
-          <div className="rise-in relative h-40 overflow-hidden border border-white/40 bg-paper text-ink sm:h-44" {...rise(500)}>
+          <div className="rise-in relative h-40 overflow-hidden border border-white/40 bg-paper text-ink sm:h-44" {...rise(350)}>
             <Viz slug={slug} />
           </div>
         </div>
@@ -230,7 +235,7 @@ function Blueprint({
         {/* Spec list */}
         <ol className="mt-6 border-t border-white/30">
           {steps.map((d, i) => (
-            <li key={d} className="rise-in grid grid-cols-[2.5rem_1fr] border-b border-white/20 py-2.5 text-[14.5px] leading-snug" {...rise(650 + i * 120)}>
+            <li key={d} className="rise-in grid grid-cols-[2.5rem_1fr] border-b border-white/20 py-2.5 text-[14.5px] leading-snug" {...rise(450 + i * 90)}>
               <span className="font-mono text-[11px] text-white/55">0{i + 3}</span>
               {d}
             </li>
@@ -238,10 +243,10 @@ function Blueprint({
         </ol>
 
         {/* Dimension line: live in … */}
-        <div className="rise-in mt-5" {...rise(1050)}>
+        <div className="rise-in mt-5" {...rise(700)}>
           <div className="relative h-3" aria-hidden>
             <span className="absolute inset-y-0 left-0 w-px bg-white" />
-            <span className="absolute left-0 top-1/2 h-px w-full origin-left bg-white/70 animate-[strike_.9s_cubic-bezier(.7,0,.2,1)_1.1s_both]" />
+            <span className="absolute left-0 top-1/2 h-px w-full origin-left bg-white/70 animate-[strike_.8s_cubic-bezier(.7,0,.2,1)_.75s_both]" />
             <span className="absolute inset-y-0 right-0 w-px bg-white" />
           </div>
           <p className="mt-2 flex items-baseline justify-between gap-4 font-mono text-[10.5px] uppercase tracking-[0.12em]">
@@ -258,12 +263,60 @@ function Blueprint({
             Status
             <br />
             <b className="font-medium text-white">Ready to build</b>
-            <span className="absolute -right-2 -top-3 rotate-[-8deg] border-2 border-white bg-cobalt px-1.5 py-0.5 text-[10px] font-bold text-white animate-[stamp_.4s_cubic-bezier(.2,.75,.15,1)_1.5s_both]">
+            <span className="absolute -right-2 -top-3 rotate-[-8deg] border-2 border-white bg-cobalt px-1.5 py-0.5 text-[10px] font-bold text-white animate-[stamp_.4s_cubic-bezier(.2,.75,.15,1)_1.05s_both]">
               Approved
             </span>
           </span>
         </div>
       </div>
     </figure>
+  )
+}
+
+/** Underlines, in a hand-drawn wave, the words that told us which system to draw. */
+function Marked({ text }: { text: string }) {
+  // Whole words only, matched from the start of the word ("build" must not light up for "ui").
+  const starts = new RegExp(`^(?:${MATCHERS.map(([r]) => r.source).join('|')})`, 'i')
+  return (
+    <>
+      {text.split(/(\s+)/).map((w, i) =>
+        /\S/.test(w) && starts.test(w.replace(/^[^\p{L}\p{N}]+/u, '')) ? (
+          <span key={i} className="underline decoration-white/80 decoration-wavy decoration-[1.5px] underline-offset-[5px]">
+            {w}
+          </span>
+        ) : (
+          w
+        )
+      )}
+    </>
+  )
+}
+
+/**
+ * The blueprint sits on a little pad of older sheets and leans toward the
+ * pointer, like a drawing held up in your hand.
+ */
+function TiltStack({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const move = (e: React.PointerEvent) => {
+    const el = ref.current
+    if (!el || e.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const r = el.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width - 0.5
+    const y = (e.clientY - r.top) / r.height - 0.5
+    el.style.transform = `rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg)`
+  }
+  const leave = () => {
+    if (ref.current) ref.current.style.transform = ''
+  }
+  return (
+    <div className="[perspective:1400px]" onPointerMove={move} onPointerLeave={leave}>
+      <div ref={ref} className="relative transition-transform duration-300 ease-out [transform-style:preserve-3d]">
+        {/* older sheets underneath */}
+        <div aria-hidden className="absolute inset-0 translate-x-[5px] translate-y-[12px] rotate-[1.2deg] sm:translate-x-[14px] sm:translate-y-[16px] sm:rotate-[2.2deg] border border-cobalt/30 bg-[#c9d3f5]" />
+        <div aria-hidden className="absolute inset-0 translate-x-[2px] translate-y-[6px] rotate-[0.6deg] sm:translate-x-[7px] sm:translate-y-[8px] sm:rotate-[1deg] border border-cobalt/40 bg-[#7d93e8]" />
+        <div className="relative">{children}</div>
+      </div>
+    </div>
   )
 }
