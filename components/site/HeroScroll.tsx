@@ -19,7 +19,16 @@ import { cn } from '@/lib/utils'
 const HOURS_SAVED = 32
 const TASKS = 6
 
-export default function HeroScroll() {
+export default function HeroScroll({
+  heading: Heading = 'h1',
+  label,
+  ctas = true,
+}: {
+  heading?: 'h1' | 'h2'
+  /** Small line above the headline, e.g. on the About page */
+  label?: string
+  ctas?: boolean
+} = {}) {
   const track = useRef<HTMLElement>(null)
   const [progress, setProgress] = useState(0) // 0 → 1 across the pinned scroll
   const [manual, setManual] = useState<number | null>(null)
@@ -66,12 +75,15 @@ export default function HeroScroll() {
   const tasks = Math.round((wipe / 100) * TASKS)
 
   return (
-    <section ref={track} aria-label="Introduction" className={cn('relative', pinned ? 'h-[260svh]' : '')}>
+    <section ref={track} aria-label="Before and after Trident Square" className={cn('relative', pinned ? 'h-[260svh]' : '')}>
       <div className={cn('flex flex-col', pinned ? 'sticky top-0 h-[100svh] pb-5 pt-24 sm:pt-[6.5rem]' : 'pb-16 pt-28')}>
         <div className="container flex min-h-0 flex-1 flex-col">
           {/* ── Words ── */}
           <div className="grid gap-5 lg:grid-cols-12 lg:items-end lg:gap-10">
-            <h1 className="display text-[clamp(2.5rem,5.6vw,5.5rem)] lg:col-span-7">
+            <Heading className="display text-[clamp(2.5rem,5.6vw,5.5rem)] lg:col-span-7">
+              {label ? (
+                <span className="mb-4 block font-mono text-[11px] font-normal normal-case tracking-[0.14em] text-muted">{label}</span>
+              ) : null}
               <span className="block animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_both]">Your Monday,</span>
               <span className="relative block h-[0.9em] overflow-hidden animate-[title-in_1s_cubic-bezier(.2,.75,.15,1)_120ms_both]">
                 <span className="sr-only">without automation, and on autopilot with Trident Square.</span>
@@ -84,21 +96,23 @@ export default function HeroScroll() {
                   <span className="block h-[0.9em] text-cobalt">on autopilot.</span>
                 </span>
               </span>
-            </h1>
+            </Heading>
 
             <div className="lg:col-span-5">
               <p className="hidden max-w-md text-[17px] leading-relaxed text-ink-2 sm:block">
                 Trident Square builds <strong className="font-semibold text-ink">automation, AI agents and custom software</strong> that
                 take the repetitive work off your team.
               </p>
-              <div className="mt-4 flex flex-wrap gap-2.5">
-                <Link href="/contact" className="btn-primary">
-                  Book a free call <Arrow />
-                </Link>
-                <Link href="/services" className="btn-ghost">
-                  What we build
-                </Link>
-              </div>
+              {ctas ? (
+                <div className="mt-4 flex flex-wrap gap-2.5">
+                  <Link href="/contact" className="btn-primary">
+                    Book a free call <Arrow />
+                  </Link>
+                  <Link href="/services" className="btn-ghost">
+                    What we build
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </div>
 

@@ -65,7 +65,7 @@ export default function ServiceCards() {
 
 /* Small live pictures, one per service */
 
-function Viz({ slug }: { slug: string }) {
+export function Viz({ slug }: { slug: string }) {
   switch (slug) {
     case 'voice-ai-agents':
       return (

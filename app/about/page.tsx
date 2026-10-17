@@ -1,4 +1,5 @@
 import CtaBand from '@/components/site/CtaBand'
+import HeroScroll from '@/components/site/HeroScroll'
 import PageHero from '@/components/site/PageHero'
 import Reveal from '@/components/site/Reveal'
 import SectionHead from '@/components/site/SectionHead'
@@ -61,7 +62,11 @@ export default function AboutPage() {
         }
       />
 
-      <div className="mt-24 sm:mt-32">
+      <div className="mt-16 sm:mt-24">
+        <HeroScroll heading="h2" label="Why we exist — every business has this Monday" ctas={false} />
+      </div>
+
+      <div className="mt-8 sm:mt-12">
         <WordMarquee words={['Automate', 'Integrate', 'Design', 'Engineer', 'Ship', 'Support']} />
       </div>
 
