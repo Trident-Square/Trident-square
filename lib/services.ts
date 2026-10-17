@@ -1,10 +1,23 @@
 export type Faq = { q: string; a: string }
 
+export type GroupId = 'talks' | 'thinks' | 'ships' | 'base'
+
+/** The trident: three prongs plus the shaft. Every service belongs to one. */
+export const groups: { id: GroupId; n: string; verb: string; title: string; line: string }[] = [
+  { id: 'talks', n: '01', verb: 'Talks', title: 'Conversational AI', line: 'AI that speaks to your customers' },
+  { id: 'thinks', n: '02', verb: 'Thinks', title: 'AI & automation', line: 'Systems that do the work for you' },
+  { id: 'ships', n: '03', verb: 'Ships', title: 'Software products', line: 'Software your business runs on' },
+  { id: 'base', n: '04', verb: 'Base', title: 'Design & cloud', line: 'The shaft that holds it all' },
+]
+
 export type Service = {
   slug: string
+  group: GroupId
   name: string
   /** Short noun used in cards and menus */
   short: string
+  /** One-line promise shown under the name in menus */
+  hook: string
   metaTitle: string
   metaDescription: string
   h1: string
@@ -20,11 +33,13 @@ export type Service = {
   keywords: string[]
 }
 
-export const services: Service[] = [
+const allServices: Service[] = [
   {
     slug: 'ai-agent-development',
+    group: 'thinks',
     name: 'AI Agent Development',
     short: 'AI agents & automation',
+    hook: 'Agents that act inside your tools',
     metaTitle: 'AI Agent Development Company in India',
     metaDescription:
       'We build production AI agents that read, decide and act inside your tools — CRM, WhatsApp, email, ERP. LLM agents, RAG and workflow automation from Noida, India.',
@@ -62,8 +77,10 @@ export const services: Service[] = [
   },
   {
     slug: 'voice-ai-agents',
+    group: 'talks',
     name: 'Voice AI Agents',
     short: 'Voice AI agents',
+    hook: 'Calls in Hindi & English, 24/7',
     metaTitle: 'Voice AI Agent Development — Hindi & English',
     metaDescription:
       'Phone and in-app voice AI agents that answer, call and follow up 24/7 in Hindi, English and regional languages. Built on Twilio, Exotel and modern speech models.',
@@ -100,8 +117,10 @@ export const services: Service[] = [
   },
   {
     slug: 'ai-chatbot-development',
+    group: 'talks',
     name: 'AI Chatbot Development',
     short: 'AI chatbots',
+    hook: 'Website & WhatsApp bots on your data',
     metaTitle: 'AI Chatbot Development for Website & WhatsApp',
     metaDescription:
       'Custom AI chatbots for websites, apps and WhatsApp that answer from your own documents, capture leads and hand off to humans. GPT, Claude and Gemini based.',
@@ -136,8 +155,10 @@ export const services: Service[] = [
   },
   {
     slug: 'custom-software-development',
+    group: 'ships',
     name: 'Custom Software Development',
     short: 'Custom software',
+    hook: 'CRMs, ERPs, SaaS & MVPs',
     metaTitle: 'Custom Software Development Company in Noida',
     metaDescription:
       'Custom CRMs, ERPs, internal tools, SaaS products and MVPs built around how your business actually works. Fixed-scope or dedicated team, from Noida, India.',
@@ -174,8 +195,10 @@ export const services: Service[] = [
   },
   {
     slug: 'web-development',
+    group: 'ships',
     name: 'Web Development',
     short: 'Web apps & websites',
+    hook: 'Fast, SEO-ready sites & web apps',
     metaTitle: 'Web Development Company in Noida — Next.js & React',
     metaDescription:
       'Fast, SEO-ready websites, web apps and e-commerce built with Next.js and React. Core Web Vitals, CMS, payments and analytics included.',
@@ -209,8 +232,10 @@ export const services: Service[] = [
   },
   {
     slug: 'mobile-app-development',
+    group: 'ships',
     name: 'Mobile App Development',
     short: 'iOS & Android apps',
+    hook: 'iOS & Android, one codebase',
     metaTitle: 'Mobile App Development Company — iOS & Android',
     metaDescription:
       'Cross-platform iOS and Android apps in React Native and Flutter, from design to Play Store and App Store launch, with AI features built in.',
@@ -244,8 +269,10 @@ export const services: Service[] = [
   },
   {
     slug: 'ui-ux-design',
+    group: 'base',
     name: 'UI/UX Design',
     short: 'Product design',
+    hook: 'Research, prototypes, design systems',
     metaTitle: 'UI/UX Design Agency for SaaS & AI Products',
     metaDescription:
       'Product design for SaaS, AI and mobile apps: research, flows, prototypes and design systems your developers can build from.',
@@ -276,8 +303,132 @@ export const services: Service[] = [
     work: ['trendify', 'gamecam'],
     keywords: ['UI UX design agency India', 'SaaS product design', 'AI UX design', 'mobile app design company'],
   },
+  {
+    slug: 'business-process-automation',
+    group: 'thinks',
+    name: 'Business Process Automation',
+    short: 'Workflow automation',
+    hook: 'CRM, ERP, Tally, WhatsApp on autopilot',
+    metaTitle: 'Business Process Automation Company in India',
+    metaDescription:
+      'End-to-end automation systems for operations, sales, finance and HR — connecting your CRM, ERP, Tally, WhatsApp, email and sheets so work moves without manual copy-paste.',
+    h1: 'Automation systems that take the busywork off your team',
+    lede:
+      'We automate the repetitive work that eats your team’s week — order processing, invoicing, approvals, reporting, follow-ups, data entry — by connecting the tools you already pay for and adding AI where judgement is needed.',
+    body: [
+      'Every business has a dozen workflows where someone copies data from one screen to another: a new order becomes an invoice, a WhatsApp enquiry becomes a CRM entry, a PDF becomes a row in Tally. Each one is small. Together they cost you a full-time salary and a steady stream of mistakes.',
+      'We map those workflows, rank them by hours saved, and build automations that run reliably — with retries, alerts when something breaks, and a dashboard that shows exactly what ran. Simple flows run on n8n, Make or Zapier; complex ones get custom code and AI steps for reading documents and making decisions.',
+    ],
+    deliverables: [
+      'Process audit with hours-saved estimate per workflow',
+      'Integrations across CRM, ERP, Tally, Zoho, HubSpot, Shopify, WhatsApp, email and sheets',
+      'AI steps for reading invoices, forms, emails and PDFs',
+      'Approval flows, alerts and exception handling',
+      'Automated reports and dashboards',
+      'Monitoring, logs and a runbook your team can follow',
+    ],
+    useCases: [
+      { title: 'Order to invoice', text: 'New orders create invoices, update stock, notify the customer on WhatsApp and post to accounting automatically.' },
+      { title: 'Lead routing', text: 'Leads from ads, website and WhatsApp land in your CRM, get scored and assigned, and receive an instant first reply.' },
+      { title: 'Document processing', text: 'Invoices, KYC documents and purchase orders are read by AI, validated and pushed into your systems.' },
+      { title: 'Reporting', text: 'Daily sales, cash and operations reports compiled and sent to your inbox or WhatsApp every morning.' },
+    ],
+    stack: ['n8n', 'Make', 'Zapier', 'Python', 'Node.js', 'Zoho', 'HubSpot', 'Tally', 'WhatsApp API', 'Google Workspace'],
+    timeline: 'First automations live in 2–3 weeks',
+    faqs: [
+      { q: 'What business processes can you automate?', a: 'Almost anything that follows rules: order processing, invoicing, payment follow-ups, lead routing, onboarding, approvals, inventory updates, HR paperwork and reporting. If a person copies data between tools, it can usually be automated.' },
+      { q: 'Do we need to change our existing software?', a: 'Usually not. We connect the tools you already use — CRM, ERP, Tally, Shopify, Google Sheets, WhatsApp — through their APIs or, where none exist, through careful scripted access.' },
+      { q: 'n8n, Zapier or custom code?', a: 'We pick per workflow. No-code tools are fast and cheap for simple flows; custom code is better for high volume, complex logic or sensitive data. Many systems mix both.' },
+      { q: 'What happens when an automation fails?', a: 'It retries, then alerts the right person with the details. Every run is logged so you can see what happened and replay it.' },
+    ],
+    work: ['instabus', 'gigtap'],
+    keywords: ['business process automation company India', 'workflow automation services', 'n8n automation agency', 'RPA services India', 'Zoho automation', 'Tally automation'],
+  },
+  {
+    slug: 'ecommerce-development',
+    group: 'ships',
+    name: 'E-commerce Development',
+    short: 'Online stores',
+    hook: 'Shopify, WooCommerce & custom',
+    metaTitle: 'E-commerce Website Development — Shopify & Custom',
+    metaDescription:
+      'Shopify, WooCommerce and custom e-commerce stores with Razorpay/Stripe, inventory sync, WhatsApp order updates and automation built in.',
+    h1: 'Online stores that sell — and run themselves',
+    lede:
+      'We build e-commerce stores on Shopify, WooCommerce or fully custom stacks, then wire them into your inventory, accounting, shipping and WhatsApp so orders flow without manual work.',
+    body: [
+      'A store is more than a theme. Conversion depends on speed, product pages and a checkout that works on every phone; profit depends on what happens after the order — stock, invoices, shipping labels, returns and customer updates.',
+      'We handle both: a fast, search-friendly storefront and the automations behind it, so a growing order volume doesn’t mean a growing back office.',
+    ],
+    deliverables: [
+      'Storefront design and development',
+      'Payments: Razorpay, Stripe, PayU, COD',
+      'Shipping integrations: Shiprocket, Delhivery and more',
+      'Inventory, ERP and accounting sync',
+      'WhatsApp and email order notifications',
+      'SEO, analytics and conversion tracking',
+    ],
+    useCases: [
+      { title: 'D2C brands', text: 'Fast Shopify or headless stores with subscriptions, bundles and reviews.' },
+      { title: 'B2B ordering', text: 'Wholesale portals with customer-specific pricing, credit limits and bulk ordering.' },
+      { title: 'Marketplace sync', text: 'One inventory across your store, Amazon and Flipkart.' },
+    ],
+    stack: ['Shopify', 'WooCommerce', 'Next.js', 'Medusa', 'Razorpay', 'Stripe', 'Shiprocket'],
+    timeline: 'Store live in 4–8 weeks',
+    faqs: [
+      { q: 'Shopify or custom?', a: 'Shopify is the fastest route for most D2C brands. Custom or headless builds make sense for complex B2B pricing, very high traffic or unusual product logic.' },
+      { q: 'Can you migrate our existing store?', a: 'Yes — products, customers, orders and URLs, with redirects so you keep your search rankings.' },
+    ],
+    work: ['trendify', 'gigtap'],
+    keywords: ['ecommerce website development company India', 'Shopify development agency', 'WooCommerce developer', 'headless ecommerce'],
+  },
+  {
+    slug: 'cloud-devops',
+    group: 'base',
+    name: 'Cloud & DevOps',
+    short: 'Cloud & DevOps',
+    hook: 'AWS & GCP, CI/CD, lower bills',
+    metaTitle: 'Cloud & DevOps Services — AWS, GCP, Azure',
+    metaDescription:
+      'Cloud architecture, CI/CD, monitoring and cost optimisation on AWS, Google Cloud and Azure — so your software stays fast, secure and affordable.',
+    h1: 'Infrastructure that stays up and stays cheap',
+    lede:
+      'We set up and run the cloud behind your product — deployments, databases, monitoring, backups and security — and keep the monthly bill in check.',
+    body: [
+      'Most cloud bills are 30–50% higher than they need to be, and most outages come from manual deployments. We automate releases, right-size infrastructure and add the monitoring that tells you about problems before your customers do.',
+      'Whether you are launching a new product or untangling an existing setup, you get infrastructure as code, documentation and a clear handover.',
+    ],
+    deliverables: [
+      'Cloud architecture on AWS, GCP or Azure',
+      'CI/CD pipelines and zero-downtime deploys',
+      'Monitoring, alerting and uptime dashboards',
+      'Backups, disaster recovery and security hardening',
+      'Cloud cost review and optimisation',
+    ],
+    useCases: [
+      { title: 'Launch setup', text: 'Production-ready infrastructure for a new product, done right the first time.' },
+      { title: 'Cost cutting', text: 'Audit and right-size an existing setup to lower the monthly bill.' },
+      { title: 'Managed operations', text: 'We watch, patch and scale your infrastructure on a monthly plan.' },
+    ],
+    stack: ['AWS', 'Google Cloud', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Vercel'],
+    timeline: 'Audit in 1 week',
+    faqs: [
+      { q: 'Can you reduce our cloud bill?', a: 'Usually, yes. A one-week audit identifies idle resources, oversized instances and cheaper pricing options, with an estimated monthly saving for each.' },
+    ],
+    work: ['gamecam', 'gigtap'],
+    keywords: ['cloud devops services India', 'AWS consulting company', 'DevOps outsourcing', 'cloud cost optimization'],
+  },
 ]
+
+const groupOrder: GroupId[] = ['talks', 'thinks', 'ships', 'base']
+
+/** Services in trident order, so every list on the site reads prong by prong. */
+export const services = [...allServices].sort((a, b) => groupOrder.indexOf(a.group) - groupOrder.indexOf(b.group))
 
 export function getService(slug: string) {
   return services.find((s) => s.slug === slug)
+}
+
+export function servicesIn(group: GroupId) {
+  return services.filter((s) => s.group === group)
 }

@@ -17,18 +17,20 @@ const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', displ
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'Trident Square — AI Agent & Custom Software Development Company',
+    default: 'Trident Square — Automation, AI & Custom Software Development Company',
     template: '%s | Trident Square',
   },
   description:
-    'AI agent and custom software development company in Noida, India. AI agents, voice bots, chatbots, web and mobile apps for businesses worldwide.',
+    'Automation, AI and custom software development company in Noida, India. Business automation, AI agents, chatbots, web, e-commerce and mobile apps.',
   applicationName: site.name,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   publisher: site.name,
   category: 'technology',
   keywords: [
+    'business automation company India',
     'AI agent development company',
+    'workflow automation services',
     'AI development company India',
     'voice AI agent',
     'AI chatbot development',
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: site.url,
     siteName: site.name,
-    title: 'Trident Square — AI agents & custom software',
+    title: 'Trident Square — Automation, AI & custom software',
     description: site.description,
   },
   twitter: { card: 'summary_large_image' },

@@ -13,7 +13,7 @@ type Tab = 'talks' | 'thinks' | 'ships'
 
 const TABS: { id: Tab; n: string; label: string; caption: string }[] = [
   { id: 'talks', n: '1', label: 'Talks', caption: 'Voice agent · outbound booking call' },
-  { id: 'thinks', n: '2', label: 'Thinks', caption: 'AI agent · WhatsApp lead → booked meeting' },
+  { id: 'thinks', n: '2', label: 'Thinks', caption: 'Automation · order → invoice → shipping → WhatsApp' },
   { id: 'ships', n: '3', label: 'Ships', caption: 'Custom software · operations dashboard' },
 ]
 
@@ -25,12 +25,12 @@ const CALL = [
 ] as const
 
 const RUN = [
-  ['read_message', 'intent: new project'],
-  ['extract', 'Mehta Motors · 12 showrooms · ₹8L'],
-  ['score_lead', '86 / 100 — qualified'],
-  ['calendar.find_slot', 'Thu 16:00 IST'],
-  ['meeting.book', 'invite sent ✓'],
-  ['crm.create_deal', '#D-2041'],
+  ['erp.check_stock', '3 / 3 items in stock'],
+  ['invoice.create', 'INV-2291 · GST applied'],
+  ['tally.post_voucher', 'sales voucher posted'],
+  ['shiprocket.label', 'AWB 1489•••• · pickup 5pm'],
+  ['whatsapp.notify', 'customer updated ✓'],
+  ['sheets.append', 'daily sales report'],
 ] as const
 
 const ROWS = [
@@ -170,8 +170,8 @@ function Agent({ step }: { step: number }) {
   return (
     <div className="grid h-full grid-rows-[auto_1fr_auto] gap-3 p-4 sm:p-5">
       <div className="max-w-[88%] border border-ink/10 bg-white px-3.5 py-2.5 text-[14px] leading-snug">
-        <span className="mb-0.5 block font-mono text-[9.5px] uppercase tracking-[0.12em] text-muted">WhatsApp · new lead</span>
-        Hi, we need a CRM for our 12 showrooms. Budget around 8L. Can we talk this week?
+        <span className="mb-0.5 block font-mono text-[9.5px] uppercase tracking-[0.12em] text-muted">Trigger · Shopify</span>
+        New order #8812 — 3 items, ₹14,250, ship to Pune.
       </div>
       <ol className="bg-ink p-4 font-mono text-[12px] leading-relaxed text-paper/80">
         {RUN.map(([fn, out], i) => (
@@ -185,8 +185,8 @@ function Agent({ step }: { step: number }) {
         {!replied ? <li className="mt-1 h-3.5 w-2 animate-blink bg-paper/70" aria-hidden /> : null}
       </ol>
       <div className={cn('ml-auto max-w-[88%] bg-cobalt px-3.5 py-2.5 text-[14px] leading-snug text-white transition-all duration-500', replied ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0')}>
-        <span className="mb-0.5 block font-mono text-[9.5px] uppercase tracking-[0.12em] opacity-60">AI agent · 4.2s</span>
-        Thanks Mr. Mehta! I’ve booked a call with our engineer on Thursday, 4 PM. Invite is in your inbox.
+        <span className="mb-0.5 block font-mono text-[9.5px] uppercase tracking-[0.12em] opacity-60">Done · 3.1s · 0 manual steps</span>
+        Order invoiced, posted to Tally, label printed and customer notified — before anyone opened their laptop.
       </div>
     </div>
   )

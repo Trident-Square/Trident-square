@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       { source: '/portfolio', destination: '/work', permanent: true },
       { source: '/services/web', destination: '/services/web-development', permanent: true },
       { source: '/services/app', destination: '/services/mobile-app-development', permanent: true },
-      { source: '/services/ecommerce', destination: '/services/web-development', permanent: true },
+      { source: '/services/ecommerce', destination: '/services/ecommerce-development', permanent: true },
       { source: '/services/design', destination: '/services/ui-ux-design', permanent: true },
       { source: '/partner', destination: '/partners', permanent: true },
       { source: '/affiliate', destination: '/partners', permanent: true },

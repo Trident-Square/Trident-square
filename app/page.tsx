@@ -14,8 +14,8 @@ import { projects } from '@/lib/work'
 
 const footnotes = [
   ['1', 'Talks', 'Voice agents and chatbots that speak to your customers — in Hindi, English and Hinglish.'],
-  ['2', 'Thinks', 'AI agents that read, decide and act inside your CRM, inbox and WhatsApp.'],
-  ['3', 'Ships', 'Custom software, web and mobile apps your team runs on every day.'],
+  ['2', 'Thinks', 'Automation systems and AI agents that run your workflows — CRM, ERP, Tally, WhatsApp, documents, reports.'],
+  ['3', 'Ships', 'Custom software, SaaS, web, e-commerce and mobile apps — every kind of software your business runs on.'],
 ]
 
 const titleBlock = [
@@ -41,7 +41,7 @@ const models = [
 ]
 
 const faqs: Faq[] = [
-  { q: 'What does Trident Square do?', a: 'We are an AI and software engineering studio in Noida, India. We build AI agents, voice AI agents, AI chatbots, custom software, web apps and mobile apps for startups and businesses in India and abroad.' },
+  { q: 'What does Trident Square do?', a: 'We are an automation and software engineering company in Noida, India. We build business process automation, AI agents, voice and chat bots, custom software, SaaS, web, e-commerce and mobile apps, plus UI/UX design and cloud — for startups and businesses in India and abroad.' },
   { q: 'How much does an AI agent or app cost?', a: 'Focused AI agents and chatbots usually start around ₹3–6 lakh (US$4k–8k); MVPs for custom software or apps typically range ₹4–15 lakh. You get a fixed quote after a free scoping call.' },
   { q: 'Do you work with clients outside India?', a: 'Yes. We work with clients across India, the US, UK, Europe and the Middle East, with overlapping hours and weekly video demos.' },
   { q: 'Who owns the code?', a: 'You do. Code lives in your repository from the start and full IP transfers to you on payment.' },
@@ -84,8 +84,8 @@ export default function Home() {
                 ))}
               </ol>
               <p className="mt-8 max-w-md text-[17px] leading-relaxed text-ink-2">
-                {site.projectsDelivered} products shipped by a team of engineers and designers in Noida — building AI that
-                does real work for startups and growing businesses.
+                {site.projectsDelivered} products shipped. One partner for everything from a single automation to a full
+                software platform — built in Noida for businesses worldwide.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/contact" className="btn-primary">
@@ -119,7 +119,7 @@ export default function Home() {
           index="01"
           label="What we build"
           title="Three prongs. One shaft."
-          intro="Everything we do fits on our logo. Pick a prong — or bring a problem and we’ll tell you which one it needs."
+          intro="Automation, AI and every kind of software — and it all fits on our logo. Pick a prong, or bring a problem and we’ll tell you which one it needs."
         />
         <div className="mt-16">
           <TridentServices />

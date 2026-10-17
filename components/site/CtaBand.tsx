@@ -3,7 +3,7 @@ import Arrow from './Arrow'
 import { whatsappHref } from '@/lib/site'
 
 export default function CtaBand({
-  title = 'Have a workflow AI should be doing?',
+  title = 'Have work that should run itself?',
   text = 'Tell us what eats your team’s time. You’ll get a straight answer on what’s possible, what it costs and how long it takes — usually within one business day.',
 }: {
   title?: string

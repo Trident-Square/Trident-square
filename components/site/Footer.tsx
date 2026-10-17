@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <Logo />
             <p className="mt-5 max-w-xs text-[15px] leading-relaxed text-muted">
-              AI agents, voice AI and custom software for startups and growing businesses. Built in Noida, shipped worldwide.
+              Automation systems, AI and custom software for startups and growing businesses. Built in Noida, shipped worldwide.
             </p>
             <address className="mt-6 not-italic text-[14px] leading-relaxed text-muted">
               {site.address.street},<br />

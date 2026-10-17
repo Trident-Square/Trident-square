@@ -9,7 +9,7 @@ import { absoluteUrl } from '@/lib/site'
 export const metadata = pageMetadata({
   title: 'AI & Software Development Services',
   description:
-    'AI agent development, voice AI, AI chatbots, custom software, web and mobile app development and UI/UX design — from Trident Square, Noida.',
+    'Business process automation, AI agents, chatbots, voice AI, custom software, web, e-commerce and mobile apps, UI/UX design and cloud — from Trident Square, Noida.',
   path: '/services',
 })
 
@@ -37,8 +37,8 @@ export default function ServicesPage() {
           AI and software, <span className="mark-word text-cobalt">built to last</span>
         </h1>
         <p className="lede mt-8 max-w-2xl">
-          We take on work where engineering quality decides the outcome — agents that act on live data, voice bots
-          that sound human, and software your team relies on every day.
+          Automation, AI and software under one roof — from a single workflow that saves your team ten hours a week
+          to the platform your whole business runs on.
         </p>
       </section>
 

@@ -1,17 +1,11 @@
 import Link from 'next/link'
-import { getService } from '@/lib/services'
+import { groups, servicesIn } from '@/lib/services'
 import Arrow from './Arrow'
 
 /**
  * The services section drawn as the brand mark itself: three prongs (what we
  * build), a crossbar and a shaft (the engineering that holds them together).
  */
-
-const PRONGS = [
-  { n: '1', verb: 'Talks', line: 'AI that speaks to your customers', slugs: ['voice-ai-agents', 'ai-chatbot-development'] },
-  { n: '2', verb: 'Thinks', line: 'AI that does the work', slugs: ['ai-agent-development'] },
-  { n: '3', verb: 'Ships', line: 'Software your team runs on', slugs: ['custom-software-development', 'web-development', 'mobile-app-development'] },
-]
 
 /** Barbed spear tip centred on x, point at y. */
 function tip(x: number, y: number) {
@@ -43,32 +37,32 @@ function TridentHead() {
 }
 
 export default function TridentServices() {
-  const base = getService('ui-ux-design')!
+  const prongs = groups.filter((g) => g.id !== 'base')
+  const base = servicesIn('base')
   return (
     <div>
       <div className="hidden md:block">
         <TridentHead />
       </div>
       <div className="grid gap-6 md:grid-cols-3 md:gap-4 lg:gap-8">
-        {PRONGS.map((p) => (
-          <div key={p.verb} className="group flex flex-col">
+        {prongs.map((p) => (
+          <div key={p.id} className="group flex flex-col">
             <div className="flex items-end justify-between bg-ink px-5 pb-4 pt-10 text-paper transition-colors duration-300 group-hover:bg-cobalt">
               <span className="display text-[clamp(3rem,5.4vw,4.75rem)]">{p.verb}</span>
-              <span className="pb-2 font-mono text-[11px] text-paper/60">0{p.n}</span>
+              <span className="pb-2 font-mono text-[11px] text-paper/60">{p.n}</span>
             </div>
             <div className="flex flex-1 flex-col border-x border-b border-ink/15 bg-paper px-5 pb-6 pt-5">
-              <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">{p.line}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">{p.title} — {p.line}</p>
               <ul className="mt-4 flex-1">
-                {p.slugs.map((slug) => {
-                  const s = getService(slug)!
+                {servicesIn(p.id).map((s) => {
                   return (
-                    <li key={slug} className="border-t border-ink/10">
-                      <Link href={`/services/${slug}`} className="group/l flex items-start justify-between gap-4 py-4">
+                    <li key={s.slug} className="border-t border-ink/10">
+                      <Link href={`/services/${s.slug}`} className="group/l flex items-start justify-between gap-4 py-4">
                         <span>
                           <span className="block text-[18px] font-semibold leading-tight transition-colors group-hover/l:text-cobalt">
                             {s.name}
                           </span>
-                          <span className="mt-1 block text-[14px] leading-snug text-muted">{s.timeline}</span>
+                          <span className="mt-1 block text-[14px] leading-snug text-muted">{s.hook}</span>
                         </span>
                         <Arrow className="mt-1 h-4 w-4 shrink-0 opacity-40 transition-all group-hover/l:translate-x-1 group-hover/l:opacity-100" />
                       </Link>
@@ -84,19 +78,25 @@ export default function TridentServices() {
       {/* Shaft down to the base */}
       <div aria-hidden className="mx-auto h-14 w-3 bg-ink sm:h-20" />
 
-      <Link
-        href={`/services/${base.slug}`}
-        className="crop group relative mx-auto grid max-w-3xl gap-4 border border-ink/15 bg-paper p-6 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-8 sm:p-8"
-      >
-        <span className="display text-[2.5rem] text-cobalt">Base</span>
-        <span>
-          <span className="block text-[17px] font-semibold">Product design &amp; engineering under everything</span>
-          <span className="mt-1 block text-[14.5px] text-muted">
-            UI/UX design, cloud &amp; DevOps, QA and long-term support — the shaft that holds all three prongs.
-          </span>
-        </span>
-        <Arrow className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-      </Link>
+      <div className="crop relative mx-auto grid max-w-4xl gap-6 border border-ink/15 bg-paper p-6 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-10 sm:p-8">
+        <div>
+          <span className="display block text-[2.5rem] text-cobalt">Base</span>
+          <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.1em] text-muted">Under every prong</span>
+        </div>
+        <ul className="grid gap-px bg-ink/10 sm:grid-cols-2">
+          {base.map((s) => (
+            <li key={s.slug} className="bg-paper">
+              <Link href={`/services/${s.slug}`} className="group/l flex h-full items-start justify-between gap-4 p-4 hover:bg-white">
+                <span>
+                  <span className="block text-[17px] font-semibold transition-colors group-hover/l:text-cobalt">{s.name}</span>
+                  <span className="mt-1 block text-[14px] leading-snug text-muted">{s.hook}</span>
+                </span>
+                <Arrow className="mt-1 h-4 w-4 shrink-0 opacity-40 transition-all group-hover/l:translate-x-1 group-hover/l:opacity-100" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
