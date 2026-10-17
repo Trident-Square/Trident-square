@@ -14,30 +14,51 @@ import { cn } from '@/lib/utils'
 export const SLOTS = ['whatsapp', 'calls', 'orders', 'invoice', 'followup', 'report'] as const
 export type Slot = (typeof SLOTS)[number]
 
-export default function BeforeAfter({ focus, layout = 'wide' }: { focus?: Slot; layout?: 'wide' | 'tall' }) {
+export default function BeforeAfter({
+  focus,
+  layout = 'wide',
+  pos: controlled,
+  onUserMove,
+}: {
+  focus?: Slot
+  layout?: 'wide' | 'tall' | 'fill'
+  /** When set, the parent drives the handle (e.g. from scroll); drags are reported via onUserMove. */
+  pos?: number
+  onUserMove?: (pos: number) => void
+}) {
   const stage = useRef<HTMLDivElement>(null)
-  const [pos, setPos] = useState(56) // % from the left
+  const [own, setOwn] = useState(56) // % from the left
+  const isControlled = controlled !== undefined
+  const pos = isControlled ? controlled : own
+  const setPos = useCallback(
+    (v: number | ((p: number) => number)) => {
+      const next = typeof v === 'function' ? v(pos) : v
+      if (isControlled) onUserMove?.(next)
+      else setOwn(next)
+    },
+    [isControlled, onUserMove, pos]
+  )
   const [touched, setTouched] = useState(false)
   const dragging = useRef(false)
 
   // Idle sway until the visitor interacts
   useEffect(() => {
-    if (touched || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (touched || isControlled || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let raf = 0
     const start = performance.now()
     const tick = (t: number) => {
-      setPos(52 + Math.sin((t - start) / 1400) * 22)
+      setOwn(52 + Math.sin((t - start) / 1400) * 22)
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [touched])
+  }, [touched, isControlled])
 
   const moveTo = useCallback((clientX: number) => {
     const r = stage.current?.getBoundingClientRect()
     if (!r) return
-    setPos(Math.min(97, Math.max(3, ((clientX - r.left) / r.width) * 100)))
-  }, [])
+    setPos(Math.min(100, Math.max(0, ((clientX - r.left) / r.width) * 100)))
+  }, [setPos])
 
   useEffect(() => {
     const up = () => (dragging.current = false)
@@ -58,7 +79,7 @@ export default function BeforeAfter({ focus, layout = 'wide' }: { focus?: Slot; 
         dragging.current = true
         moveTo(e.clientX)
       }}
-      className={cn('relative w-full cursor-ew-resize touch-pan-y select-none overflow-hidden border border-ink', layout === 'tall' ? 'aspect-[4/5] sm:aspect-square' : 'aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/8]')}
+      className={cn('relative w-full cursor-ew-resize touch-pan-y select-none overflow-hidden border border-ink', layout === 'fill' ? 'h-full' : layout === 'tall' ? 'aspect-[4/5] sm:aspect-square' : 'aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/8]')}
     >
       {/* AFTER — the calm version (underneath) */}
       <div className="absolute inset-0 bg-paper">
@@ -106,7 +127,7 @@ export default function BeforeAfter({ focus, layout = 'wide' }: { focus?: Slot; 
             <path d="M9 6l-6 6 6 6M15 6l6 6-6 6" />
           </svg>
         </button>
-        {!touched ? (
+        {!touched && !isControlled ? (
           <span className="absolute top-[calc(50%+2.5rem)] -translate-x-1/2 whitespace-nowrap bg-cobalt px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white">
             Drag me
           </span>

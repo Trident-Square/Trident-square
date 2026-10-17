@@ -4,8 +4,7 @@ import CtaBand from '@/components/site/CtaBand'
 import FaqSection from '@/components/site/FaqSection'
 import BuildBento from '@/components/site/BuildBento'
 import CountUp from '@/components/site/CountUp'
-import AutomateSection from '@/components/site/AutomateSection'
-import HeroIntro from '@/components/site/HeroIntro'
+import HeroScroll from '@/components/site/HeroScroll'
 import JsonLd from '@/components/site/JsonLd'
 import Reveal from '@/components/site/Reveal'
 import SectionHead from '@/components/site/SectionHead'
@@ -45,11 +44,7 @@ export default function Home() {
     <>
       <JsonLd data={faqSchema(faqs)} />
 
-      <HeroIntro />
-
-      <Reveal>
-        <AutomateSection />
-      </Reveal>
+      <HeroScroll />
 
       {/* ───────── TOOLS WE CONNECT ───────── */}
       <section aria-label="Tools we integrate with" className="border-y border-line bg-paper py-10">
