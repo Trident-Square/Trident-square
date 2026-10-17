@@ -1,242 +1,91 @@
-'use client'
+import CtaBand from '@/components/site/CtaBand'
+import JsonLd from '@/components/site/JsonLd'
+import { breadcrumbs, pageMetadata } from '@/lib/seo'
+import { absoluteUrl, site } from '@/lib/site'
 
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import {
-  Rocket,
-  Code,
-  Cpu,
-  Layers,
-  ArrowRight,
-  Sparkles,
-} from 'lucide-react'
-import Button from '@/components/ui/Button'
-import SiteCanvas from '@/components/layout/SiteCanvas'
-import TechMarquee from '@/components/about/TechMarquee'
-
-/** Borderless surface for About cards (avoids global `card-subtle` 1px border). */
-const aboutCard =
-  'rounded-xl bg-card/60 p-6 shadow-sm shadow-indigo-950/[0.04] dark:bg-slate-900/55 dark:shadow-black/25'
+export const metadata = pageMetadata({
+  title: 'About — AI & Software Engineering Studio in Noida',
+  description:
+    'Trident Square is an AI and software engineering studio in Noida, India building AI agents, voice AI and custom software for startups and businesses worldwide.',
+  path: '/about',
+})
 
 const principles = [
-{
-icon: Rocket,
-title: "Product Thinking",
-description:
-"We approach every project as a product, not just a website. Our goal is to build platforms that scale and deliver real value."
-},
-
-{
-icon: Code,
-title: "Modern Engineering",
-description:
-"We use modern frameworks and cloud infrastructure to create reliable, maintainable systems."
-},
-
-{
-icon: Cpu,
-title: "AI & Automation",
-description:
-"We design platforms ready for AI integration, automation, and intelligent workflows."
-},
-
-{
-icon: Layers,
-title: "End-to-End Delivery",
-description:
-"From idea to launch and beyond, we support the entire lifecycle of your product."
-}
+  { title: 'Engineers talk to clients', text: 'The person on your calls is the person writing your code. No account managers relaying messages.' },
+  { title: 'Working software every week', text: 'You get a live link every Friday. Progress is something you click, not a status report.' },
+  { title: 'AI where it earns its place', text: 'We will tell you when a simple rule or a form beats a language model — and save you the money.' },
+  { title: 'You own everything', text: 'Your repository, your cloud, your data and full IP from day one. Leaving us is easy, which is why clients stay.' },
 ]
 
 export default function AboutPage() {
+  return (
+    <>
+      <JsonLd
+        data={[
+          breadcrumbs([{ name: 'About', path: '/about' }]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            url: absoluteUrl('/about'),
+            name: `About ${site.name}`,
+            about: { '@id': `${site.url}/#organization` },
+          },
+        ]}
+      />
 
-return (
+      <section className="container pt-28 sm:pt-36">
+        <p className="eyebrow">About</p>
+        <h1 className="display mt-7 max-w-[14ch] text-[clamp(2.75rem,7.5vw,6.75rem)]">
+          A studio that <span className="mark-word text-cobalt">ships</span>.
+        </h1>
+        <div className="mt-12 grid gap-10 lg:grid-cols-12">
+          <div className="space-y-5 text-[18px] leading-relaxed text-ink-2 lg:col-span-7">
+            <p>
+              Trident Square is an AI and software engineering studio based in Sector 62, Noida. We started because we kept
+              seeing the same thing: businesses paying for impressive AI demos that never made it into daily use.
+            </p>
+            <p>
+              So we built the opposite kind of studio — engineers who stay close to the problem, ship working software every
+              week and measure success by whether people actually use what we build. {site.projectsDelivered} products later,
+              that includes voice agents making real calls, hiring platforms used by thousands of workers and computer vision
+              running on live sports footage.
+            </p>
+          </div>
+          <dl className="grid grid-cols-2 gap-px self-start overflow-hidden border border-line bg-line lg:col-span-4 lg:col-start-9">
+            {[
+              [site.projectsDelivered, 'products shipped'],
+              ['HI · EN', 'languages we build in'],
+              ['Noida', 'headquarters'],
+              ['Weekly', 'live demos'],
+            ].map(([v, l]) => (
+              <div key={l} className="bg-paper p-6">
+                <dt className="sr-only">{l}</dt>
+                <dd>
+                  <span className="block text-3xl display">{v}</span>
+                  <span className="mt-1 block text-[13.5px] text-muted">{l}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
 
-<SiteCanvas>
-
-<div className="relative z-[1]">
-
-{/* HERO + WHO WE ARE + PRINCIPLES + TECH — one backdrop (includes header offset so nothing sits above it) */}
-<section className="relative z-[1] overflow-hidden pt-36 pb-20 sm:pt-40 sm:pb-24 lg:pt-44 lg:pb-28">
-  <div
-    className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_50%_at_50%_-5%,rgba(99,102,241,0.13),transparent_55%),radial-gradient(ellipse_55%_42%_at_100%_72%,rgba(45,212,191,0.07),transparent_50%),radial-gradient(ellipse_50%_38%_at_0%_88%,rgba(99,102,241,0.06),transparent_48%)] dark:bg-[radial-gradient(ellipse_88%_48%_at_50%_-8%,rgba(129,140,248,0.15),transparent_58%),radial-gradient(ellipse_48%_40%_at_100%_78%,rgba(45,212,191,0.06),transparent_52%),radial-gradient(ellipse_45%_36%_at_0%_90%,rgba(129,140,248,0.07),transparent_50%)]"
-    aria-hidden
-  />
-  <div
-    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-card/[0.14] via-transparent to-card/[0.12] dark:from-card/20 dark:via-transparent dark:to-card/18"
-    aria-hidden
-  />
-
-  <div className="relative z-[1] pb-20 sm:pb-24">
-    <div className="container mx-auto max-w-3xl px-6 text-center">
-      <motion.p
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
-        className="premium-eyebrow mx-auto mb-5 justify-center text-muted"
-      >
-        <span className="premium-eyebrow-bar" />
-        Our studio
-      </motion.p>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-6 text-4xl font-bold text-fg md:text-5xl lg:text-6xl"
-      >
-        About <span className="gradient-text">Trident Square</span>
-      </motion.h1>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="text-xl text-muted"
-      >
-        We are a digital product studio building modern platforms, AI-powered tools, and scalable software for ambitious
-        teams.
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.18 }}
-        className="mx-auto mt-8 max-w-lg"
-      >
-        <Link
-          href="/portfolio"
-          className="group flex items-center justify-center gap-3 rounded-2xl border border-indigo-200/90 bg-gradient-to-br from-white/95 via-indigo-50/50 to-teal-50/35 px-5 py-4 shadow-md shadow-indigo-900/[0.07] ring-1 ring-indigo-950/[0.05] transition-[border-color,box-shadow] hover:border-indigo-300/90 hover:shadow-lg dark:border-slate-600/85 dark:from-slate-900/95 dark:via-slate-900/75 dark:to-indigo-950/35 dark:shadow-black/40 dark:ring-white/[0.06] dark:hover:border-indigo-500/45 sm:gap-4 sm:px-6"
-          aria-label="Portfolio: 25+ projects delivered"
-        >
-          <span className="text-[1.85rem] font-bold tabular-nums leading-none tracking-tight gradient-text sm:text-4xl">
-            25+
-          </span>
-          <span className="min-w-0 border-l border-indigo-200/80 pl-3 text-left sm:pl-4 dark:border-slate-600">
-            <span className="block text-sm font-semibold text-fg sm:text-base">Projects delivered</span>
-            <span className="mt-0.5 block text-xs text-muted sm:text-sm">Explore our portfolio</span>
-          </span>
-          <ArrowRight className="h-4 w-4 shrink-0 text-indigo-500 opacity-70 transition-transform group-hover:translate-x-0.5 group-hover:opacity-100 dark:text-indigo-300" aria-hidden />
-        </Link>
-      </motion.div>
-    </div>
-  </div>
-
-  <div className="container relative mx-auto grid gap-16 px-6 pb-16 sm:pb-20 lg:grid-cols-2 lg:pb-24 lg:items-center">
-    <div>
-      <h2 className="mb-6 text-3xl font-bold text-fg">Who we are</h2>
-      <p className="mb-6 leading-relaxed text-muted">
-        Trident Square is a digital product studio focused on building high-quality software platforms, web
-        applications, and mobile products.
-      </p>
-      <p className="mb-6 leading-relaxed text-muted">
-        We partner with startups, founders, and businesses to transform ideas into reliable digital platforms. Our team
-        combines engineering, design, and product thinking to deliver systems that scale.
-      </p>
-      <p className="leading-relaxed text-muted">
-        From AI-powered platforms to mobile apps and complex web systems, we focus on building products that are not
-        only functional but also built for long-term growth.
-      </p>
-    </div>
-    <div className="grid grid-cols-2 gap-6">
-      <div className={`${aboutCard} text-center`}>
-        <h3 className="mb-2 text-3xl font-bold gradient-text">AI</h3>
-        <p className="text-sm text-muted">Voice assistants, automation, and intelligent platforms.</p>
-      </div>
-      <div className={`${aboutCard} text-center`}>
-        <h3 className="mb-2 text-3xl font-bold gradient-text">Web</h3>
-        <p className="text-sm text-muted">Modern scalable web platforms and SaaS products.</p>
-      </div>
-      <div className={`${aboutCard} text-center`}>
-        <h3 className="mb-2 text-3xl font-bold gradient-text">Mobile</h3>
-        <p className="text-sm text-muted">Cross-platform and native mobile apps.</p>
-      </div>
-      <div className={`${aboutCard} text-center`}>
-        <h3 className="mb-2 text-3xl font-bold gradient-text">Cloud</h3>
-        <p className="text-sm text-muted">APIs, hosting, and environments built for reliability and scale.</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="container relative mx-auto px-6 pb-14 sm:pb-16 lg:pb-20">
-    <h2 className="mb-14 text-center text-3xl font-bold text-fg">How we build products</h2>
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-      {principles.map((p, index) => {
-        const Icon = p.icon
-        return (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
-            className={aboutCard}
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <Icon className="h-6 w-6" />
+      <section className="container py-24 sm:py-32">
+        <p className="eyebrow"><span className="text-cobalt">01 / </span>How we work</p>
+        <h2 className="h2 mt-6 max-w-[16ch]">Four things we won’t compromise on</h2>
+        <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2">
+          {principles.map((p, i) => (
+            <div key={p.title} className="border-t-2 border-ink pt-6">
+              <span className="font-mono text-[12px] text-cobalt">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em]">{p.title}</h3>
+              <p className="mt-3 max-w-md text-[16px] leading-relaxed text-muted">{p.text}</p>
             </div>
-            <h3 className="mb-2 font-semibold text-fg">{p.title}</h3>
-            <p className="text-sm text-muted">{p.description}</p>
-          </motion.div>
-        )
-      })}
-    </div>
-  </div>
+          ))}
+        </div>
+      </section>
 
-  <div className="relative pt-4 sm:pt-6">
-    <div className="container relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-      <p className="premium-eyebrow normal-case mx-auto mb-4 inline-flex items-center justify-center gap-2 text-muted sm:mb-5">
-        <span className="premium-eyebrow-bar" />
-        <Sparkles className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" strokeWidth={2.25} aria-hidden />
-        Engineering stack
-      </p>
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-fg sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-        Technologies we <span className="gradient-text">use</span>
-      </h2>
-      <p className="mx-auto mt-4 max-w-lg text-pretty text-sm leading-relaxed text-muted sm:mt-5 sm:text-base">
-        Production-grade tools we deploy every day. The strip scrolls automatically; it stays still when your system
-        prefers reduced motion.
-      </p>
-    </div>
-    <div className="relative mt-10 sm:mt-12">
-      <TechMarquee />
-    </div>
-  </div>
-</section>
-
-
-{/* CTA */}
-
-<section className="py-24 relative overflow-hidden">
-
-<div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-sky-500/10"/>
-
-<div className="container mx-auto px-6 text-center relative">
-
-<h2 className="text-3xl font-bold text-fg mb-4">
-
-Have an idea for a product?
-
-</h2>
-
-<p className="text-muted max-w-xl mx-auto mb-8">
-
-Tell us what you're building and we'll help you turn it
-into a working platform.
-
-</p>
-
-<Button href="/contact" size="lg">
-
-Start your project
-<ArrowRight className="ml-2 w-5 h-5"/>
-
-</Button>
-
-</div>
-
-</section>
-
-</div>
-
-</SiteCanvas>
-
-)
+      <CtaBand />
+    </>
+  )
 }
+

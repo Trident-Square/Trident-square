@@ -1,0 +1,69 @@
+/**
+ * Single source of truth for company facts. Everything user-facing and every
+ * JSON-LD block reads from here, so NAP (name / address / phone) stays
+ * identical across the site — Google's local ranking depends on that.
+ */
+
+export const site = {
+  name: 'Trident Square',
+  legalName: 'Trident Square',
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tridentsquare.com').replace(/\/$/, ''),
+  tagline: 'AI agents & custom software, engineered in Noida',
+  description:
+    'Trident Square is an AI and software engineering studio in Noida, India. We build AI agents, voice AI, chatbots, custom software, web and mobile apps for startups and growing businesses worldwide.',
+  projectsDelivered: '25+',
+  email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? '').trim(),
+  phoneE164: (process.env.NEXT_PUBLIC_CONTACT_PHONE_E164 ?? '916388443418').replace(/\D/g, ''),
+  phoneDisplay: (process.env.NEXT_PUBLIC_CONTACT_PHONE_DISPLAY ?? '+91 63884 43418').trim(),
+  address: {
+    street: 'Bhutani 62 Avenue, Block C, Phase 2, Industrial Area, Sector 62',
+    locality: 'Noida',
+    region: 'Uttar Pradesh',
+    postalCode: '201309',
+    country: 'IN',
+    countryName: 'India',
+  },
+  hours: 'Mo-Sa 10:00-19:00',
+  socials: {
+    linkedin: 'https://www.linkedin.com/company/trident-square/',
+    instagram: 'https://www.instagram.com/tridentsquare/',
+    facebook: 'https://www.facebook.com/profile.php?id=61574509445613',
+  },
+  gaId: 'G-5Q3QKNZVZ4',
+} as const
+
+/**
+ * Partner programme economics. Change numbers here and the partner page,
+ * calculator, FAQ and schema all update together.
+ */
+export const partnerProgram = {
+  referral: { base: 30, boosted: 35 },
+  /** Deal size (INR) above which a referral earns the boosted rate. */
+  boostThresholdInr: 1_000_000,
+  /** Closed deals after which every later deal earns the boosted rate. */
+  boostAfterDeals: 2,
+  /** White-label: partner sets their own price; this is the margin we build in for them. */
+  whiteLabelMargin: { min: 30, max: 35 },
+  /** Retainers keep paying the partner for this many months. */
+  recurringMonths: 12,
+  /** Days after the client's payment clears that the partner is paid. */
+  payoutDays: 7,
+} as const
+
+export const phoneHref = `tel:+${site.phoneE164}`
+
+export function whatsappHref(text?: string) {
+  const base = `https://wa.me/${site.phoneE164}`
+  return text ? `${base}?${new URLSearchParams({ text })}` : base
+}
+
+export function absoluteUrl(path = '/') {
+  return `${site.url}${path.startsWith('/') ? path : `/${path}`}`
+}
+
+export const nav = [
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/work' },
+  { label: 'Partners', href: '/partners' },
+  { label: 'About', href: '/about' },
+] as const

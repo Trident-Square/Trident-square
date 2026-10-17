@@ -1,52 +1,78 @@
-import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
-import ContactEngagementModal from "@/components/layout/ContactEngagementModal";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { Analytics } from "@vercel/analytics/next";
+import type { Metadata, Viewport } from 'next'
+import { Archivo, JetBrains_Mono } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
+import Header from '@/components/site/Header'
+import Footer from '@/components/site/Footer'
+import JsonLd from '@/components/site/JsonLd'
+import WhatsAppFloat from '@/components/site/WhatsAppFloat'
+import { organizationGraph } from '@/lib/seo'
+import { site } from '@/lib/site'
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+// Archivo's width axis gives us both a condensed industrial display face and a normal-width text face from one file.
+const sans = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-sans', display: 'swap' })
+const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 
 export const metadata: Metadata = {
-  title: "Trident Square — Digital Solutions",
-  description: "Intelligent digital solutions. Web, app, and product development.",
-  icons: {
-    icon: [{ url: "/trident-remove-bg.png", type: "image/png" }],
-    apple: "/trident-remove-bg.png",
+  metadataBase: new URL(site.url),
+  title: {
+    default: 'Trident Square — AI Agent & Custom Software Development Company',
+    template: '%s | Trident Square',
   },
-};
+  description:
+    'AI agent and custom software development company in Noida, India. AI agents, voice bots, chatbots, web and mobile apps for businesses worldwide.',
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: 'technology',
+  keywords: [
+    'AI agent development company',
+    'AI development company India',
+    'voice AI agent',
+    'AI chatbot development',
+    'custom software development company Noida',
+    'software development company Noida',
+    'mobile app development',
+    'web development company',
+  ],
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: site.url,
+    siteName: site.name,
+    title: 'Trident Square — AI agents & custom software',
+    description: site.description,
+  },
+  twitter: { card: 'summary_large_image' },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
+  icons: { icon: '/trident-remove-bg.png', apple: '/trident-remove-bg.png' },
+  formatDetection: { telephone: true, email: true, address: true },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: '#F6F4EF',
+  width: 'device-width',
+  initialScale: 1,
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var k='trident-theme';var s=localStorage.getItem(k);var dark;if(s==='light')dark=false;else if(s==='dark')dark=true;else dark=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
-          }}
-        />
-      </head>
-      <body className={`${outfit.variable} font-sans antialiased text-fg bg-vignette overflow-x-clip`}>
-        <ThemeProvider>
-          <div className="relative z-[1] flex min-h-0 w-full min-w-0 flex-col">
-            <Header />
-            <main className="w-full min-w-0">{children}</main>
-            <Footer />
-            <WhatsAppFloat />
-            <ContactEngagementModal />
-          </div>
-        </ThemeProvider>
+    <html lang="en-IN" className={`${sans.variable} ${mono.variable}`}>
+      <body className="min-h-dvh overflow-x-clip">
+        <JsonLd data={organizationGraph()} />
+        <Header />
+        <main id="main" className="relative z-[1]">{children}</main>
+        <Footer />
+        <WhatsAppFloat />
         <Analytics />
-        <GoogleAnalytics gaId="G-5Q3QKNZVZ4" />
+        <GoogleAnalytics gaId={site.gaId} />
       </body>
     </html>
-  );
+  )
 }

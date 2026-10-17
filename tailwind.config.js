@@ -1,80 +1,39 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./app/**/*.{ts,tsx,mdx}', './components/site/**/*.{ts,tsx}'],
   theme: {
+    container: { center: true, padding: { DEFAULT: '1rem', sm: '1.5rem', lg: '2.5rem' }, screens: { '2xl': '1360px' } },
     extend: {
       fontFamily: {
-        sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
-        bg: 'var(--bg)',
-        fg: 'var(--fg)',
-        muted: 'var(--muted)',
-        accent: 'var(--accent)',
-        'accent-soft': 'var(--accent-soft)',
-        'accent-2': 'var(--accent-2)',
-        'accent-2-soft': 'var(--accent-2-soft)',
-        border: 'var(--border)',
-        card: 'var(--card)',
-        glow: 'var(--glow)',
+        paper: 'rgb(var(--paper) / <alpha-value>)',
+        'paper-2': 'rgb(var(--paper-2) / <alpha-value>)',
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        'ink-2': 'rgb(var(--ink-2) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        line: 'rgb(var(--line) / <alpha-value>)',
+        cobalt: 'rgb(var(--cobalt) / <alpha-value>)',
+        'cobalt-ink': 'rgb(var(--cobalt-ink) / <alpha-value>)',
+        signal: 'rgb(var(--signal) / <alpha-value>)',
+      },
+      letterSpacing: { tightest: '-0.045em' },
+      maxWidth: { prose: '68ch' },
+      keyframes: {
+        marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+        rise: { from: { opacity: '0', transform: 'translateY(14px)' }, to: { opacity: '1', transform: 'none' } },
+        pulse_dot: { '0%,100%': { opacity: '1' }, '50%': { opacity: '.35' } },
+        wave: { '0%,100%': { transform: 'scaleY(.25)' }, '50%': { transform: 'scaleY(1)' } },
+        blink: { '0%,100%': { opacity: '1' }, '50%': { opacity: '0' } },
       },
       animation: {
-        blob: 'blob 8s ease-in-out infinite',
-        float: 'float 6s ease-in-out infinite',
-        'float-slow': 'float 10s ease-in-out infinite',
-        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
-        'gradient-x': 'gradient-x 8s ease infinite',
-        shimmer: 'shimmer 2.5s linear infinite',
-        'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-        'scale-in': 'scale-in 0.5s ease-out forwards',
-        'tech-marquee': 'tech-marquee 50s linear infinite',
-      },
-      keyframes: {
-        'tech-marquee': {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-        blob: {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.08)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.92)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-16px)' },
-        },
-        'glow-pulse': {
-          '0%, 100%': { opacity: '0.5' },
-          '50%': { opacity: '1' },
-        },
-        'gradient-x': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
-        },
-        'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        'scale-in': {
-          '0%': { opacity: '0', transform: 'scale(0.95)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-      },
-      backgroundImage: {
-        'grid-pattern': 'var(--grid-pattern)',
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      },
-      boxShadow: {
-        glow: '0 0 40px var(--glow)',
-        'glow-lg': '0 0 60px var(--glow)',
+        marquee: 'marquee 40s linear infinite',
+        rise: 'rise .7s cubic-bezier(.2,.7,.2,1) both',
+        'pulse-dot': 'pulse_dot 2s ease-in-out infinite',
+        wave: 'wave 1s ease-in-out infinite',
+        blink: 'blink 1s steps(1) infinite',
       },
     },
   },
