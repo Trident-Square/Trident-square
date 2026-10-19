@@ -7,60 +7,96 @@ import { whatsappHref } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
 type Kind = 'project' | 'partner'
-type Status = 'idle' | 'sending' | 'sent' | 'error'
+type Status = 'idle' | 'sending' | 'redirecting'
 
 const budgets = ['Under ₹3 lakh', '₹3–10 lakh', '₹10–25 lakh', '₹25 lakh+', 'Not sure yet']
 const partnerTypes = ['Referral partner', 'White-label / reseller agency', 'Freelancer or consultant', 'Other']
 
+// Order and wording of the fields in the prefilled WhatsApp message.
+const WA_LABELS: [string, string][] = [
+  ['name', 'Name'],
+  ['company', 'Company'],
+  ['email', 'Email'],
+  ['phone', 'Phone'],
+  ['service', 'Need'],
+  ['budget', 'Budget'],
+  ['partner_type', 'Partnership'],
+  ['location', 'Location'],
+  ['message', 'Details'],
+]
+
+const REDIRECT_MS = 1500
+
+function whatsappMessage(kind: Kind, data: Record<string, string>) {
+  const intro =
+    kind === 'partner'
+      ? 'Hi Trident Square! I just applied to your partner programme on the website.'
+      : 'Hi Trident Square! I just sent a project enquiry on your website.'
+  const lines = WA_LABELS.filter(([k]) => data[k]?.trim()).map(([k, label]) => `${label}: ${data[k].trim()}`)
+  return `${intro}\n\n${lines.join('\n')}`.slice(0, 1500)
+}
+
 /**
- * One form for both project enquiries and partner sign-ups. Posts to /api/lead,
- * which forwards to the configured webhook / email. If delivery fails we hand
- * the visitor a prefilled WhatsApp link so the lead is never lost.
+ * One form for both project enquiries and partner sign-ups. On submit the lead
+ * is saved through /api/lead (Google Sheet + email), then the visitor is taken
+ * to our WhatsApp with their details already typed — they only press Send.
+ * If saving fails we still open WhatsApp so the lead is never lost.
  */
 export default function LeadForm({ kind = 'project', defaultService }: { kind?: Kind; defaultService?: string }) {
   const [status, setStatus] = useState<Status>('idle')
-  const [fallback, setFallback] = useState('')
+  const [saved, setSaved] = useState(false)
+  const [waUrl, setWaUrl] = useState('')
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>
     setStatus('sending')
+    let ok = false
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ kind, page: window.location.pathname, ...data }),
       })
-      if (!res.ok) throw new Error(String(res.status))
-      setStatus('sent')
-      form.reset()
-      window.gtag?.('event', kind === 'partner' ? 'partner_signup' : 'generate_lead', { method: 'form' })
+      ok = res.ok
     } catch {
-      const summary = Object.entries(data)
-        .filter(([k, v]) => v && k !== 'company_website')
-        .map(([k, v]) => `${k}: ${v}`)
-        .join('\n')
-      setFallback(whatsappHref(`${kind === 'partner' ? 'Partner enquiry' : 'Project enquiry'}\n${summary}`))
-      setStatus('error')
+      ok = false
     }
+    if (ok) window.gtag?.('event', kind === 'partner' ? 'partner_signup' : 'generate_lead', { method: 'form' })
+
+    const url = whatsappHref(whatsappMessage(kind, data))
+    setSaved(ok)
+    setWaUrl(url)
+    setStatus('redirecting')
+    form.reset()
+    // Same-tab navigation: popup blockers don't stop it, and on phones wa.me opens the WhatsApp app.
+    window.setTimeout(() => {
+      window.location.href = url
+    }, REDIRECT_MS)
   }
 
-  if (status === 'sent') {
+  if (status === 'redirecting') {
     return (
-      <div className="border border-line bg-white p-8 sm:p-10" role="status">
-        <p className="eyebrow text-signal">Received</p>
-        <h3 className="mt-4 text-3xl font-semibold tracking-[-0.03em]">
-          {kind === 'partner' ? 'Welcome aboard — almost.' : 'Thanks. We’re on it.'}
-        </h3>
-        <p className="mt-3 max-w-md leading-relaxed text-muted">
-          {kind === 'partner'
-            ? 'We’ll send your partner agreement and referral link within one business day.'
-            : 'A senior engineer (not a salesperson) will reply within one business day with questions or a first estimate.'}
+      <div className="border border-line bg-white p-8 sm:p-10" role="status" aria-live="polite">
+        <p className="eyebrow flex items-center gap-2 text-signal">
+          <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-signal" />
+          {saved ? 'Details saved' : 'Almost there'}
         </p>
-        <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-8">
-          Send another
-        </button>
+        <h3 className="mt-4 text-3xl font-semibold tracking-[-0.03em]">Opening WhatsApp…</h3>
+        <p className="mt-3 max-w-md leading-relaxed text-muted">
+          {saved
+            ? 'Your message is already typed — just press Send and you’re talking to our team directly.'
+            : 'We couldn’t save the form just now, so please press Send in WhatsApp — your details are already typed in.'}
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href={waUrl} className="btn bg-[#1aa851] text-white hover:bg-ink">
+            Open WhatsApp now <Arrow />
+          </a>
+          <button type="button" onClick={() => setStatus('idle')} className="btn-ghost">
+            Send another
+          </button>
+        </div>
       </div>
     )
   }
@@ -125,23 +161,14 @@ export default function LeadForm({ kind = 'project', defaultService }: { kind?: 
 
       <div className="mt-7 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-sm text-[12.5px] leading-relaxed text-muted">
-          We reply within one business day. Your details are used only to respond to you — never sold or shared.
+          After you submit we’ll open WhatsApp with your details typed in, so you can talk to us directly. Your details are
+          used only to respond to you — never sold or shared.
         </p>
         <button type="submit" disabled={status === 'sending'} className={cn('btn-primary shrink-0', status === 'sending' && 'opacity-70')}>
-          {status === 'sending' ? 'Sending…' : kind === 'partner' ? 'Apply as partner' : 'Send enquiry'}
+          {status === 'sending' ? 'Sending…' : kind === 'partner' ? 'Apply on WhatsApp' : 'Send on WhatsApp'}
           <Arrow />
         </button>
       </div>
-
-      {status === 'error' ? (
-        <p className="mt-5 bg-paper-2 p-4 text-[14px]" role="alert">
-          Couldn’t send just now.{' '}
-          <a href={fallback} target="_blank" rel="noopener noreferrer" className="font-medium text-cobalt underline">
-            Send the same details on WhatsApp
-          </a>{' '}
-          — it takes one tap.
-        </p>
-      ) : null}
     </form>
   )
 }

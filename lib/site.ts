@@ -54,7 +54,8 @@ export const phoneHref = `tel:+${site.phoneE164}`
 
 export function whatsappHref(text?: string) {
   const base = `https://wa.me/${site.phoneE164}`
-  return text ? `${base}?${new URLSearchParams({ text })}` : base
+  // encodeURIComponent (spaces → %20): some WhatsApp clients show a literal "+" for form-style encoding.
+  return text ? `${base}?text=${encodeURIComponent(text)}` : base
 }
 
 export function absoluteUrl(path = '/') {

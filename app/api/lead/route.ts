@@ -6,7 +6,9 @@ import path from 'node:path'
  * Receives project enquiries and partner applications.
  *
  * Delivery (any that are configured run in parallel):
- *  - LEAD_WEBHOOK_URL  → JSON POST (Slack/Discord incoming webhook, Zapier, Make, n8n, Google Apps Script…)
+ *  - LEAD_WEBHOOK_URL  → JSON POST. Recommended: the Google Apps Script in docs/google-sheet-leads.gs,
+ *    which appends a row to a Google Sheet and emails you the lead (free). Also works with
+ *    Slack/Discord webhooks, Zapier, Make or n8n. LEAD_WEBHOOK_SECRET is sent as `token`.
  *  - RESEND_API_KEY + LEAD_TO_EMAIL (+ LEAD_FROM_EMAIL) → email via Resend
  * With neither set (local dev) leads are appended to .data/leads.jsonl.
  */
@@ -55,9 +57,15 @@ export async function POST(req: Request) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // `text` makes Slack/Discord-style webhooks render a readable message; the rest is for automations.
-        body: JSON.stringify({ text, content: text, ...record }),
-      }).then((r) => {
+        body: JSON.stringify({ text, content: text, ...record, token: process.env.LEAD_WEBHOOK_SECRET ?? '' }),
+        redirect: 'follow', // Apps Script answers with a redirect to the result
+      }).then(async (r) => {
         if (!r.ok) throw new Error(`webhook ${r.status}`)
+        // Apps Script always answers 200, so failures come back as { ok: false } in the body.
+        if ((r.headers.get('content-type') ?? '').includes('json')) {
+          const body = (await r.json().catch(() => null)) as { ok?: boolean; error?: string } | null
+          if (body && body.ok === false) throw new Error(`webhook: ${body.error ?? 'rejected'}`)
+        }
       })
     )
   }
