@@ -59,12 +59,12 @@ export default function Header() {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-paper">
         Skip to content
       </a>
-      <div className={cn('transition-[padding] duration-500 ease-[cubic-bezier(.2,.75,.15,1)]', scrolled && !mega && !open ? 'bg-gradient-to-b from-paper via-paper/90 to-transparent px-3 pb-3 pt-3 sm:px-5' : cn('px-0 pt-0', (mega || open) && 'border-b border-line bg-paper'))}>
+      <div className={cn('transition-[padding] duration-500 ease-[cubic-bezier(.2,.75,.15,1)]', scrolled && !mega && !open ? 'px-3 pt-3 sm:px-5' : cn('px-0 pt-0', (mega || open) && 'border-b border-line bg-paper'))}>
         <div
           className={cn(
             'mx-auto flex items-center justify-between gap-6 transition-all duration-500 ease-[cubic-bezier(.2,.75,.15,1)]',
             scrolled && !mega && !open
-              ? 'h-16 max-w-[1320px] border border-ink/10 bg-paper/85 px-4 shadow-[0_18px_40px_-24px_rgba(17,17,16,0.35)] backdrop-blur-md sm:px-6'
+              ? 'h-16 max-w-[1320px] border border-ink/10 bg-paper/95 px-4 shadow-[0_18px_40px_-24px_rgba(17,17,16,0.45)] backdrop-blur-md sm:px-6'
               : cn('container h-20', (mega || open) && 'bg-paper')
           )}
         >
