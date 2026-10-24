@@ -6,12 +6,15 @@ import type { Project } from '@/lib/work'
 import { cn } from '@/lib/utils'
 
 /**
- * A slow, endless strip of real product footage in device frames. Videos only
- * play while the strip is on screen; hovering pauses the drift.
+ * A slow, endless strip of real product footage in device frames. A video only
+ * plays while the strip is on screen and that video is inside the strip's
+ * visible window — the strip is doubled for the loop, so playing every copy
+ * would decode ~10 videos at once and make scrolling stutter on slower laptops.
  */
 export default function Showreel({ projects }: { projects: Project[] }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  const inStrip = useRef(new Set<HTMLVideoElement>())
   const items = projects.filter((p) => p.loop)
 
   useEffect(() => {
@@ -23,7 +26,33 @@ export default function Showreel({ projects }: { projects: Project[] }) {
   }, [])
 
   useEffect(() => {
-    ref.current?.querySelectorAll('video').forEach((v) => (visible ? v.play().catch(() => {}) : v.pause()))
+    const el = ref.current
+    if (!el || !visible) {
+      el?.querySelectorAll('video').forEach((v) => v.pause())
+      return
+    }
+    const seen = inStrip.current
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          const v = e.target as HTMLVideoElement
+          if (e.isIntersecting) {
+            seen.add(v)
+            v.play().catch(() => {})
+          } else {
+            seen.delete(v)
+            v.pause()
+          }
+        })
+      },
+      { root: el, threshold: 0.05 }
+    )
+    el.querySelectorAll('video').forEach((v) => io.observe(v))
+    return () => {
+      io.disconnect()
+      seen.forEach((v) => v.pause())
+      seen.clear()
+    }
   }, [visible])
 
   return (

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{ts,tsx,mdx}', './components/site/**/*.{ts,tsx}'],
+  content: ['./app/**/*.{ts,tsx,mdx}', './components/site/**/*.{ts,tsx}', './components/blog/**/*.{ts,tsx}'],
   theme: {
     container: { center: true, padding: { DEFAULT: '1rem', sm: '1.5rem', lg: '2.5rem' }, screens: { '2xl': '1360px' } },
     extend: {

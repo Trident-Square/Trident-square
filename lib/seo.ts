@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { absoluteUrl, partnerProgram, site } from './site'
 import { services, type Faq, type Service } from './services'
+import type { Post } from './blog'
 import type { Project } from './work'
 
 const ORG_ID = `${site.url}/#organization`
@@ -207,5 +208,25 @@ export function partnerProgramSchema() {
       description: `Partners earn up to ${partnerProgram.share.max}% of the net project value, rising with project size, paid within ${partnerProgram.payoutDays} business days of each client payment.`,
       seller: { '@id': ORG_ID },
     },
+  }
+}
+
+export function blogPostingSchema(p: Post) {
+  const url = absoluteUrl(`/blog/${p.slug}`)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: p.title,
+    description: p.excerpt,
+    url,
+    mainEntityOfPage: url,
+    image: absoluteUrl(`/blog/${p.slug}/opengraph-image`),
+    datePublished: `${p.date}T09:00:00+05:30`,
+    dateModified: `${p.updated ?? p.date}T09:00:00+05:30`,
+    articleSection: p.category,
+    keywords: p.keywords.join(', '),
+    inLanguage: 'en-IN',
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
   }
 }

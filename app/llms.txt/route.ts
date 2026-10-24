@@ -1,5 +1,6 @@
 import { absoluteUrl, partnerProgram, phoneHref, site } from '@/lib/site'
 import { services } from '@/lib/services'
+import { sortedPosts } from '@/lib/blog'
 import { projects } from '@/lib/work'
 
 // llms.txt: a plain-text map of the site for AI assistants and answer engines.
@@ -19,6 +20,9 @@ ${services.map((s) => `- [${s.name}](${absoluteUrl(`/services/${s.slug}`)}): ${s
 
 ## Case studies
 ${projects.map((p) => `- [${p.name}](${absoluteUrl(`/work/${p.slug}`)}) (${p.industry}): ${p.summary}`).join('\n')}
+
+## Blog
+${sortedPosts().map((p) => `- [${p.title}](${absoluteUrl(`/blog/${p.slug}`)}): ${p.excerpt}`).join('\n')}
 
 ## Partner programme
 - [Partner programme](${absoluteUrl('/partners')}): Partners who bring a client earn up to ${partnerProgram.share.max}% of the net project value (after pass-through costs), rising with project size. Paid within ${partnerProgram.payoutDays} business days of each client payment.

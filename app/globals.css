@@ -140,6 +140,63 @@
   .rule-t {
     @apply border-t border-line;
   }
+
+  /* Blog article typography. Direct children only, so callouts/tables/CTAs keep their own styles. */
+  .article {
+    @apply text-[18px] leading-[1.75] text-ink-2;
+  }
+  .article > p {
+    @apply mt-6;
+  }
+  .article > p:first-child {
+    @apply mt-0 text-[clamp(1.2rem,1.8vw,1.4rem)] leading-[1.6] text-ink;
+  }
+  .article > h2 {
+    @apply mt-16 border-t border-ink pt-6 text-[clamp(1.75rem,3vw,2.35rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink;
+  }
+  .article > h3 {
+    @apply mt-10 text-[21px] font-semibold leading-snug tracking-[-0.015em] text-ink;
+  }
+  .article > h3 + p {
+    @apply mt-3;
+  }
+  .article > ul,
+  .article > ol {
+    @apply mt-6 space-y-3;
+  }
+  .article > ul > li {
+    @apply relative pl-7;
+  }
+  .article > ul > li::before {
+    content: '';
+    @apply absolute left-1 top-[0.72em] h-[7px] w-[7px] bg-cobalt;
+  }
+  .article > ol {
+    counter-reset: step;
+  }
+  .article > ol > li {
+    counter-increment: step;
+    @apply relative pl-11;
+  }
+  .article > ol > li::before {
+    content: counter(step, decimal-leading-zero);
+    @apply absolute left-0 top-[0.2em] font-mono text-[12px] font-medium text-cobalt;
+  }
+  .article > blockquote {
+    @apply my-10 border-l-[3px] border-ink pl-6 text-[22px] font-medium leading-snug tracking-[-0.015em] text-ink;
+  }
+  .article > blockquote footer {
+    @apply mt-3 font-mono text-[12px] uppercase tracking-[0.12em] text-muted;
+  }
+  .article strong {
+    @apply font-semibold text-ink;
+  }
+  .article a:not(.no-underline):not(.not-article) {
+    @apply text-cobalt underline decoration-cobalt/30 underline-offset-[3px] transition-colors hover:decoration-cobalt;
+  }
+  .article code {
+    @apply bg-paper-2 px-1.5 py-0.5 font-mono text-[0.85em] text-ink;
+  }
 }
 
 @layer utilities {
