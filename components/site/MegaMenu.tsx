@@ -127,7 +127,7 @@ export default function MegaMenu({ open, onNavigate }: { open: boolean; onNaviga
               All services <Arrow className="h-3 w-3" />
             </Link>
             <Link href="/partners" onClick={onNavigate} className="flex items-center gap-1.5 hover:text-cobalt">
-              Refer & earn {partnerProgram.referral.boosted}% <Arrow className="h-3 w-3" />
+              Refer & earn up to {partnerProgram.share.max}% <Arrow className="h-3 w-3" />
             </Link>
             <Link href="/contact" onClick={onNavigate} className="flex items-center gap-1.5 bg-ink px-3 py-1.5 text-paper hover:bg-cobalt">
               Free consultation <Arrow className="h-3 w-3" />

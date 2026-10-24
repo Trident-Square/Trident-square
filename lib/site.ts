@@ -37,18 +37,25 @@ export const site = {
  * calculator, FAQ and schema all update together.
  */
 export const partnerProgram = {
-  referral: { base: 30, boosted: 35 },
-  /** Deal size (INR) above which a referral earns the boosted rate. */
-  boostThresholdInr: 1_000_000,
-  /** Closed deals after which every later deal earns the boosted rate. */
-  boostAfterDeals: 2,
-  /** White-label: partner sets their own price; this is the margin we build in for them. */
-  whiteLabelMargin: { min: 30, max: 35 },
-  /** Retainers keep paying the partner for this many months. */
-  recurringMonths: 12,
-  /** Days after the client's payment clears that the partner is paid. */
-  payoutDays: 7,
+  /**
+   * Partner share by net project value (project value minus pass-through costs).
+   * Indicative: the exact share is agreed per project after scoping.
+   */
+  slabs: [
+    { upToInr: 100_000, min: 10, max: 15, label: 'Up to ₹1 lakh', fit: 'Small builds, sites, single automations' },
+    { upToInr: 1_500_000, min: 20, max: 25, label: '₹1–15 lakh', fit: 'AI agents, chatbots, MVPs, apps' },
+    { upToInr: Infinity, min: 30, max: 35, label: '₹15 lakh+', fit: 'Platforms and large builds' },
+  ],
+  share: { min: 10, max: 35 },
+  /** Business days after the client's payment clears that the partner is paid. */
+  payoutDays: 5,
+  /** How long an introduced lead stays registered to the partner. */
+  leadProtectionMonths: 12,
 } as const
+
+export function partnerSlab(netInr: number) {
+  return partnerProgram.slabs.find((s) => netInr <= s.upToInr) ?? partnerProgram.slabs[partnerProgram.slabs.length - 1]
+}
 
 export const phoneHref = `tel:+${site.phoneE164}`
 

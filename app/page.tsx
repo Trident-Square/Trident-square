@@ -36,7 +36,7 @@ const faqs: Faq[] = [
   { q: 'How much does an AI agent or app cost?', a: 'Focused AI agents and chatbots usually start around ₹3–6 lakh (US$4k–8k); MVPs for custom software or apps typically range ₹4–15 lakh. You get a fixed quote after a free scoping call.' },
   { q: 'Do you work with clients outside India?', a: 'Yes. We work with clients across India, the US, UK, Europe and the Middle East, with overlapping hours and weekly video demos.' },
   { q: 'Who owns the code?', a: 'You do. Code lives in your repository from the start and full IP transfers to you on payment.' },
-  { q: 'Can I earn by referring clients?', a: `Yes. Our partner programme pays ${partnerProgram.referral.base}–${partnerProgram.referral.boosted}% of the project value for every client you introduce who signs with us.` },
+  { q: 'Can I earn by referring clients?', a: `Yes. Our partner programme pays ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value for every client you introduce who signs with us — the bigger the project, the bigger your share.` },
 ]
 
 export default function Home() {
@@ -75,7 +75,7 @@ export default function Home() {
             { v: <CountUp to={25} suffix="+" />, l: 'products shipped' },
             { v: <CountUp to={10} />, l: 'services, one team' },
             { v: <>&lt;<CountUp to={2} />s</>, l: 'voice agent reply time' },
-            { v: <CountUp to={partnerProgram.referral.boosted} suffix="%" />, l: 'paid to referral partners' },
+            { v: <CountUp to={partnerProgram.share.max} suffix="%" />, l: 'top partner share' },
           ].map((x, i) => (
             <Reveal key={x.l} delay={i * 90} className="border-l border-ink pl-5">
               <dt className="sr-only">{x.l}</dt>
@@ -172,8 +172,8 @@ export default function Home() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/60">Partner programme</p>
                 <h2 className="display mt-6 text-[clamp(2.75rem,6vw,5.5rem)]">Know someone who needs software?</h2>
                 <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-white/75">
-                  Introduce them. We do the selling and the building. You earn {partnerProgram.referral.base}% of the project — {partnerProgram.referral.boosted}% on
-                  bigger or repeat deals. Agencies can white-label our team.
+                  Introduce them. We do the scoping and the building. You earn {partnerProgram.share.min}–{partnerProgram.share.max}% of the
+                  project — the bigger the project, the bigger your share.
                 </p>
                 <span className="btn mt-10 bg-white text-ink group-hover:bg-ink group-hover:text-white">
                   How it works <Arrow />
@@ -181,7 +181,7 @@ export default function Home() {
               </div>
               <div className="flex items-end justify-end border-t border-white/20 p-8 sm:p-12 lg:col-span-5 lg:border-l lg:border-t-0">
                 <p className="display text-right text-[clamp(6rem,16vw,15rem)] leading-[0.78] transition-transform duration-700 group-hover:-translate-y-2">
-                  {partnerProgram.referral.boosted}
+                  {partnerProgram.share.max}
                   <span className="text-white/40">%</span>
                 </p>
               </div>

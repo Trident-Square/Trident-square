@@ -21,7 +21,7 @@ ${services.map((s) => `- [${s.name}](${absoluteUrl(`/services/${s.slug}`)}): ${s
 ${projects.map((p) => `- [${p.name}](${absoluteUrl(`/work/${p.slug}`)}) (${p.industry}): ${p.summary}`).join('\n')}
 
 ## Partner programme
-- [Partner programme](${absoluteUrl('/partners')}): Referral partners earn ${partnerProgram.referral.base}% of project value (${partnerProgram.referral.boosted}% on larger or repeat deals). White-label partners keep a ${partnerProgram.whiteLabelMargin.min}–${partnerProgram.whiteLabelMargin.max}% margin.
+- [Partner programme](${absoluteUrl('/partners')}): Partners who bring a client earn ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value (after pass-through costs), rising with project size. Paid within ${partnerProgram.payoutDays} business days of each client payment.
 
 ## Company
 - [About](${absoluteUrl('/about')})

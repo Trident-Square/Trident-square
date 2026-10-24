@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Trident Square — Partner Deck</title>
+<meta name="description" content="Partner with Trident Square: bring the client, we build AI agents, automation and custom software." />
+<link rel="icon" href="/trident-remove-bg.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f6f4ef;
+    --paper-2: #edeae2;
+    --ink: #111110;
+    --ink-2: #1c1c1a;
+    --muted: #605e58;
+    --line: #dcd8ce;
+    --cobalt: #1e4bd8;
+    --cobalt-ink: #8ca4ff;
+    --sans: 'Archivo', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --ease: cubic-bezier(.2, .75, .15, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; line-height: 1.5; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3 { text-wrap: balance; font-weight: inherit; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--cobalt); color: #fff; }
+
+  /* ---------- type ---------- */
+  .display { font-weight: 800; text-transform: uppercase; font-stretch: 72%; font-variation-settings: 'wdth' 72; line-height: .86; letter-spacing: -.012em; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
+  .eyebrow b { font-weight: 500; color: var(--cobalt); }
+  .eyebrow::after { content: ''; height: 1px; width: 56px; background: currentColor; opacity: .5; }
+  .h2 { font-size: clamp(2.9rem, 7.2vw, 6rem); margin-top: 18px; }
+  .lead { font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.5; color: var(--muted); }
+  .accent { color: var(--cobalt); }
+
+  /* ---------- sections ---------- */
+  .sec { position: relative; padding: clamp(72px, 11vw, 136px) 16px; overflow: hidden; }
+  .sec::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(17, 17, 16, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 17, 16, .045) 1px, transparent 1px);
+    background-size: 44px 44px; background-position: center top;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%); mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+  }
+  .inner { position: relative; width: 100%; max-width: 1180px; margin: 0 auto; }
+  @media print, (min-width: 768px) { .sec { padding-left: 40px; padding-right: 40px; } }
+
+  .dark { background: var(--ink); color: var(--paper); }
+  .dark::before { background-image: linear-gradient(rgba(246, 244, 239, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(246, 244, 239, .05) 1px, transparent 1px); }
+  .dark .eyebrow, .dark .lead { color: rgba(246, 244, 239, .58); }
+  .dark .eyebrow b, .dark .accent { color: var(--cobalt-ink); }
+  .blue { background: var(--cobalt); color: #fff; }
+  .blue::before { background-image: linear-gradient(rgba(255, 255, 255, .09) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .09) 1px, transparent 1px); }
+  .blue .eyebrow, .blue .lead { color: rgba(255, 255, 255, .75); }
+  .blue .eyebrow b { color: #fff; }
+  .tint { background: var(--paper-2); }
+
+  /* scroll reveal */
+  .rv { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .9s var(--ease); }
+  .rv.in { opacity: 1; transform: none; }
+  .d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- top bar ---------- */
+  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; background: rgba(246, 244, 239, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(17, 17, 16, .08); transform: translateY(-100%); transition: transform .4s var(--ease); }
+  .top.show { transform: none; }
+  .top .brand-sm { display: flex; align-items: center; gap: 8px; font-size: 16px; letter-spacing: -.03em; }
+  .top .brand-sm img { height: 22px; width: auto; }
+  .top .brand-sm span { opacity: .55; }
+  .top nav { display: none; gap: 22px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  .top nav a { transition: color .2s; }
+  .top nav a:hover, .top nav a.on { color: var(--ink); }
+  .top nav a.on { color: var(--cobalt); }
+  .top .pdf { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; background: var(--ink); color: var(--paper); border: 0; padding: 9px 13px; cursor: pointer; transition: background .2s; }
+  .top .pdf:hover { background: var(--cobalt); }
+  .bar-progress { position: absolute; left: 0; bottom: -1px; height: 2px; background: var(--cobalt); width: 0; }
+  @media print, (min-width: 1000px) { .top { padding: 12px 40px; } .top nav { display: flex; } }
+
+  /* ---------- 01 cover ---------- */
+  .cover { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding-top: 48px; padding-bottom: 48px; }
+  .cover .inner { display: grid; gap: 56px; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 22px; letter-spacing: -.035em; }
+  .brand img { height: 34px; width: auto; }
+  .brand span { opacity: .55; }
+  .cover .kicker { margin-top: clamp(40px, 7vw, 72px); }
+  .cover h1 { font-size: clamp(3.6rem, 10.5vw, 7.4rem); margin-top: 20px; }
+  .cover .lead { margin-top: 26px; max-width: 34ch; }
+  .cover dl { display: flex; flex-wrap: wrap; gap: 18px 40px; margin-top: 40px; padding-top: 18px; border-top: 1px solid rgba(246, 244, 239, .25); }
+  .cover dt { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: rgba(246, 244, 239, .5); }
+  .cover dd { font-size: 16px; font-weight: 600; margin-top: 4px; }
+  .collage { position: relative; height: 420px; }
+  .collage figure { position: absolute; width: min(62%, 340px); background: #fff; padding: 8px 8px 0; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); transition: transform .6s var(--ease); }
+  .collage img { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; }
+  .collage figcaption { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink); padding: 9px 2px; display: flex; justify-content: space-between; gap: 8px; }
+  .collage figure:nth-child(1) { top: 0; right: 0; transform: rotate(4deg); }
+  .collage figure:nth-child(2) { top: 120px; left: 0; transform: rotate(-5deg); z-index: 1; }
+  .collage figure:nth-child(3) { top: 230px; right: 6%; transform: rotate(2.5deg); z-index: 2; }
+  .collage:hover figure:nth-child(1) { transform: rotate(6deg) translate(8px, -6px); }
+  .collage:hover figure:nth-child(2) { transform: rotate(-7deg) translate(-8px, 0); }
+  .collage:hover figure:nth-child(3) { transform: rotate(4deg) translate(6px, 8px); }
+  .stamp { position: absolute; top: 70px; left: 46%; z-index: 3; width: 112px; height: 112px; border-radius: 50%; background: var(--cobalt); color: #fff; display: grid; place-items: center; text-align: center; transform: rotate(-10deg); box-shadow: 0 12px 30px rgba(30, 75, 216, .45); }
+  .stamp strong { display: block; font-size: 44px; }
+  .stamp span { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; display: block; margin-top: 2px; }
+  .scroll-cue { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(246, 244, 239, .45); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scroll-cue i { width: 1px; height: 32px; background: linear-gradient(rgba(246, 244, 239, .6), transparent); animation: cue 1.8s var(--ease) infinite; transform-origin: top; }
+  @media (max-height: 820px), (max-width: 999px) { .scroll-cue { display: none; } }
+  @keyframes cue { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+  @media print, (min-width: 1000px) {
+    .cover .inner { grid-template-columns: 1.15fr 1fr; }
+    .collage { height: 560px; }
+    .collage figure:nth-child(2) { top: 190px; }
+    .collage figure:nth-child(3) { top: 360px; }
+    .stamp { top: 150px; left: auto; right: -8px; width: 124px; height: 124px; }
+    .stamp strong { font-size: 50px; }
+  }
+
+  /* ---------- 02 about ---------- */
+  .split { display: grid; gap: 40px; margin-top: 48px; align-items: start; }
+  .story .big { font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.28; font-weight: 500; letter-spacing: -.015em; color: var(--ink); }
+  .story p + p { margin-top: 16px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .stats div { background: var(--paper); padding: 22px 22px 20px; }
+  .stats strong { display: block; font-size: clamp(3.2rem, 6vw, 4.8rem); }
+  .stats span { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  .stats div:first-child strong { color: var(--cobalt); }
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 24px; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--ink); }
+  .principles h3 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; margin-top: 6px; }
+  .principles p { font-size: 15px; color: var(--muted); margin-top: 4px; }
+  .principles .n { font-family: var(--mono); font-size: 11px; color: var(--cobalt); }
+  @media print, (min-width: 900px) { .split { grid-template-columns: 1.1fr 1fr; gap: 64px; } .principles { grid-template-columns: repeat(4, 1fr); } }
+
+  /* ---------- 03 services ---------- */
+  .svc { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(246, 244, 239, .14); border: 1px solid rgba(246, 244, 239, .14); margin-top: 48px; }
+  .svc div { background: var(--ink); padding: 20px 18px 22px; min-height: 150px; display: flex; flex-direction: column; transition: background .25s; }
+  .svc div:hover { background: var(--ink-2); }
+  .svc .n { font-family: var(--mono); font-size: 11px; color: var(--cobalt-ink); }
+  .svc h3 { font-size: clamp(17px, 1.7vw, 21px); font-weight: 600; letter-spacing: -.02em; line-height: 1.15; margin-top: 14px; }
+  .svc p { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: rgba(246, 244, 239, .5); margin-top: auto; padding-top: 14px; }
+  .svc .hot { background: var(--cobalt); }
+  .svc .hot:hover { background: #2a57e6; }
+  .svc .hot .n, .svc .hot p { color: rgba(255, 255, 255, .75); }
+  .note-line { margin-top: 24px; font-size: 15px; }
+  @media print, (min-width: 700px) { .svc { grid-template-columns: repeat(3, 1fr); } }
+  @media print, (min-width: 1000px) { .svc { grid-template-columns: repeat(5, 1fr); } .svc div { min-height: 170px; } }
+
+  /* ---------- 04 proof ---------- */
+  .proof { display: grid; gap: 22px; margin-top: 48px; }
+  .card { background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(17, 17, 16, .12); }
+  .card .ph { overflow: hidden; background: var(--paper-2); }
+  .card img { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; transition: transform .8s var(--ease); }
+  .card:hover img { transform: scale(1.04); }
+  .card .body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card .tag { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  .card h3 { font-size: 28px; font-weight: 700; letter-spacing: -.025em; }
+  .card .kpi { font-size: 15.5px; color: var(--muted); }
+  .card .kpi b { color: var(--cobalt); font-weight: 600; }
+  .card .visit { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; background: var(--ink); color: var(--paper); padding: 12px 14px; transition: background .2s; }
+  .card .visit:hover { background: var(--cobalt); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; align-items: center; }
+  .chips span { border: 1px solid rgba(17, 17, 16, .18); padding: 7px 12px; font-size: 14px; background: rgba(255, 255, 255, .55); }
+  .chips span b { font-weight: 600; }
+  .chips .lbl { border: 0; background: none; padding-left: 0; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  @media print, (min-width: 900px) { .proof { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ---------- 05 how it works ---------- */
+  .steps { display: grid; gap: 40px 28px; margin-top: 56px; grid-template-columns: 1fr 1fr; }
+  .step .num { font-size: clamp(4.5rem, 9vw, 7.5rem); color: transparent; -webkit-text-stroke: 1.5px rgba(246, 244, 239, .6); }
+  .step:last-child .num { -webkit-text-stroke-color: var(--cobalt-ink); }
+  .rail { position: relative; height: 14px; margin: 20px 0; }
+  .rail::before { content: ''; position: absolute; left: 0; right: -28px; top: 50%; height: 1px; background: rgba(246, 244, 239, .3); }
+  .rail::after { content: ''; position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); }
+  .step:last-child .rail::after { background: var(--cobalt-ink); box-shadow: 0 0 0 6px rgba(140, 164, 255, .2); }
+  .step h3 { font-size: clamp(20px, 2vw, 26px); font-weight: 600; letter-spacing: -.02em; }
+  .step p { font-size: 15.5px; color: rgba(246, 244, 239, .62); margin-top: 8px; }
+  .strip { display: grid; grid-template-columns: 1fr 1fr; margin-top: 64px; border-top: 1px solid rgba(246, 244, 239, .2); border-left: 1px solid rgba(246, 244, 239, .2); }
+  .strip div { padding: 18px 20px; border-right: 1px solid rgba(246, 244, 239, .2); border-bottom: 1px solid rgba(246, 244, 239, .2); }
+  .strip span { display: block; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: rgba(246, 244, 239, .5); }
+  .strip strong { display: block; font-size: clamp(17px, 1.8vw, 21px); font-weight: 600; margin-top: 4px; }
+  @media print, (min-width: 900px) { .steps, .strip { grid-template-columns: repeat(4, 1fr); } }
+
+  /* ---------- 06 share ---------- */
+  .slabs { display: grid; gap: 16px; margin-top: 52px; align-items: end; }
+  .slab { border: 1px solid rgba(255, 255, 255, .32); padding: 24px 26px 26px; background: rgba(255, 255, 255, .05); transition: transform .4s var(--ease); }
+  .slab:hover { transform: translateY(-6px); }
+  .slab:nth-child(3) { background: #fff; color: var(--ink); border-color: #fff; }
+  .slab .range { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; opacity: .75; }
+  .slab strong { display: block; font-size: clamp(4rem, 8vw, 6.4rem); margin-top: 18px; white-space: nowrap; }
+  .slab:nth-child(3) strong { color: var(--cobalt); }
+  .slab p { font-size: 15px; margin-top: 10px; opacity: .8; }
+  .fine { margin-top: 40px; display: flex; gap: 14px; font-size: 16px; max-width: 72ch; }
+  .fine .bar { width: 3px; background: #fff; flex: none; }
+  @media print, (min-width: 900px) {
+    .slabs { grid-template-columns: repeat(3, 1fr); }
+    .slab:nth-child(1) { min-height: 250px; }
+    .slab:nth-child(2) { min-height: 300px; }
+    .slab:nth-child(3) { min-height: 350px; }
+  }
+
+  /* ---------- 07 worked example ---------- */
+  .ex { display: grid; gap: 40px; margin-top: 48px; align-items: start; }
+  .mono-l { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  .money { display: flex; height: clamp(84px, 10vw, 104px); margin-top: 12px; border: 1px solid var(--ink); overflow: hidden; }
+  .money .pass { width: 25%; background: repeating-linear-gradient(135deg, var(--paper-2) 0 8px, #d6d1c5 8px 9px); display: flex; flex-direction: column; justify-content: center; padding: 0 14px; border-right: 1px solid var(--ink); }
+  .money .net { flex: 1; background: var(--ink); color: var(--paper); display: flex; flex-direction: column; justify-content: center; padding: 0 20px; transform-origin: left; }
+  .money small { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; opacity: .7; }
+  .money b { font-size: clamp(18px, 2.4vw, 28px); font-weight: 700; letter-spacing: -.02em; }
+  .rv .money .net { transform: scaleX(.2); transition: transform 1.2s var(--ease) .3s; }
+  .rv.in .money .net { transform: none; }
+  .scale { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 8px; }
+  .scale span:nth-child(2) { margin-left: 22%; margin-right: auto; }
+  .pass-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .pass-list span { border: 1px dashed rgba(17, 17, 16, .35); padding: 6px 11px; font-size: 13.5px; }
+  .result { margin-top: 28px; background: var(--cobalt); color: #fff; padding: 22px 26px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; align-items: center; }
+  .result span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; opacity: .8; }
+  .result strong { font-size: clamp(3rem, 6vw, 4.6rem); }
+  .calc { background: #fff; border: 1px solid var(--line); padding: 6px 24px; }
+  .calc .row { display: flex; justify-content: space-between; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 16.5px; }
+  .calc .row:last-child { border-bottom: 0; }
+  .calc .row.minus { color: var(--muted); }
+  .calc .row.total { font-weight: 700; border-bottom-color: var(--ink); }
+  .calc .row.share { color: var(--cobalt); font-weight: 600; }
+  .calc-note { font-size: 14px; color: var(--muted); margin-top: 16px; line-height: 1.55; }
+  @media print, (min-width: 900px) { .ex { grid-template-columns: 1.35fr 1fr; gap: 56px; } }
+
+  /* ---------- 08 promises & terms ---------- */
+  .two { display: grid; gap: 48px; margin-top: 48px; }
+  .two h3.col { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--cobalt-ink); padding-bottom: 12px; border-bottom: 1px solid rgba(246, 244, 239, .3); }
+  .list li { list-style: none; display: grid; gap: 2px; padding: 15px 0; border-bottom: 1px solid rgba(246, 244, 239, .12); }
+  .list b { font-size: 16.5px; font-weight: 600; }
+  .list span { font-size: 15px; color: rgba(246, 244, 239, .62); }
+  @media print, (min-width: 600px) { .list li { grid-template-columns: 170px 1fr; gap: 16px; } }
+  @media print, (min-width: 1000px) { .two { grid-template-columns: 1fr 1fr; gap: 56px; } }
+
+  /* ---------- 09 cta ---------- */
+  .cta h2 { font-size: clamp(3.4rem, 10vw, 8.4rem); margin-top: 22px; max-width: 11ch; }
+  .cta .lead { margin-top: 26px; max-width: 46ch; }
+  .contact { display: grid; gap: 1px; background: rgba(255, 255, 255, .3); border: 1px solid rgba(255, 255, 255, .3); margin-top: 56px; }
+  .contact > * { background: var(--cobalt); padding: 20px 22px; display: block; transition: background .2s; }
+  .contact a:hover { background: #2a57e6; }
+  .contact span { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255, 255, 255, .65); }
+  .contact strong { display: block; font-size: 17px; font-weight: 600; margin-top: 5px; word-break: break-word; }
+  @media print, (min-width: 700px) { .contact { grid-template-columns: 1fr 1fr; } }
+  @media print, (min-width: 1100px) { .contact { grid-template-columns: repeat(4, 1fr); } }
+  .end { margin-top: 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255, 255, 255, .55); }
+
+  /* floating download, bottom right */
+  .dl { position: fixed; right: 16px; bottom: 16px; z-index: 30; display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; background: var(--cobalt); color: #fff; padding: 14px 18px; box-shadow: 0 12px 32px rgba(30, 75, 216, .45), 0 0 0 1px rgba(255, 255, 255, .15) inset; transition: background .2s, transform .3s var(--ease); }
+  .dl:hover { background: var(--ink); transform: translateY(-2px); }
+  @media print, (min-width: 768px) { .dl { right: 24px; bottom: 24px; } }
+
+  /* ---------- print / save as PDF ---------- */
+  @media print {
+    @page { size: 1440px 1000px; margin: 0; }
+    html { scroll-behavior: auto; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .top, .scroll-cue, .dl { display: none; }
+    .rv, .rv .money .net { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .sec { height: 1000px; min-height: 0; padding: 72px 120px; display: flex; flex-direction: column; justify-content: center; break-after: page; break-inside: avoid; }
+    .sec::before { -webkit-mask-image: none; mask-image: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <a href="#cover" class="brand-sm"><img src="/trident-remove-bg.png" alt="" /><b>Trident</b><span>Square</span></a>
+  <nav id="nav">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#proof">Work</a>
+    <a href="#how">How it works</a>
+    <a href="#share">Your share</a>
+    <a href="#example">Example</a>
+    <a href="#terms">Terms</a>
+  </nav>
+  <a class="pdf" href="/partner-deck.pdf" download="Trident-Square-Partner-Deck.pdf">Download PDF</a>
+  <span class="bar-progress" id="progress"></span>
+</header>
+
+<!-- COVER -->
+<section class="sec dark cover" id="cover">
+  <div class="inner">
+    <div>
+      <div class="brand rv"><img src="/trident-remove-bg.png" alt="" /><b>Trident</b><span>Square</span></div>
+      <p class="eyebrow kicker rv d1"><b>Partner deck</b> 2026</p>
+      <h1 class="display rv d2">Bring the client.<br /><span class="accent">We build it.</span></h1>
+      <p class="lead rv d3">AI agents, voice bots, automation and custom software, scoped, built and supported by our engineers. You earn on every project you bring.</p>
+      <dl class="rv d4">
+        <div><dt>Based in</dt><dd>Sector 62, Noida</dd></div>
+        <div><dt>Products shipped</dt><dd>25+</dd></div>
+        <div><dt>Clients across</dt><dd>India · US · UK · Middle East</dd></div>
+      </dl>
+    </div>
+    <div class="collage rv d2" aria-hidden="true">
+      <figure><img src="/work/gigtap.jpg" alt="" /><figcaption><span>Gigtap</span><span>AI · Web · Android</span></figcaption></figure>
+      <figure><img src="/work/instabus.jpg" alt="" /><figcaption><span>InstaBus</span><span>Voice AI</span></figcaption></figure>
+      <figure><img src="/work/gamecam.jpg" alt="" /><figcaption><span>Gamecam</span><span>Computer vision</span></figcaption></figure>
+      <div class="stamp"><div><strong class="display">25+</strong><span>shipped</span></div></div>
+    </div>
+  </div>
+  <a href="#about" class="scroll-cue">Scroll<i></i></a>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="inner">
+    <p class="eyebrow rv"><b>01</b> Who we are</p>
+    <h2 class="display h2 rv d1">Engineers first.<br /><span class="accent">Now an agency.</span></h2>
+    <div class="split">
+      <div class="story lead rv d2">
+        <p class="big">We spent years as hands-on engineers shipping products for startups and businesses.</p>
+        <p>After 25+ launches, from voice agents making real calls to hiring platforms used by thousands of workers, we set up Trident Square as an agency, with a team, a process and an office in Noida, so we can take on more work without dropping quality.</p>
+      </div>
+      <div class="stats rv d3">
+        <div><strong class="display">25+</strong><span>products shipped</span></div>
+        <div><strong class="display">10</strong><span>services, one team</span></div>
+        <div><strong class="display">&lt;2s</strong><span>voice agent reply</span></div>
+        <div><strong class="display">2</strong><span>languages · Hindi + English</span></div>
+      </div>
+    </div>
+    <div class="principles rv">
+      <div><span class="n">01</span><h3>Engineers on calls</h3><p>The person on the call writes the code.</p></div>
+      <div><span class="n">02</span><h3>Demo every Friday</h3><p>A live staging link, not a status report.</p></div>
+      <div><span class="n">03</span><h3>AI where it pays</h3><p>If a simple rule wins, we say so.</p></div>
+      <div><span class="n">04</span><h3>Client owns it all</h3><p>Code, cloud, data and full IP.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec dark" id="services">
+  <div class="inner">
+    <p class="eyebrow rv"><b>02</b> What you can bring us</p>
+    <h2 class="display h2 rv d1">Ten services.<br /><span class="accent">One delivery team.</span></h2>
+    <div class="svc rv d2">
+      <div class="hot"><span class="n">01</span><h3>AI Agents</h3><p>First agent · 3–5 wks</p></div>
+      <div class="hot"><span class="n">02</span><h3>Voice AI Agents</h3><p>Live pilot · 3–4 wks</p></div>
+      <div class="hot"><span class="n">03</span><h3>AI Chatbots</h3><p>Web + WhatsApp · 2–4 wks</p></div>
+      <div><span class="n">04</span><h3>Business Process Automation</h3><p>First flows · 2–3 wks</p></div>
+      <div><span class="n">05</span><h3>Custom Software &amp; SaaS</h3><p>MVP · 8–12 wks</p></div>
+      <div><span class="n">06</span><h3>Web Development</h3><p>Sites · 3–6 wks</p></div>
+      <div><span class="n">07</span><h3>Mobile Apps</h3><p>Store-ready · 10–14 wks</p></div>
+      <div><span class="n">08</span><h3>E-commerce</h3><p>Store live · 4–8 wks</p></div>
+      <div><span class="n">09</span><h3>UI/UX Design</h3><p>Prototype · 2–4 wks</p></div>
+      <div><span class="n">10</span><h3>Cloud &amp; DevOps</h3><p>Audit · 1 wk</p></div>
+    </div>
+    <p class="note-line lead rv">Typical budgets: AI agents and chatbots from ₹3–6 lakh · MVPs ₹4–15 lakh · fixed quote after a free scoping call.</p>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="sec tint" id="proof">
+  <div class="inner">
+    <p class="eyebrow rv"><b>03</b> Proof</p>
+    <h2 class="display h2 rv d1">Shipped. Live. <span class="accent">Used.</span></h2>
+    <div class="proof">
+      <article class="card rv d1">
+        <div class="ph"><img src="/work/gigtap.jpg" alt="Gigtap hiring platform" loading="lazy" /></div>
+        <div class="body">
+          <span class="tag">HR tech · AI + Web + Android</span>
+          <h3>Gigtap</h3>
+          <p class="kpi">Hindi/English AI hiring for blue-collar workers. <b>3× faster hiring.</b></p>
+          <a class="visit" href="https://gigtap.in/" target="_blank" rel="noopener">Visit gigtap.in <span>↗</span></a>
+        </div>
+      </article>
+      <article class="card rv d2">
+        <div class="ph"><img src="/work/instabus.jpg" alt="InstaBus voice agent dashboard" loading="lazy" /></div>
+        <div class="body">
+          <span class="tag">Travel · Voice AI + dashboard</span>
+          <h3>InstaBus</h3>
+          <p class="kpi">Calls every passenger from booking to feedback. <b>50% faster onboarding.</b></p>
+          <a class="visit" href="https://instabus.co.in/" target="_blank" rel="noopener">Visit instabus.co.in <span>↗</span></a>
+        </div>
+      </article>
+      <article class="card rv d3">
+        <div class="ph"><img src="/work/gamecam.jpg" alt="Gamecam padel analytics" loading="lazy" /></div>
+        <div class="body">
+          <span class="tag">Sports · Computer vision</span>
+          <h3>Gamecam</h3>
+          <p class="kpi">Padel stats from one camera. <b>Live score and shot detection.</b></p>
+          <a class="visit" href="https://tridentsquare.com/work/gamecam" target="_blank" rel="noopener">View case study <span>↗</span></a>
+        </div>
+      </article>
+    </div>
+    <div class="chips rv">
+      <span class="lbl">Also shipped</span>
+      <span><b>ARIA</b> hotel voice agent · −60% calls</span>
+      <span><b>NowoChat</b> document AI app</span>
+      <span><b>Trendify</b> AI image app</span>
+      <span><b>Voice Form</b> · 98% accuracy</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec dark" id="how">
+  <div class="inner">
+    <p class="eyebrow rv"><b>04</b> How it works</p>
+    <h2 class="display h2 rv d1">You bring the client.<br /><span class="accent">We do the rest.</span></h2>
+    <div class="steps">
+      <div class="step rv d1"><span class="display num">01</span><div class="rail"></div><h3>Register the lead</h3><p>Share the brief. We confirm in writing within 24 hours that the lead is yours.</p></div>
+      <div class="step rv d2"><span class="display num">02</span><div class="rail"></div><h3>Scope &amp; quote</h3><p>Our engineer runs the scoping call. Price, milestones and your share fixed upfront.</p></div>
+      <div class="step rv d3"><span class="display num">03</span><div class="rail"></div><h3>We build</h3><p>Weekly demos and a staging link every Friday. You stay in the loop.</p></div>
+      <div class="step rv d4"><span class="display num">04</span><div class="rail"></div><h3>You get paid</h3><p>Your share for each milestone, as soon as the client pays it.</p></div>
+    </div>
+    <div class="strip rv">
+      <div><span>Payout</span><strong>5 business days</strong></div>
+      <div><span>Paid on</span><strong>Every milestone</strong></div>
+      <div><span>To join</span><strong>₹0 · no targets</strong></div>
+      <div><span>Lead protection</span><strong>12 months</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE -->
+<section class="sec blue" id="share">
+  <div class="inner">
+    <p class="eyebrow rv"><b>05</b> Your share</p>
+    <h2 class="display h2 rv d1">Bigger projects,<br />bigger share.</h2>
+    <div class="slabs">
+      <div class="slab rv d1"><p class="range">Up to ~₹1 lakh</p><strong class="display">10–15%</strong><p>Small builds, sites, single automations</p></div>
+      <div class="slab rv d2"><p class="range">₹1 – 15 lakh</p><strong class="display">20–25%</strong><p>AI agents, chatbots, MVPs, apps</p></div>
+      <div class="slab rv d3"><p class="range">₹15 lakh +</p><strong class="display">30–35%</strong><p>Platforms and large builds</p></div>
+    </div>
+    <div class="fine rv"><span class="bar"></span><p>Your share is calculated on the <b>net project value</b>, after third-party costs nobody controls. Slabs are indicative; the exact share is agreed per project after scoping and confirmed in writing before work starts.</p></div>
+  </div>
+</section>
+
+<!-- EXAMPLE -->
+<section class="sec" id="example">
+  <div class="inner">
+    <p class="eyebrow rv"><b>06</b> How the maths works</p>
+    <h2 class="display h2 rv d1">₹8 lakh project.<br /><span class="accent">Share on ₹6 lakh.</span></h2>
+    <div class="ex">
+      <div class="rv d2">
+        <p class="mono-l">Client pays ₹8,00,000</p>
+        <div class="money">
+          <div class="pass"><small>Pass-through</small><b>₹2L</b></div>
+          <div class="net"><small>Net value · your share is on this</small><b>₹6,00,000</b></div>
+        </div>
+        <div class="scale"><span>₹0</span><span>₹2L</span><span>₹8L</span></div>
+        <div class="pass-list">
+          <span>Servers &amp; hosting</span><span>KYC / verification APIs</span><span>Telephony &amp; SMS</span><span>AI model usage</span><span>Licences &amp; store fees</span>
+        </div>
+        <div class="result"><span>Your share at 20%</span><strong class="display">₹1,20,000</strong></div>
+      </div>
+      <div class="rv d3">
+        <div class="calc">
+          <div class="row"><span>Project value</span><span>₹8,00,000</span></div>
+          <div class="row minus"><span>− Pass-through costs</span><span>₹2,00,000</span></div>
+          <div class="row total"><span>Net project value</span><span>₹6,00,000</span></div>
+          <div class="row share"><span>Share at 20%</span><span>₹1,20,000</span></div>
+          <div class="row share"><span>Share at 25%</span><span>₹1,50,000</span></div>
+        </div>
+        <p class="calc-note">Pass-through costs are fixed costs the project needs and nobody controls: servers, verification, telephony, third-party APIs. They are listed in the quote with actual bills, so you always see what was deducted. Illustrative figures; GST extra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISES & TERMS -->
+<section class="sec dark" id="terms">
+  <div class="inner">
+    <p class="eyebrow rv"><b>07</b> Promises &amp; terms</p>
+    <h2 class="display h2 rv d1">Your client stays<br /><span class="accent">your client.</span></h2>
+    <div class="two">
+      <div class="rv d1">
+        <h3 class="col">What we promise</h3>
+        <ul class="list">
+          <li><b>Non-solicit</b><span>We never approach your client directly, during or after the project.</span></li>
+          <li><b>Lead protection</b><span>Registered leads stay yours for 12 months.</span></li>
+          <li><b>Confidentiality</b><span>NDA before the first brief.</span></li>
+          <li><b>Same senior team</b><span>Your clients get the engineers our direct clients get.</span></li>
+          <li><b>Full visibility</b><span>Deal status, milestones and client payments.</span></li>
+        </ul>
+      </div>
+      <div class="rv d2">
+        <h3 class="col">Commercial terms</h3>
+        <ul class="list">
+          <li><b>Payout</b><span>Within 5 business days of each client payment clearing.</span></li>
+          <li><b>Calculated on</b><span>Net project value, excluding GST and pass-through costs.</span></li>
+          <li><b>One-time</b><span>Share applies to project milestones; no recurring commission.</span></li>
+          <li><b>Change requests</b><span>Quoted separately; your share applies to them too.</span></li>
+          <li><b>Warranty</b><span>30-day bug-fix warranty after launch.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec blue cta" id="start">
+  <div class="inner">
+    <p class="eyebrow rv"><b>08</b> Let's start</p>
+    <h2 class="display rv d1">Start with one pilot project.</h2>
+    <p class="lead rv d2">Pick one client need: a chatbot, an automation or a voice agent. We scope it together, deliver it, and you judge the quality before we scale.</p>
+    <div class="contact rv d3">
+      <a href="https://wa.me/916388443418" target="_blank" rel="noopener"><span>WhatsApp · fastest</span><strong>+91 63884 43418</strong></a>
+      <a href="mailto:admin@tridentsquare.com"><span>Email</span><strong>admin@tridentsquare.com</strong></a>
+      <a href="https://tridentsquare.com" target="_blank" rel="noopener"><span>Web</span><strong>tridentsquare.com</strong></a>
+      <div><span>Office</span><strong>Bhutani 62 Avenue, Sector 62, Noida</strong></div>
+    </div>
+    <div class="end"><span>Trident Square · Partner deck</span><span>Terms are indicative and finalised in the partner agreement</span></div>
+  </div>
+</section>
+
+<a class="dl" href="/partner-deck.pdf" download="Trident-Square-Partner-Deck.pdf" aria-label="Download partner deck as PDF">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M2.5 13.5h11" stroke="currentColor" stroke-width="1.6" /></svg>
+  <span>Download PDF</span>
+</a>
+
+<script>
+  (function () {
+    // Reveal on scroll
+    var els = document.querySelectorAll('.rv')
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } })
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' })
+      els.forEach(function (el) { io.observe(el) })
+    } else {
+      els.forEach(function (el) { el.classList.add('in') })
+    }
+    addEventListener('beforeprint', function () { els.forEach(function (el) { el.classList.add('in') }) })
+
+    // Top bar, progress and active section
+    var top = document.getElementById('top')
+    var bar = document.getElementById('progress')
+    var links = [].slice.call(document.querySelectorAll('#nav a'))
+    var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')) })
+    function onScroll() {
+      var y = scrollY, h = document.documentElement.scrollHeight - innerHeight
+      top.classList.toggle('show', y > innerHeight * 0.6)
+      bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%'
+      var cur = -1
+      secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top < innerHeight * 0.4) cur = i })
+      links.forEach(function (a, i) { a.classList.toggle('on', i === cur) })
+    }
+    addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+  })()
+</script>
+</body>
+</html>

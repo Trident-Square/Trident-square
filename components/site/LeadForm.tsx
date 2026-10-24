@@ -10,7 +10,7 @@ type Kind = 'project' | 'partner'
 type Status = 'idle' | 'sending' | 'redirecting'
 
 const budgets = ['Under ₹3 lakh', '₹3–10 lakh', '₹10–25 lakh', '₹25 lakh+', 'Not sure yet']
-const partnerTypes = ['Referral partner', 'White-label / reseller agency', 'Freelancer or consultant', 'Other']
+const partnerTypes = ['Agency or consultant', 'Freelancer', 'Business owner or individual with a network', 'Other']
 
 // Order and wording of the fields in the prefilled WhatsApp message.
 const WA_LABELS: [string, string][] = [

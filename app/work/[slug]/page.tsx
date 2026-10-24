@@ -66,7 +66,20 @@ export default async function ProjectPage({ params }: Props) {
             ),
           },
         ]}
-        intro={<p className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-snug tracking-[-0.015em] text-ink">{p.summary}</p>}
+        intro={
+          <>
+            <p className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-snug tracking-[-0.015em] text-ink">{p.summary}</p>
+            {p.links?.length ? (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {p.links.map((l, i) => (
+                  <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className={i === 0 ? 'btn-cobalt' : 'btn-ghost'}>
+                    {i === 0 ? `Visit ${l.label}` : l.label} ↗
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </>
+        }
       />
 
       <section className="container mt-16 sm:mt-24">
@@ -148,15 +161,6 @@ export default async function ProjectPage({ params }: Props) {
                 <li key={t} className="border border-line px-3.5 py-1.5 text-[14px]">{t}</li>
               ))}
             </ul>
-            {p.links?.length ? (
-              <div className="mt-8 flex flex-wrap gap-3">
-                {p.links.map((l) => (
-                  <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="btn-ghost min-h-[40px] px-4 text-[14px]">
-                    {l.label} ↗
-                  </a>
-                ))}
-              </div>
-            ) : null}
           </div>
         </div>
       </section>

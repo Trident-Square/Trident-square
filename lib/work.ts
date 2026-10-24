@@ -78,6 +78,7 @@ export const projects: Project[] = [
     loop: '/work/instabus-loop.mp4',
     demo: '/project/Instabus vdo.mp4',
     orientation: 'landscape',
+    links: [{ label: 'instabus.co.in', url: 'https://instabus.co.in/' }],
   },
   {
     slug: 'gamecam',

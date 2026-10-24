@@ -198,12 +198,12 @@ export function partnerProgramSchema() {
     '@type': 'WebPage',
     name: `${site.name} Partner Programme`,
     url: absoluteUrl('/partners'),
-    description: `Refer clients for AI agents and custom software and earn ${partnerProgram.referral.base}–${partnerProgram.referral.boosted}% of the project value.`,
+    description: `Bring clients who need AI agents and custom software and earn ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value.`,
     publisher: { '@id': ORG_ID },
     mainEntity: {
       '@type': 'Offer',
-      name: 'Referral and white-label partnership',
-      description: `${partnerProgram.referral.base}% commission on every closed referral, ${partnerProgram.referral.boosted}% on larger or repeat deals. White-label partners keep a ${partnerProgram.whiteLabelMargin.min}–${partnerProgram.whiteLabelMargin.max}% margin.`,
+      name: 'Partner programme',
+      description: `Partners earn ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value, rising with project size, paid within ${partnerProgram.payoutDays} business days of each client payment.`,
       seller: { '@id': ORG_ID },
     },
   }
