@@ -9,8 +9,8 @@ import { partnerProgram as pp, whatsappHref } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
 export const metadata = pageMetadata({
-  title: `Partner Programme — Earn ${pp.share.min}–${pp.share.max}% on Software Projects`,
-  description: `Bring clients who need AI agents, chatbots, apps or custom software and earn ${pp.share.min}–${pp.share.max}% of the net project value. Paid within ${pp.payoutDays} business days of each client payment.`,
+  title: `Partner Programme — Earn up to ${pp.share.max}% on Software Projects`,
+  description: `Bring clients who need AI agents, chatbots, apps or custom software and earn up to ${pp.share.max}% of the net project value. Paid within ${pp.payoutDays} business days of each client payment.`,
   path: '/partners',
   keywords: ['software referral program India', 'IT referral commission', 'software agency partner program', 'AI agency partner program', 'affiliate program software development'],
 })
@@ -24,10 +24,10 @@ const steps = [
 ]
 
 const faqs: Faq[] = [
-  { q: 'How much do I earn?', a: `${pp.share.min}–${pp.share.max}% of the net project value, depending on size: ${pp.slabs.map((s) => `${s.min}–${s.max}% for ${s.label.toLowerCase()}`).join(', ')}. Slabs are indicative — the exact share is agreed per project after scoping and confirmed in writing before work starts.` },
+  { q: 'How much do I earn?', a: `Up to ${pp.share.max}% of the net project value, depending on size: ${pp.slabs.map((s) => `${s.min}–${s.max}% for ${s.label.toLowerCase()}`).join(', ')}. Slabs are indicative — the exact share is agreed per project after scoping and confirmed in writing before work starts.` },
   { q: 'What is the net project value?', a: 'The project value minus pass-through costs the project needs and nobody controls: servers, verification/KYC APIs, telephony, AI model usage and third-party licences. On an ₹8 lakh project with ₹2 lakh of such costs, your share is calculated on ₹6 lakh. The partner deck walks through the full example.' },
   { q: 'When and how do I get paid?', a: `Per milestone, within ${pp.payoutDays} business days of the client’s payment clearing, by bank transfer or UPI (India) or Wise/PayPal (international). One-time project share — no recurring commission.` },
-  { q: 'Is there any fee or target?', a: `No fees, no targets and no exclusivity. Leads stay registered to you for ${pp.leadProtectionMonths} months, and we never approach your client directly.` },
+  { q: 'Is there any fee or target?', a: `No fees, no targets and no exclusivity. We never approach your client directly.` },
 ]
 
 export default function PartnersPage() {
@@ -37,11 +37,10 @@ export default function PartnersPage() {
 
       <PageHero
         crumbs={[{ label: 'Partner programme' }]}
-        title={<>Bring a client.<br />Earn <span className="text-cobalt">{pp.share.min}–{pp.share.max}%.</span></>}
+        title={<>Bring a client.<br />Earn up to <span className="text-cobalt">{pp.share.max}%.</span></>}
         meta={[
-          { k: 'Partner share', v: `${pp.share.min}–${pp.share.max}% of net value` },
+          { k: 'Partner share', v: `Up to ${pp.share.max}% of net value` },
           { k: 'Payout', v: `${pp.payoutDays} business days after client pays` },
-          { k: 'Lead protection', v: `${pp.leadProtectionMonths} months` },
           { k: 'To join', v: '₹0 · no targets' },
         ]}
         intro={
@@ -50,7 +49,7 @@ export default function PartnersPage() {
               Know a business that needs automation, an AI agent, an app or custom software? Introduce them.
             </p>
             <p className="mt-5 text-[17px] leading-relaxed text-muted">
-              We do the scoping and the building. You earn {pp.share.min}–{pp.share.max}% — the bigger the project, the bigger your share.
+              We do the scoping and the building. You earn up to {pp.share.max}% of every project — the bigger the project, the bigger your share.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={DECK} target="_blank" rel="noopener noreferrer" className="btn-cobalt">View partner deck <Arrow /></a>

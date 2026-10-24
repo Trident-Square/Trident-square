@@ -36,7 +36,7 @@ const faqs: Faq[] = [
   { q: 'How much does an AI agent or app cost?', a: 'Focused AI agents and chatbots usually start around ₹3–6 lakh (US$4k–8k); MVPs for custom software or apps typically range ₹4–15 lakh. You get a fixed quote after a free scoping call.' },
   { q: 'Do you work with clients outside India?', a: 'Yes. We work with clients across India, the US, UK, Europe and the Middle East, with overlapping hours and weekly video demos.' },
   { q: 'Who owns the code?', a: 'You do. Code lives in your repository from the start and full IP transfers to you on payment.' },
-  { q: 'Can I earn by referring clients?', a: `Yes. Our partner programme pays ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value for every client you introduce who signs with us — the bigger the project, the bigger your share.` },
+  { q: 'Can I earn by referring clients?', a: `Yes. Our partner programme pays up to ${partnerProgram.share.max}% of the net project value for every client you introduce who signs with us — the bigger the project, the bigger your share.` },
 ]
 
 export default function Home() {
@@ -172,7 +172,7 @@ export default function Home() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/60">Partner programme</p>
                 <h2 className="display mt-6 text-[clamp(2.75rem,6vw,5.5rem)]">Know someone who needs software?</h2>
                 <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-white/75">
-                  Introduce them. We do the scoping and the building. You earn {partnerProgram.share.min}–{partnerProgram.share.max}% of the
+                  Introduce them. We do the scoping and the building. You earn up to {partnerProgram.share.max}% of the
                   project — the bigger the project, the bigger your share.
                 </p>
                 <span className="btn mt-10 bg-white text-ink group-hover:bg-ink group-hover:text-white">

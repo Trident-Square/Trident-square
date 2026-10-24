@@ -198,12 +198,12 @@ export function partnerProgramSchema() {
     '@type': 'WebPage',
     name: `${site.name} Partner Programme`,
     url: absoluteUrl('/partners'),
-    description: `Bring clients who need AI agents and custom software and earn ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value.`,
+    description: `Bring clients who need AI agents and custom software and earn up to ${partnerProgram.share.max}% of the net project value.`,
     publisher: { '@id': ORG_ID },
     mainEntity: {
       '@type': 'Offer',
       name: 'Partner programme',
-      description: `Partners earn ${partnerProgram.share.min}–${partnerProgram.share.max}% of the net project value, rising with project size, paid within ${partnerProgram.payoutDays} business days of each client payment.`,
+      description: `Partners earn up to ${partnerProgram.share.max}% of the net project value, rising with project size, paid within ${partnerProgram.payoutDays} business days of each client payment.`,
       seller: { '@id': ORG_ID },
     },
   }

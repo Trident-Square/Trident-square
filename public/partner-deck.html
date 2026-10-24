@@ -181,11 +181,12 @@
   .step:last-child .rail::after { background: var(--cobalt-ink); box-shadow: 0 0 0 6px rgba(140, 164, 255, .2); }
   .step h3 { font-size: clamp(20px, 2vw, 26px); font-weight: 600; letter-spacing: -.02em; }
   .step p { font-size: 15.5px; color: rgba(246, 244, 239, .62); margin-top: 8px; }
-  .strip { display: grid; grid-template-columns: 1fr 1fr; margin-top: 64px; border-top: 1px solid rgba(246, 244, 239, .2); border-left: 1px solid rgba(246, 244, 239, .2); }
+  .strip { display: grid; grid-template-columns: 1fr; margin-top: 64px; border-top: 1px solid rgba(246, 244, 239, .2); border-left: 1px solid rgba(246, 244, 239, .2); }
   .strip div { padding: 18px 20px; border-right: 1px solid rgba(246, 244, 239, .2); border-bottom: 1px solid rgba(246, 244, 239, .2); }
   .strip span { display: block; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: rgba(246, 244, 239, .5); }
   .strip strong { display: block; font-size: clamp(17px, 1.8vw, 21px); font-weight: 600; margin-top: 4px; }
-  @media print, (min-width: 900px) { .steps, .strip { grid-template-columns: repeat(4, 1fr); } }
+  @media print, (min-width: 900px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+  @media print, (min-width: 600px) { .strip { grid-template-columns: repeat(3, 1fr); } }
 
   /* ---------- 06 share ---------- */
   .slabs { display: grid; gap: 16px; margin-top: 52px; align-items: end; }
@@ -416,7 +417,6 @@
       <div><span>Payout</span><strong>5 business days</strong></div>
       <div><span>Paid on</span><strong>Every milestone</strong></div>
       <div><span>To join</span><strong>₹0 · no targets</strong></div>
-      <div><span>Lead protection</span><strong>12 months</strong></div>
     </div>
   </div>
 </section>
@@ -477,7 +477,6 @@
         <h3 class="col">What we promise</h3>
         <ul class="list">
           <li><b>Non-solicit</b><span>We never approach your client directly, during or after the project.</span></li>
-          <li><b>Lead protection</b><span>Registered leads stay yours for 12 months.</span></li>
           <li><b>Confidentiality</b><span>NDA before the first brief.</span></li>
           <li><b>Same senior team</b><span>Your clients get the engineers our direct clients get.</span></li>
           <li><b>Full visibility</b><span>Deal status, milestones and client payments.</span></li>
@@ -486,7 +485,8 @@
       <div class="rv d2">
         <h3 class="col">Commercial terms</h3>
         <ul class="list">
-          <li><b>Payout</b><span>Within 5 business days of each client payment clearing.</span></li>
+          <li><b>Client payments</b><span>Per milestone, by bank transfer (NEFT / RTGS / IMPS) or a Razorpay link (UPI, cards, netbanking).</span></li>
+          <li><b>Your payout</b><span>Bank transfer or UPI, within 5 business days of each client payment clearing.</span></li>
           <li><b>Calculated on</b><span>Net project value, excluding GST and pass-through costs.</span></li>
           <li><b>One-time</b><span>Share applies to project milestones; no recurring commission.</span></li>
           <li><b>Change requests</b><span>Quoted separately; your share applies to them too.</span></li>

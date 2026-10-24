@@ -46,11 +46,9 @@ export const partnerProgram = {
     { upToInr: 1_500_000, min: 20, max: 25, label: '₹1–15 lakh', fit: 'AI agents, chatbots, MVPs, apps' },
     { upToInr: Infinity, min: 30, max: 35, label: '₹15 lakh+', fit: 'Platforms and large builds' },
   ],
-  share: { min: 10, max: 35 },
+  share: { max: 35 },
   /** Business days after the client's payment clears that the partner is paid. */
   payoutDays: 5,
-  /** How long an introduced lead stays registered to the partner. */
-  leadProtectionMonths: 12,
 } as const
 
 export function partnerSlab(netInr: number) {
