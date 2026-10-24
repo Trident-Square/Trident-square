@@ -1,3 +1,4 @@
+import CoverArt from './CoverArt'
 import type { Post } from '@/lib/blog'
 import { cn } from '@/lib/utils'
 
@@ -28,17 +29,42 @@ export default function PostCover({ post, size = 'card', className }: { post: Po
           <span>{post.category}</span>
           <span>Trident Square · Blog</span>
         </div>
-        <p
-          className={cn(
-            'display whitespace-nowrap transition-transform duration-700 ease-[cubic-bezier(.2,.75,.15,1)] group-hover:-translate-y-1',
-            size === 'card' && 'text-[clamp(4rem,9vw,6.5rem)]',
-            size === 'feature' && 'text-[clamp(5rem,12vw,10rem)]',
-            size === 'hero' && 'text-[clamp(6rem,19vw,17rem)]'
-          )}
-        >
-          {post.coverWord}
-        </p>
+        <div className={cn('flex flex-col gap-4', size !== 'card' && 'sm:flex-row sm:items-end sm:justify-between sm:gap-10')}>
+          <p
+            className={cn(
+              'display whitespace-nowrap transition-transform duration-700 ease-[cubic-bezier(.2,.75,.15,1)] group-hover:-translate-y-1',
+              size === 'card' && 'text-[clamp(3rem,5.5vw,4.25rem)]',
+              size === 'feature' && 'text-[clamp(4.5rem,10vw,8.5rem)]',
+              size === 'hero' && 'text-[clamp(5rem,15vw,13rem)]'
+            )}
+          >
+            {post.coverWord}
+          </p>
+          <p
+            className={cn(
+              'font-medium leading-snug tracking-[-0.01em] opacity-90',
+              size === 'card' && 'max-w-[26ch] text-[14px]',
+              size === 'feature' && 'max-w-[22ch] sm:border-l sm:border-current/30 text-[clamp(1rem,1.6vw,1.35rem)] sm:pb-3 sm:pl-5',
+              size === 'hero' && 'max-w-[24ch] sm:border-l sm:border-current/30 text-[clamp(1.1rem,2vw,1.75rem)] sm:pb-5 sm:pl-6'
+            )}
+          >
+            {post.coverLine}
+          </p>
+        </div>
       </div>
+
+      {post.art ? (
+      <div
+        className={cn(
+          'absolute',
+          size === 'card' && 'right-5 top-11 w-[40%]',
+          size === 'feature' && 'right-8 top-[22%] hidden w-[42%] sm:block lg:right-10',
+          size === 'hero' && 'right-[6%] top-[15%] hidden w-[34%] sm:block'
+        )}
+      >
+        <CoverArt size={size} />
+      </div>
+      ) : null}
 
       {/* crop marks */}
       {['left-3 top-3 border-l border-t', 'right-3 top-3 border-r border-t', 'bottom-3 left-3 border-b border-l', 'bottom-3 right-3 border-b border-r'].map((c) => (

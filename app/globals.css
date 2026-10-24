@@ -246,6 +246,12 @@ details > summary::-webkit-details-marker {
   from { opacity: 0; }
 }
 
+/* Blog cover waveform: each bar breathes between 45% and 100% of its own height (--h). */
+@keyframes cover-wave {
+  0%, 100% { transform: scaleY(calc(var(--h) * 0.45)); }
+  50% { transform: scaleY(var(--h)); }
+}
+
 @keyframes title-in {
   from { opacity: 0; transform: translateY(0.25em); clip-path: inset(0 0 100% 0); }
   to { opacity: 1; transform: none; clip-path: inset(0 0 -10% 0); }

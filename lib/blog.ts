@@ -29,6 +29,10 @@ export type Post = {
   updated?: string
   /** Big word on the generated cover art. */
   coverWord: string
+  /** Short line set beside the big word, so the cover reads on its own. */
+  coverLine: string
+  /** Optional topic illustration on the cover. */
+  art?: 'wave'
   tone: 'cobalt' | 'ink' | 'signal'
   /** Service the post leads into. */
   service: string
@@ -47,7 +51,8 @@ export const posts: Post[] = [
       'A straight answer with real ranges: what you pay to build a business chatbot, what it costs to run every month, and the five things that move the price.',
     category: 'Pricing',
     date: '2026-10-25',
-    coverWord: '₹',
+    coverWord: '₹3–6L',
+    coverLine: 'What a business AI chatbot really costs to build in India',
     tone: 'cobalt',
     service: 'ai-chatbot-development',
     keywords: ['AI chatbot cost India', 'chatbot development cost', 'WhatsApp chatbot price', 'AI chatbot for business India'],
@@ -170,6 +175,7 @@ export const posts: Post[] = [
     category: 'Automation',
     date: '2026-10-25',
     coverWord: 'WA',
+    coverLine: 'Automate the WhatsApp chats that eat your team’s day',
     tone: 'signal',
     service: 'business-process-automation',
     keywords: ['WhatsApp automation for business', 'WhatsApp Business API India', 'WhatsApp chatbot for SME', 'WhatsApp CRM integration'],
@@ -277,6 +283,8 @@ export const posts: Post[] = [
     category: 'Voice AI',
     date: '2026-10-25',
     coverWord: 'Hello?',
+    coverLine: 'AI that picks up the phone — and when it is worth it',
+    art: 'wave',
     tone: 'ink',
     service: 'voice-ai-agents',
     keywords: ['voice AI agent', 'AI calling agent India', 'AI phone agent', 'Hindi voice bot', 'AI receptionist'],
