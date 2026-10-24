@@ -185,7 +185,8 @@ export function projectSchema(p: Project) {
             description: p.summary,
             contentUrl: absoluteUrl(encodeURI(p.demo)),
             thumbnailUrl: p.poster ? absoluteUrl(p.poster) : undefined,
-            uploadDate: `${p.year}-01-01`,
+            // Full ISO datetime with IST offset; a bare date is flagged by Google's Rich Results Test.
+            uploadDate: `${p.year}-01-01T00:00:00+05:30`,
           },
         }
       : {}),

@@ -7,7 +7,7 @@
 export const site = {
   name: 'Trident Square',
   legalName: 'Trident Square',
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tridentsquare.com').replace(/\/$/, ''),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tridentsquare.com').replace(/\/$/, ''),
   tagline: 'Automation, AI and custom software, engineered in Noida',
   description:
     'Trident Square is an automation and software engineering company in Noida, India. We build business automation systems, AI agents, voice and chat bots, custom software, web, e-commerce and mobile apps for businesses worldwide.',
