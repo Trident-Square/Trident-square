@@ -3,6 +3,7 @@ import { whatsappHref } from '@/lib/site'
 export default function WhatsAppFloat() {
   return (
     <a
+      data-track="floating_button"
       href={whatsappHref('Hi Trident Square, I’d like to discuss a project.')}
       target="_blank"
       rel="noopener noreferrer"

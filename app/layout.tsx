@@ -7,6 +7,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import JsonLd from '@/components/site/JsonLd'
 import SmoothScroll from '@/components/site/SmoothScroll'
+import ContactClickTracking from '@/components/site/ContactClickTracking'
 import WhatsAppFloat from '@/components/site/WhatsAppFloat'
 import { organizationGraph } from '@/lib/seo'
 import { site } from '@/lib/site'
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WhatsAppFloat />
         <Analytics />
         <GoogleAnalytics gaId={site.gaId} />
+        <ContactClickTracking />
       </body>
     </html>
   )
