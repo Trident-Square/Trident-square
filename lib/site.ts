@@ -12,7 +12,7 @@ export const site = {
   description:
     'Trident Square is an automation and software engineering company in Noida, India. We build business automation systems, AI agents, voice and chat bots, custom software, web, e-commerce and mobile apps for businesses worldwide.',
   projectsDelivered: '25+',
-  email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? '').trim(),
+  email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'hello@tridentsquare.com').trim(),
   phoneE164: (process.env.NEXT_PUBLIC_CONTACT_PHONE_E164 ?? '916388443418').replace(/\D/g, ''),
   phoneDisplay: (process.env.NEXT_PUBLIC_CONTACT_PHONE_DISPLAY ?? '+91 63884 43418').trim(),
   address: {

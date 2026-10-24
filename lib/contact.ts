@@ -5,7 +5,7 @@
  */
 
 export function getContactEmail(): string {
-  return (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? '').trim()
+  return (process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'hello@tridentsquare.com').trim()
 }
 
 /** Digits only, country code included, no + (e.g. 911234567890). Used for tel: and WhatsApp. */
