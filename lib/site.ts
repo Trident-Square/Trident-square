@@ -47,8 +47,13 @@ export const partnerProgram = {
     { upToInr: Infinity, min: 30, max: 35, label: '₹15 lakh+', fit: 'Platforms and large builds' },
   ],
   share: { max: 35 },
-  /** Business days after the client's payment clears that the partner is paid. */
+  /** Business days after the client's payment clears that the partner is paid: usually / at most. */
+  payoutTypicalDays: 2,
   payoutDays: 5,
+  /** How long a registered lead stays credited to the partner, from the written registration date. */
+  leadProtectionMonths: 12,
+  /** Monthly volume that qualifies for a performance bonus (either one). Amount confirmed in writing. */
+  bonus: { revenueInr: 2_000_000, projects: 10 },
 } as const
 
 export function partnerSlab(netInr: number) {

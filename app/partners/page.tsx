@@ -18,16 +18,21 @@ export const metadata = pageMetadata({
 const DECK = '/partner-deck.html'
 
 const steps = [
-  { title: 'Register the lead', text: 'Share the client brief. We confirm in writing within 24 hours that the lead is yours.' },
+  { title: 'Register the lead', text: `Share the client brief. We confirm in writing within 24 hours — the lead is protected for you for ${pp.leadProtectionMonths / 12} year.` },
   { title: 'We scope & build', text: 'Our engineers fix price, milestones and your share upfront, then deliver.' },
-  { title: 'You get paid', text: `Your share for each milestone within ${pp.payoutDays} business days of the client’s payment.` },
+  { title: 'You get paid', text: `Your share for each milestone, usually within ${pp.payoutTypicalDays} business days of the client’s payment (${pp.payoutDays} at most).` },
 ]
 
 const faqs: Faq[] = [
   { q: 'How much do I earn?', a: `Up to ${pp.share.max}% of the net project value, depending on size: ${pp.slabs.map((s) => `${s.min}–${s.max}% for ${s.label.toLowerCase()}`).join(', ')}. Slabs are indicative — the exact share is agreed per project after scoping and confirmed in writing before work starts.` },
   { q: 'What is the net project value?', a: 'The project value minus pass-through costs the project needs and nobody controls: servers, verification/KYC APIs, telephony, AI model usage and third-party licences. On an ₹8 lakh project with ₹2 lakh of such costs, your share is calculated on ₹6 lakh. The partner deck walks through the full example.' },
-  { q: 'When and how do I get paid?', a: `Per milestone, within ${pp.payoutDays} business days of the client’s payment clearing, by bank transfer or UPI (India) or Wise/PayPal (international). One-time project share — no recurring commission.` },
-  { q: 'Is there any fee or target?', a: `No fees, no targets and no exclusivity. We never approach your client directly.` },
+  { q: 'When and how do I get paid?', a: `Per milestone, as the client pays — you don’t wait for the project to finish. Payouts usually go out within ${pp.payoutTypicalDays} business days of the client’s payment clearing, and at most ${pp.payoutDays}, by bank transfer or UPI (India) or international transfer. Each payout comes with a breakdown of the client payment, exclusions and your share.` },
+  { q: 'Can you show a milestone example?', a: 'A ₹10 lakh project (excluding GST) with ₹30,000 of agreed third-party costs has a net value of ₹9.7 lakh. At an agreed 20%, your total is ₹1,94,000. If the client pays 30% / 40% / 30%, you receive ₹58,200, ₹77,600 and ₹58,200 as each milestone is paid.' },
+  { q: 'How is my lead protected?', a: `Once we confirm your lead in writing, it is registered to you for ${pp.leadProtectionMonths / 12} year from that date. If the client signs any time in that year — even if they later contact us directly — you earn your share. If two partners introduce the same client, the first registration counts. Clients who were already in touch with us before your introduction aren’t eligible.` },
+  { q: 'Is there a limit, fee or target?', a: 'No referral limit, no fees, no targets and no exclusivity. We never approach your client directly. Focus on businesses with a genuine need and a realistic budget.' },
+  { q: 'Is there a bonus for high performers?', a: `Yes. Partners who bring more than ₹${pp.bonus.revenueInr / 100_000} lakh in project revenue, or close more than ${pp.bonus.projects} projects, in a month qualify for a performance bonus. The amount and how revenue and projects are counted are confirmed in writing. Strong partners can also move to a higher commission rate at the annual partnership review.` },
+  { q: 'What if a client pays late, or the project runs past 12 months?', a: 'Your commission continues on every eligible payment until the full project amount is received, however long that takes. New projects or separately quoted work from the same client have their commission agreed in writing. There is no recurring commission on ongoing services.' },
+  { q: 'What if a client stops paying?', a: 'You never cover a client’s unpaid invoice or a loss outside your control. Commission is paid only on amounts we actually receive and retain, and a client missing a later payment does not mean returning commission already earned on cleared payments. How a genuine refund or payment reversal is handled is set out in the partner agreement.' },
 ]
 
 export default function PartnersPage() {
@@ -40,7 +45,8 @@ export default function PartnersPage() {
         title={<>Bring a client.<br />Earn up to <span className="text-cobalt">{pp.share.max}%.</span></>}
         meta={[
           { k: 'Partner share', v: `Up to ${pp.share.max}% of net value` },
-          { k: 'Payout', v: `${pp.payoutDays} business days after client pays` },
+          { k: 'Payout', v: `Usually ${pp.payoutTypicalDays}, max ${pp.payoutDays} business days` },
+          { k: 'Lead protection', v: `${pp.leadProtectionMonths / 12} year from registration` },
           { k: 'To join', v: '₹0 · no targets' },
         ]}
         intro={
