@@ -380,6 +380,183 @@ export const posts: Post[] = [
       { q: 'How much does a voice agent cost to run?', a: 'Usually a few rupees per minute including telephony, speech and model usage. We give you a per-minute estimate during scoping.' },
     ],
   },
+  {
+    slug: 'app-development-cost-india',
+    title: 'How much does it cost to build a mobile app in India in 2026?',
+    excerpt:
+      'Real price ranges for Android and iOS apps, from a simple business app to a full marketplace — plus the running costs nobody quotes and how to avoid paying twice.',
+    category: 'Pricing',
+    date: '2026-10-29',
+    coverWord: '₹5–12L',
+    coverLine: 'What a startup or business app really costs to build in India',
+    tone: 'ink',
+    service: 'mobile-app-development',
+    keywords: [
+      'app development cost India',
+      'mobile app development cost',
+      'cost to build an app in India',
+      'Android app development cost',
+      'app banwane ka kharcha',
+    ],
+    body: [
+      {
+        t: 'p',
+        text: 'Short answer: a solid first version of a business or startup app — Android and iOS, with login, a backend, payments and an admin panel — usually costs **₹5–12 lakh** to build in India (roughly US$6k–15k) and takes **8–14 weeks**. A simple app with a handful of screens can cost less. A two-sided marketplace or an app with AI at its core costs more.',
+      },
+      {
+        t: 'p',
+        text: 'Quotes for the “same” app can range from ₹50,000 to ₹50 lakh, which tells you the quotes are not for the same app. This guide shows what goes into the number, so you can compare quotes properly — including ours.',
+      },
+      {
+        t: 'stats',
+        items: [
+          { v: '₹5–12L', l: 'typical first version, Android + iOS' },
+          { v: '8–14 wks', l: 'from design to store launch' },
+          { v: '15–20%', l: 'of build cost per year to run and maintain' },
+        ],
+      },
+      { t: 'h2', text: 'Typical price ranges' },
+      {
+        t: 'table',
+        head: ['Type of app', 'Typical build cost', 'Timeline'],
+        rows: [
+          ['Simple business app: catalogue, enquiry form, login, basic admin', '₹2–5 lakh', '4–8 weeks'],
+          ['Startup MVP: user accounts, core feature, payments, notifications, admin panel', '₹5–12 lakh', '8–12 weeks'],
+          ['Marketplace or booking app: two user types, chat, payments, ratings, tracking', '₹12–25 lakh', '12–20 weeks'],
+          ['AI-first or large platform: AI chat, voice or image features, many integrations', '₹20 lakh+', '16+ weeks'],
+        ],
+        caption: 'Indicative ranges for India-based engineering with one codebase for Android and iOS. Your exact price is fixed after scoping.',
+      },
+      {
+        t: 'callout',
+        tone: 'warn',
+        title: 'Why the ₹50,000 app quote is rarely ₹50,000',
+        text: 'Very low quotes usually mean a reskinned template, no backend you own, or a scope so vague that every real feature becomes a “change request”. Ask what is not included before you compare prices.',
+      },
+      { t: 'h2', text: 'What you are actually paying for' },
+      { t: 'p', text: 'An app is not just the screens you see. Every quote should cover these six pieces of work:' },
+      {
+        t: 'ol',
+        items: [
+          '**Product scoping** — turning your idea into a written feature list, user flows and a clear “version 1” so nothing important is guessed later.',
+          '**UI/UX design** — every screen, empty state and error, designed for real phones and real users, not just the happy path.',
+          '**The app itself** — one codebase for Android and iOS in React Native or Flutter, built so it feels native on both.',
+          '**Backend and admin panel** — the server, database, login, payments and the dashboard your team uses to manage users, orders and content.',
+          '**Testing** — on low-end Android phones and slow networks, not only on the developer’s new iPhone.',
+          '**Store launch** — Play Store and App Store listings, screenshots, review guidelines and fixes for rejections, published under your own developer accounts.',
+        ],
+      },
+      { t: 'h2', text: 'Six things that move the price' },
+      { t: 'h3', text: '1. Number of user types' },
+      {
+        t: 'p',
+        text: 'An app for one kind of user is one product. A marketplace — customers and service providers, or riders and drivers — is really two apps plus an admin panel, and the price reflects that.',
+      },
+      { t: 'h3', text: '2. Payments and money flows' },
+      {
+        t: 'p',
+        text: 'Taking a single payment through Razorpay is quick. Wallets, refunds, subscriptions, commissions and payouts to vendors need careful logic and testing, because mistakes cost real money.',
+      },
+      { t: 'h3', text: '3. Real-time features' },
+      { t: 'p', text: 'Chat, live location tracking and instant updates need extra infrastructure and are among the most expensive features to get right.' },
+      { t: 'h3', text: '4. Integrations' },
+      {
+        t: 'p',
+        text: 'Every connection to something outside the app — WhatsApp, a CRM, a logistics partner, Aadhaar or KYC checks, your existing ERP — adds build and testing time.',
+      },
+      { t: 'h3', text: '5. AI features' },
+      {
+        t: 'p',
+        text: 'A chatbot that answers from your documents, voice input in Hindi, or AI image generation can be the reason users choose your app. They also add a monthly usage cost, which a good team estimates before you build. We have shipped all three in apps like [NowoChat](/work/nowochat) and [Trendify](/work/trendify).',
+      },
+      { t: 'h3', text: '6. Who your users are' },
+      {
+        t: 'p',
+        text: 'Apps for first-time smartphone users need larger buttons, local languages, small download sizes and offline handling. For [Gigtap](/work/gigtap) we designed the job app for workers on low-end Android phones who prefer Hindi — that care is part of the cost, and it is why people actually use the app.',
+      },
+      { t: 'h2', text: 'The running costs nobody quotes' },
+      { t: 'p', text: 'The build is a one-time cost. After launch you will pay every year for:' },
+      {
+        t: 'ul',
+        items: [
+          '**Store accounts** — Google Play charges a one-time US$25 registration fee; Apple charges US$99 a year.',
+          '**Hosting and database** — from a few thousand rupees a month for a new app, growing with your users.',
+          '**Third-party services** — SMS OTPs, maps, push notifications, email and AI model usage, mostly charged per use.',
+          '**Maintenance** — Android and iOS update every year, and your app must keep up. Budget around **15–20% of the build cost per year** for updates, fixes and small improvements.',
+        ],
+      },
+      { t: 'h2', text: 'Freelancer, agency or in-house team?' },
+      {
+        t: 'table',
+        head: ['', 'Freelancer', 'Agency', 'In-house team'],
+        rows: [
+          ['Cost', 'Lowest', 'Medium', 'Highest (salaries before launch)'],
+          ['Design, backend and app together', 'Rarely one person', 'Yes', 'Only after you hire all roles'],
+          ['If someone leaves', 'Project stalls', 'Team covers', 'You rehire'],
+          ['Best for', 'Small, well-defined tasks', 'First version and fast launch', 'After product–market fit'],
+        ],
+      },
+      {
+        t: 'p',
+        text: 'Whoever you choose, insist on two things: the code lives in **your** repository from day one, and the app is published under **your** store accounts. Founders who skip this end up paying twice when they change vendors.',
+      },
+      { t: 'h2', text: 'How to keep the cost down' },
+      {
+        t: 'ul',
+        items: [
+          '**Launch one core feature first.** Write down the one thing users must be able to do, build that well, and add the rest after real feedback.',
+          '**Use one codebase.** React Native or Flutter gives you Android and iOS for a little more than the price of one.',
+          '**Start on Android if your users are in India.** Most Indian users are on Android; iOS can follow a few weeks later from the same code.',
+          '**Use a web admin panel**, not a second app, for your team.',
+          '**Ask for a fixed price** on a written scope, paid by milestone, so you only pay for work you can see.',
+        ],
+      },
+      { t: 'h2', text: 'Questions to ask before you sign' },
+      {
+        t: 'ol',
+        items: [
+          'Can I see two apps you have built that are live on the store today?',
+          'Is the price fixed for this scope, and what counts as a change request?',
+          'Who owns the code, the designs and the store accounts?',
+          'What happens after launch — who fixes bugs, and for how long?',
+          'What will it cost per month to run at 1,000 and at 10,000 users?',
+        ],
+      },
+      {
+        t: 'p',
+        text: 'If a team cannot answer these clearly, the cheapest quote will not stay cheap. See the [apps we have shipped](/work) and [how we build mobile apps](/services/mobile-app-development).',
+      },
+      {
+        t: 'cta',
+        title: 'Get a fixed quote for your app',
+        text: '30 minutes with an engineer. Share your idea and leave with a version-1 feature list, a price range and a timeline.',
+        href: '/contact',
+        label: 'Book a free scoping call',
+      },
+    ],
+    faqs: [
+      {
+        q: 'How much does it cost to make an app in India?',
+        a: 'A simple business app usually costs ₹2–5 lakh. A startup MVP with login, payments and an admin panel usually costs ₹5–12 lakh, and marketplace or booking apps ₹12–25 lakh. The exact price depends on features, integrations and design.',
+      },
+      {
+        q: 'How long does it take to build an app?',
+        a: 'A simple app takes 4–8 weeks. A full first version for Android and iOS usually takes 8–14 weeks from design to store launch.',
+      },
+      {
+        q: 'Is it cheaper to build only an Android app?',
+        a: 'Slightly. With React Native or Flutter, one codebase covers both platforms, so adding iOS costs much less than building a second app. Many Indian startups launch on Android first and add iOS from the same code.',
+      },
+      {
+        q: 'What are the monthly costs after the app is live?',
+        a: 'Hosting, SMS and other services usually start at a few thousand rupees a month and grow with users. Plan around 15–20% of the build cost per year for maintenance and updates.',
+      },
+      {
+        q: 'Who owns the app after it is built?',
+        a: 'You should. With Trident Square the code lives in your repository from day one, the app is published under your store accounts, and full IP transfers to you on payment.',
+      },
+    ],
+  },
 ]
 
 export function getPost(slug: string) {
