@@ -1,3 +1,4 @@
+import type { Art } from '@/components/blog/CoverArt'
 import type { Faq } from './services'
 
 /**
@@ -32,7 +33,7 @@ export type Post = {
   /** Short line set beside the big word, so the cover reads on its own. */
   coverLine: string
   /** Optional topic illustration on the cover. */
-  art?: 'wave'
+  art?: Art
   tone: 'cobalt' | 'ink' | 'signal'
   /** Service the post leads into. */
   service: string
@@ -53,6 +54,7 @@ export const posts: Post[] = [
     date: '2026-10-25',
     coverWord: '₹3–6L',
     coverLine: 'What a business AI chatbot really costs to build in India',
+    art: 'chatbot',
     tone: 'cobalt',
     service: 'ai-chatbot-development',
     keywords: ['AI chatbot cost India', 'chatbot development cost', 'WhatsApp chatbot price', 'AI chatbot for business India'],
@@ -176,6 +178,7 @@ export const posts: Post[] = [
     date: '2026-10-25',
     coverWord: 'WA',
     coverLine: 'Automate the WhatsApp chats that eat your team’s day',
+    art: 'whatsapp',
     tone: 'signal',
     service: 'business-process-automation',
     keywords: ['WhatsApp automation for business', 'WhatsApp Business API India', 'WhatsApp chatbot for SME', 'WhatsApp CRM integration'],
@@ -389,6 +392,7 @@ export const posts: Post[] = [
     date: '2026-10-29',
     coverWord: '₹5–12L',
     coverLine: 'What a startup or business app really costs to build in India',
+    art: 'app',
     tone: 'ink',
     service: 'mobile-app-development',
     keywords: [

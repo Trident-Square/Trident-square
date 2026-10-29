@@ -285,3 +285,8 @@ details > summary::-webkit-details-marker {
   from { opacity: 0; transform: translate(-18px, -36px) rotate(-3deg); }
   to { opacity: 1; transform: none; }
 }
+
+@keyframes cover-pop {
+  from { opacity: 0; transform: translateY(0.8em) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
