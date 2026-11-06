@@ -39,12 +39,17 @@ export const site = {
 export const partnerProgram = {
   /**
    * Partner share by net project value (project value minus pass-through costs).
-   * Indicative: the exact share is agreed per project after scoping.
+   * One fixed rate per step; a project's whole net value takes the rate of the step it falls in
+   * (upToInr is inclusive). Every rate sits inside the ranges in the signed partner agreements
+   * (10–15% up to ₹1L, 20–25% for ₹1–15L, 30–35% above ₹15L), so site and agreements agree.
    */
   slabs: [
-    { upToInr: 100_000, min: 10, max: 15, label: 'Up to ₹1 lakh', fit: 'Small builds, sites, single automations' },
-    { upToInr: 1_500_000, min: 20, max: 25, label: '₹1–15 lakh', fit: 'AI agents, chatbots, MVPs, apps' },
-    { upToInr: Infinity, min: 30, max: 35, label: '₹15 lakh+', fit: 'Platforms and large builds' },
+    { upToInr: 50_000, rate: 10, label: 'Up to ₹50,000', fit: 'Single automations, small sites' },
+    { upToInr: 100_000, rate: 15, label: '₹50,000 – ₹1 lakh', fit: 'Websites, small bots and builds' },
+    { upToInr: 500_000, rate: 20, label: '₹1 – 5 lakh', fit: 'AI agents, chatbots, automations' },
+    { upToInr: 1_500_000, rate: 25, label: '₹5 – 15 lakh', fit: 'MVPs, apps, custom software' },
+    { upToInr: 3_000_000, rate: 30, label: '₹15 – 30 lakh', fit: 'Platforms, multi-system builds' },
+    { upToInr: Infinity, rate: 35, label: 'Above ₹30 lakh', fit: 'Large platforms and programmes' },
   ],
   share: { max: 35 },
   /** Business days after the client's payment clears that the partner is paid: usually / at most. */

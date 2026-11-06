@@ -190,21 +190,26 @@
   @media print, (min-width: 900px) { .strip { grid-template-columns: repeat(4, 1fr); } }
 
   /* ---------- 06 share ---------- */
-  .slabs { display: grid; gap: 16px; margin-top: 52px; align-items: end; }
-  .slab { border: 1px solid rgba(255, 255, 255, .32); padding: 24px 26px 26px; background: rgba(255, 255, 255, .05); transition: transform .4s var(--ease); }
+  /* Six fixed steps drawn as a staircase: each step taller than the last. */
+  .slabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 52px; align-items: end; }
+  .slab { border: 1px solid rgba(255, 255, 255, .32); padding: 18px 18px 20px; background: rgba(255, 255, 255, .05); transition: transform .4s var(--ease); display: flex; flex-direction: column; justify-content: flex-end; }
   .slab:hover { transform: translateY(-6px); }
-  .slab:nth-child(3) { background: #fff; color: var(--ink); border-color: #fff; }
-  .slab .range { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; opacity: .75; }
-  .slab strong { display: block; font-size: clamp(4rem, 8vw, 6.4rem); margin-top: 18px; white-space: nowrap; }
-  .slab:nth-child(3) strong { color: var(--cobalt); }
-  .slab p { font-size: 15px; margin-top: 10px; opacity: .8; }
+  .slab:last-child { background: #fff; color: var(--ink); border-color: #fff; }
+  .slab .range { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; opacity: .8; }
+  .slab strong { display: block; font-size: clamp(2.8rem, 4.4vw, 4rem); margin-top: 12px; white-space: nowrap; }
+  .slab:last-child strong { color: var(--cobalt); }
+  .slab p { font-size: 13.5px; margin-top: 8px; opacity: .8; }
   .fine { margin-top: 40px; display: flex; gap: 14px; font-size: 16px; max-width: 72ch; }
   .fine .bar { width: 3px; background: #fff; flex: none; }
+  @media (min-width: 600px) { .slabs { grid-template-columns: repeat(3, 1fr); } }
   @media print, (min-width: 900px) {
-    .slabs { grid-template-columns: repeat(3, 1fr); }
-    .slab:nth-child(1) { min-height: 250px; }
-    .slab:nth-child(2) { min-height: 300px; }
-    .slab:nth-child(3) { min-height: 350px; }
+    .slabs { grid-template-columns: repeat(6, 1fr); }
+    .slab:nth-child(1) { min-height: 190px; }
+    .slab:nth-child(2) { min-height: 225px; }
+    .slab:nth-child(3) { min-height: 260px; }
+    .slab:nth-child(4) { min-height: 295px; }
+    .slab:nth-child(5) { min-height: 330px; }
+    .slab:nth-child(6) { min-height: 365px; }
   }
 
   /* ---------- 07 worked example ---------- */
@@ -429,11 +434,14 @@
     <p class="eyebrow rv"><b>05</b> Your share</p>
     <h2 class="display h2 rv d1">Bigger projects,<br />bigger share.</h2>
     <div class="slabs">
-      <div class="slab rv d1"><p class="range">Up to ~₹1 lakh</p><strong class="display">10–15%</strong><p>Small builds, sites, single automations</p></div>
-      <div class="slab rv d2"><p class="range">₹1 – 15 lakh</p><strong class="display">20–25%</strong><p>AI agents, chatbots, MVPs, apps</p></div>
-      <div class="slab rv d3"><p class="range">₹15 lakh +</p><strong class="display">30–35%</strong><p>Platforms and large builds</p></div>
+      <div class="slab rv d1"><p class="range">Up to ₹50,000</p><strong class="display">10%</strong><p>Single automations, small sites</p></div>
+      <div class="slab rv d1"><p class="range">₹50,000 – ₹1 lakh</p><strong class="display">15%</strong><p>Websites, small bots and builds</p></div>
+      <div class="slab rv d2"><p class="range">₹1 – 5 lakh</p><strong class="display">20%</strong><p>AI agents, chatbots, automations</p></div>
+      <div class="slab rv d2"><p class="range">₹5 – 15 lakh</p><strong class="display">25%</strong><p>MVPs, apps, custom software</p></div>
+      <div class="slab rv d3"><p class="range">₹15 – 30 lakh</p><strong class="display">30%</strong><p>Platforms, multi-system builds</p></div>
+      <div class="slab rv d3"><p class="range">Above ₹30 lakh</p><strong class="display">35%</strong><p>Large platforms and programmes</p></div>
     </div>
-    <div class="fine rv"><span class="bar"></span><p>Your share is calculated on the <b>net project value</b>, after third-party costs nobody controls. Slabs are indicative; the exact share is agreed per project after scoping and confirmed in writing before work starts.</p></div>
+    <div class="fine rv"><span class="bar"></span><p>Your share is calculated on the <b>net project value</b>, after third-party costs nobody controls. The whole net value takes the rate of the step it falls in, and your rate is confirmed in writing before work starts.</p></div>
   </div>
 </section>
 
@@ -453,15 +461,14 @@
         <div class="pass-list">
           <span>Servers &amp; hosting</span><span>KYC / verification APIs</span><span>Telephony &amp; SMS</span><span>AI model usage</span><span>Licences &amp; store fees</span>
         </div>
-        <div class="result"><span>Your share at 20%</span><strong class="display">₹1,20,000</strong></div>
+        <div class="result"><span>Your share at 25%</span><strong class="display">₹1,50,000</strong></div>
       </div>
       <div class="rv d3">
         <div class="calc">
           <div class="row"><span>Project value</span><span>₹8,00,000</span></div>
           <div class="row minus"><span>− Pass-through costs</span><span>₹2,00,000</span></div>
           <div class="row total"><span>Net project value</span><span>₹6,00,000</span></div>
-          <div class="row share"><span>Share at 20%</span><span>₹1,20,000</span></div>
-          <div class="row share"><span>Share at 25%</span><span>₹1,50,000</span></div>
+          <div class="row share"><span>Share at 25% (₹5 – 15 lakh step)</span><span>₹1,50,000</span></div>
         </div>
         <p class="calc-note">Pass-through costs are fixed costs the project needs and nobody controls: servers, verification, telephony, third-party APIs. They are listed in the quote with actual bills, so you always see what was deducted. Illustrative figures; GST extra.</p>
       </div>
