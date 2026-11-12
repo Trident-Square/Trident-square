@@ -18,9 +18,51 @@ export type Project = {
   demo?: string
   orientation: 'landscape' | 'portrait'
   links?: { label: string; url: string }[]
+  /** Live products we can show in a frame on the case-study page */
+  live?: { site?: string; app?: string }
+  /** Screenshot of the live site, shown until the visitor loads the frame */
+  livePoster?: string
+  /** Project-specific showcase section rendered on the case-study page */
+  showcase?: 'richlook'
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'rich-look-laminates',
+    name: 'Rich Look Laminates',
+    client: 'Rich Look Laminates',
+    industry: 'Building materials · B2B',
+    services: ['custom-software-development', 'business-process-automation', 'web-development', 'mobile-app-development', 'ui-ux-design'],
+    year: '2026',
+    summary:
+      'Dealer platform for a laminates brand — website, partner app for dealers and staff, admin panel and WhatsApp automation — fixed, completed and launched.',
+    challenge:
+      'Rich Look’s dealer platform was already built, but it wasn’t working for the people who used it every day. Some dealers logged in and saw no data, staff couldn’t sign in with their own numbers, people were logged out in the middle of an order, screens were slow, and order alerts never reached WhatsApp.',
+    solution: [
+      'Took over the website, the Partner App and the Admin Panel, diagnosed every issue with real dealer, staff and admin logins, and fixed it all in a preview copy before anything went live.',
+      'Dealer accounts that simply work: a set-new-password flow, WhatsApp OTP reset, and every dealer sees only their own stock, orders, ledger and invoices.',
+      'WhatsApp automation on the Meta Cloud API: a PDF order slip to the party and the admin team on every order, plus OTPs, stock-available and cancellation messages.',
+      'Accounts inside the app: ledgers imported from Tally for two companies, invoices and credit notes read straight from PDF and shareable on WhatsApp.',
+      'Stock reserved first-come, first-served from the live stock sheet, with the party told the moment their stock arrives.',
+      'Admin tools to delete a single invoice, schedule in-app pop-ups and manage WhatsApp numbers — plus a new cream-and-brown app theme, faster pages and Google indexing for all 110 design pages.',
+    ],
+    results: [
+      { value: '42', label: 'items shipped — 18 quoted, 12 extra, go-live fixes' },
+      { value: '0.66 s', label: 'Order Status load, down from 0.95 s' },
+      { value: '110', label: 'design pages now in Google’s sitemap' },
+    ],
+    stack: ['React', 'React Router', 'Node.js', 'PocketBase', 'WhatsApp Cloud API', 'Google Sheets API', 'PDF parsing', 'Hostinger'],
+    poster: '/work/richlook.jpg',
+    loop: '/work/richlook-loop.mp4',
+    orientation: 'landscape',
+    links: [
+      { label: 'richlooklaminates.com', url: 'https://richlooklaminates.com/' },
+      { label: 'Partner portal', url: 'https://partner.richlooklaminates.com/' },
+    ],
+    live: { site: 'https://richlooklaminates.com/', app: 'https://partner.richlooklaminates.com/' },
+    livePoster: '/work/richlook.jpg',
+    showcase: 'richlook',
+  },
   {
     slug: 'gigtap',
     name: 'Gigtap',
@@ -51,6 +93,8 @@ export const projects: Project[] = [
       { label: 'gigtap.in', url: 'https://gigtap.in/' },
       { label: 'Play Store', url: 'https://play.google.com/store/search?q=gigtap&c=apps&hl=en_IN' },
     ],
+    live: { site: 'https://gigtap.in/' },
+    livePoster: '/work/gigtap-live.jpg',
   },
   {
     slug: 'instabus',
@@ -79,6 +123,8 @@ export const projects: Project[] = [
     demo: '/project/Instabus vdo.mp4',
     orientation: 'landscape',
     links: [{ label: 'instabus.co.in', url: 'https://instabus.co.in/' }],
+    live: { site: 'https://instabus.co.in/' },
+    livePoster: '/work/instabus-live.jpg',
   },
   {
     slug: 'gamecam',
@@ -105,7 +151,6 @@ export const projects: Project[] = [
     loop: '/work/gamecam-loop.mp4',
     demo: '/project/padel_ai.mp4',
     orientation: 'landscape',
-    links: [{ label: 'Live preview', url: 'https://gametraq-app.lovable.app' }],
   },
   {
     slug: 'nowochat',

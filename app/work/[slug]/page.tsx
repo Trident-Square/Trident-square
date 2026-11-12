@@ -5,6 +5,8 @@ import Arrow from '@/components/site/Arrow'
 import CtaBand from '@/components/site/CtaBand'
 import JsonLd from '@/components/site/JsonLd'
 import MediaReveal from '@/components/site/MediaReveal'
+import LiveFrame from '@/components/site/LiveFrame'
+import RichLookShowcase from '@/components/site/RichLookShowcase'
 import PageHero from '@/components/site/PageHero'
 import { breadcrumbs, pageMetadata, projectSchema } from '@/lib/seo'
 import { getService } from '@/lib/services'
@@ -119,6 +121,22 @@ export default async function ProjectPage({ params }: Props) {
           </details>
         ) : null}
       </section>
+
+      {p.showcase === 'richlook' ? (
+        <div className="mt-24 sm:mt-32">
+          <RichLookShowcase project={p} />
+        </div>
+      ) : null}
+
+      {!p.showcase && p.live?.site ? (
+        <section className="container mt-24 sm:mt-32">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted"><span className="text-cobalt">Live / </span>Use it right here</p>
+          <h2 className="h2 mt-5 max-w-[16ch]">Click around the real product.</h2>
+          <div className="mt-10">
+            <LiveFrame url={p.live.site} poster={p.livePoster ?? p.poster} label={p.name} />
+          </div>
+        </section>
+      ) : null}
 
       <section className="container py-24 sm:py-28">
         <div className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
