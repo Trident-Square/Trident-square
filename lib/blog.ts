@@ -17,7 +17,7 @@ export type Block =
   | { t: 'stats'; items: { v: string; l: string }[] }
   | { t: 'cta'; title: string; text: string; href: string; label: string }
 
-export type Category = 'Pricing' | 'Automation' | 'Voice AI'
+export type Category = 'Pricing' | 'Automation' | 'AI agents' | 'Voice AI' | 'Case notes'
 
 export type Post = {
   slug: string
@@ -38,13 +38,193 @@ export type Post = {
   /** Service the post leads into. */
   service: string
   keywords: string[]
+  /** Three to five one-line answers shown at the top of the article. */
+  takeaways?: string[]
   body: Block[]
   faqs?: Faq[]
 }
 
-export const categories: Category[] = ['Pricing', 'Automation', 'Voice AI']
+export const categories: Category[] = ['Pricing', 'Automation', 'AI agents', 'Voice AI', 'Case notes']
+
+/** Every article is written or reviewed by the founder; shown in the byline and in the article schema. */
+export const author = {
+  name: 'Abhishek Pratap',
+  role: 'Founder, Trident Square',
+  bio: 'Leads engineering on Trident Square’s automation, AI and software projects for Indian businesses.',
+}
 
 export const posts: Post[] = [
+  {
+    slug: 'whatsapp-business-api-pricing-india-2026',
+    title: 'WhatsApp Business API pricing in India: what changed on 1 October 2026',
+    excerpt:
+      'Service replies now cost money, utility messages in the 24-hour window are charged, and Indian accounts must move to INR billing by 31 December.',
+    category: 'Pricing',
+    date: '2026-11-12',
+    coverWord: '1 Oct',
+    coverLine: 'The new WhatsApp API rules every Indian business should know',
+    art: 'whatsapp',
+    tone: 'ink',
+    service: 'business-process-automation',
+    keywords: [
+      'WhatsApp Business API pricing India',
+      'WhatsApp API price per message India 2026',
+      'WhatsApp service message charges',
+      'WhatsApp INR billing deadline',
+      'WhatsApp utility message cost',
+      'WhatsApp Business API cost',
+    ],
+    takeaways: [
+      'Since **1 October 2026**, service replies are charged after the first **1,000 free per business number per month**.',
+      'Utility templates sent inside the 24-hour customer service window are **no longer free**.',
+      'Eligible Indian accounts must move to **INR billing by 31 December 2026** — from 1 January 2027 Meta stops delivering messages from non-INR accounts.',
+      'Marketing messages are still the expensive category — roughly **7–8×** a utility message in India.',
+      'Most bills can be cut by fixing template categories, replying inside the free window and using click-to-WhatsApp ads.',
+    ],
+    body: [
+      {
+        t: 'p',
+        text: 'If your business sends order updates, OTPs, invoices or offers on WhatsApp through the official Business API, your bill changed in October. Meta now charges for messages that used to be free, and Indian accounts face a hard billing deadline at the end of the year. This guide explains exactly what changed, what each message costs, and what to do before 31 December.',
+      },
+      {
+        t: 'p',
+        text: 'We run the WhatsApp Cloud API in production for clients — order slips, login OTPs, stock alerts and cancellations for a [dealer platform we look after](/work/rich-look-laminates) — so this is written from the bill side, not the brochure side.',
+      },
+      {
+        t: 'stats',
+        items: [
+          { v: '1,000', l: 'free service messages per number, per month' },
+          { v: '31 Dec', l: 'deadline to switch to INR billing' },
+          { v: '≈ ₹0.86', l: 'per marketing message, before GST' },
+        ],
+      },
+      { t: 'h2', text: 'What changed on 1 October 2026' },
+      { t: 'p', text: 'Meta made two pricing changes that apply to every market, including India:' },
+      {
+        t: 'ol',
+        items: [
+          '**Service messages are now charged.** These are your free-form replies when a customer writes to you first. They had been free since November 2024. Now each business phone number gets **1,000 free service messages a month**; from the 1,001st, Meta charges. The free allowance resets monthly and does not roll over.',
+          '**Utility messages inside the customer service window are now charged.** If a customer messages you and you reply with a utility template — an order confirmation, a delivery update — that used to be free inside the 24-hour window. From 1 October it is billed like any other utility message.',
+        ],
+      },
+      {
+        t: 'callout',
+        tone: 'warn',
+        title: 'No payment method, no replies',
+        text: 'Meta warned that businesses without a payment method on file could see service messages stop once the 1,000 free messages run out. Open Billing Hub in Meta Business Manager and check a card or credit line is attached to your WhatsApp account.',
+      },
+      { t: 'h2', text: 'The 31 December INR billing deadline' },
+      {
+        t: 'p',
+        text: 'Meta launched rupee billing for eligible Indian businesses on 1 January 2026. Those accounts must move to INR by **31 December 2026**. From **1 January 2027**, Meta will no longer deliver messages from the non-INR accounts of eligible customers. If your WhatsApp account is still billed in US dollars — common when it was set up through an overseas provider — this is the most urgent item on the list. Ask your provider (BSP) or check the currency in Billing Hub today.',
+      },
+      { t: 'h2', text: 'What each message costs in India' },
+      {
+        t: 'p',
+        text: 'Meta charges per delivered template message, by category. Indian rates are among the lowest in the world for utility and authentication, but marketing is several times more expensive — and India’s marketing rate went up on 1 January 2026.',
+      },
+      {
+        t: 'table',
+        head: ['Category', 'What it is for', 'Approx. Meta rate (India)'],
+        rows: [
+          ['Marketing', 'Offers, launches, festive greetings, re-engagement', '≈ ₹0.86 per message'],
+          ['Utility', 'Order and delivery updates, invoices, account alerts', '≈ ₹0.12 per message'],
+          ['Authentication', 'One-time passwords and login codes', '≈ ₹0.12 per message'],
+          ['Service', 'Free-form replies when the customer wrote first', 'First 1,000/month free, then ≈ ₹0.12'],
+        ],
+        caption: 'Approximate Meta list rates in INR as of November 2026, before 18% GST and any provider markup. Rates change — always confirm on Meta’s official rate card before budgeting.',
+      },
+      {
+        t: 'p',
+        text: 'On top of Meta’s rate you pay **18% GST**, and most providers (BSPs) add their own markup or a monthly platform fee. That is why quoted prices of ₹1 or more per marketing message are common even though Meta’s own rate is lower. Higher utility and authentication volumes also unlock lower tiered rates, tracked per month and per category.',
+      },
+      { t: 'h2', text: 'A worked example: a distributor with 300 orders a day' },
+      {
+        t: 'p',
+        text: 'Say you run a distribution business. Every month you send about **9,000 order confirmations** (utility), **2,000 OTPs** for your dealer app (authentication), reply to **3,000 customer chats** (service) and send **one offer to 4,000 dealers** (marketing).',
+      },
+      {
+        t: 'table',
+        head: ['Messages', 'Volume', 'Approx. cost'],
+        rows: [
+          ['Order confirmations (utility)', '9,000', '≈ ₹1,035'],
+          ['Login OTPs (authentication)', '2,000', '≈ ₹230'],
+          ['Customer replies (service)', '3,000 (1,000 free)', '≈ ₹230'],
+          ['One offer broadcast (marketing)', '4,000', '≈ ₹3,450'],
+          ['Total before GST', '', '≈ ₹4,945'],
+          ['Total with 18% GST', '', '≈ ₹5,835 a month'],
+        ],
+        caption: 'Illustrative, using the approximate rates above and no provider markup.',
+      },
+      {
+        t: 'p',
+        text: 'Two things jump out. First, the single marketing broadcast costs more than nine thousand order confirmations. Second, the October change added only a few hundred rupees here — but for a support-heavy business answering 20,000 chats a month, service messages alone now cost around ₹2,200 plus GST.',
+      },
+      { t: 'h2', text: 'Seven ways to keep the bill down' },
+      {
+        t: 'ol',
+        items: [
+          '**Get template categories right.** Meta re-classifies templates that look promotional as marketing — and bills them at the marketing rate. Keep utility templates strictly about the transaction: no discounts, no “check out our new range”.',
+          '**Reply inside the 24-hour window.** Free-form replies count against your 1,000 free service messages; templates sent outside the window always cost money.',
+          '**Use click-to-WhatsApp ads for acquisition.** Conversations that start from a click-to-WhatsApp ad or a Facebook Page call-to-action still open a free entry-point window.',
+          '**Combine updates.** One “order packed and dispatched” message is cheaper than two.',
+          '**Send OTPs only when needed.** Remember the device for a while instead of asking for an OTP at every login.',
+          '**Target marketing.** Ten well-chosen dealers who buy beat a broadcast to everyone who ever messaged you — and keeps your number’s quality rating healthy.',
+          '**Check your provider’s markup.** If you pay far more than Meta’s rate plus GST, compare providers or go direct on the Cloud API.',
+        ],
+      },
+      {
+        t: 'callout',
+        tone: 'tip',
+        title: 'Check your number’s health too',
+        text: 'Price is not the only risk. If customers block or report your messages, Meta lowers your quality rating and can restrict how many people you can message. Opt-ins, useful messages and an easy “stop” option protect both your bill and your number.',
+      },
+      { t: 'h2', text: 'Your checklist before 31 December' },
+      {
+        t: 'ul',
+        items: [
+          'Open **Billing Hub** and confirm the account currency is **INR**. If not, start the switch now.',
+          'Confirm a **payment method** is attached so replies never stop.',
+          'List every template and its **category**; rewrite any utility template that reads like an offer.',
+          'Look at last month’s volumes per category and estimate the new bill with the table above.',
+          'Make sure your systems — CRM, ERP, Tally, order app — send updates through **approved templates**, not unofficial tools that risk a ban.',
+        ],
+      },
+      {
+        t: 'p',
+        text: 'If you are new to the platform, start with our guide to [WhatsApp automation for business](/blog/whatsapp-automation-for-business), which explains the Business app versus the Business Platform and what you can automate.',
+      },
+      {
+        t: 'cta',
+        title: 'Not sure what your WhatsApp bill should be?',
+        text: 'Send us last month’s message volumes. We’ll tell you what you should be paying, which templates are mis-categorised, and how to automate the rest — free.',
+        href: '/contact',
+        label: 'Get a free WhatsApp audit',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is the WhatsApp Business API free in India?',
+        a: 'No. Meta charges per delivered template message by category — marketing, utility and authentication. Since 1 October 2026, service replies are also charged after the first 1,000 free per business phone number each month. The WhatsApp Business app (the free green app) is separate and has no per-message fees.',
+      },
+      {
+        q: 'How much does one WhatsApp marketing message cost in India?',
+        a: 'Meta’s list rate for India is roughly ₹0.86 per marketing message as of November 2026, before 18% GST and any provider markup. Utility, authentication and service messages cost roughly ₹0.12 each. Always confirm current rates on Meta’s official rate card.',
+      },
+      {
+        q: 'What happens if I do not switch to INR billing by 31 December 2026?',
+        a: 'According to Meta, from 1 January 2027 it will stop delivering messages from the non-INR accounts of eligible Indian customers. Check the currency in Billing Hub or ask your WhatsApp provider to move you to INR before the deadline.',
+      },
+      {
+        q: 'Are messages inside the 24-hour window still free?',
+        a: 'Partly. Free-form service replies use your 1,000 free service messages each month, then they are charged. Utility templates sent inside the window are charged since 1 October 2026. Conversations that start from a click-to-WhatsApp ad still get a free entry-point window.',
+      },
+      {
+        q: 'Can I send Tally invoices or order updates automatically on WhatsApp?',
+        a: 'Yes, through the official Business API with approved utility templates — for example an order slip PDF to the party the moment an order is placed. These are billed at the utility rate, which is the cheapest category for business-initiated messages.',
+      },
+    ],
+  },
   {
     slug: 'ai-chatbot-cost-india',
     title: 'How much does an AI chatbot cost in India in 2026?',

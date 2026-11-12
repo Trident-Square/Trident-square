@@ -2,7 +2,7 @@ import BlogIndex from '@/components/blog/BlogIndex'
 import CtaBand from '@/components/site/CtaBand'
 import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
-import { categories, sortedPosts } from '@/lib/blog'
+import { author, categories, sortedPosts } from '@/lib/blog'
 import { breadcrumbs, pageMetadata } from '@/lib/seo'
 import { absoluteUrl, site } from '@/lib/site'
 
@@ -39,7 +39,7 @@ export default function BlogPage() {
         crumbs={[{ label: 'Blog' }]}
         title={<>Field notes<br />from the <span className="text-cobalt">build.</span></>}
         meta={[
-          { k: 'Written by', v: 'Engineers, not marketers' },
+          { k: 'Written by', v: `${author.name} & the engineering team` },
           { k: 'Topics', v: 'AI · Automation · Pricing' },
           { k: 'Articles', v: posts.length },
         ]}

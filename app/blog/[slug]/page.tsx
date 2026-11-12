@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import CopyLink from '@/components/blog/CopyLink'
+import Inline from '@/components/blog/Inline'
 import PostBody from '@/components/blog/PostBody'
 import PostCard from '@/components/blog/PostCard'
 import PostCover from '@/components/blog/PostCover'
@@ -11,7 +13,7 @@ import Arrow from '@/components/site/Arrow'
 import CtaBand from '@/components/site/CtaBand'
 import FaqSection from '@/components/site/FaqSection'
 import JsonLd from '@/components/site/JsonLd'
-import { formatDate, getPost, headings, posts, readingMinutes, sortedPosts } from '@/lib/blog'
+import { author, formatDate, getPost, headings, posts, readingMinutes, sortedPosts } from '@/lib/blog'
 import { blogPostingSchema, breadcrumbs, faqSchema, pageMetadata } from '@/lib/seo'
 import { getService } from '@/lib/services'
 import { absoluteUrl } from '@/lib/site'
@@ -101,7 +103,10 @@ export default async function BlogPostPage({ params }: Props) {
               <Image src="/trident-remove-bg.png" alt="" width={22} height={24} className="h-6 w-auto" />
             </span>
             <div>
-              <p className="text-[15px] font-semibold">Trident Square Engineering</p>
+              <p className="text-[15px] font-semibold">
+                <Link href="/about" className="hover:text-cobalt">{author.name}</Link>
+                <span className="font-normal text-muted"> · {author.role}</span>
+              </p>
               <p className="text-[13.5px] text-muted">
                 {formatDate(p.date)}
                 {p.updated ? ` · Updated ${formatDate(p.updated)}` : ''} · {readingMinutes(p)} min read
@@ -115,6 +120,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {s.label}
               </a>
             ))}
+            <CopyLink url={url} />
           </div>
         </div>
 
@@ -141,6 +147,19 @@ export default async function BlogPostPage({ params }: Props) {
           </aside>
 
           <article id="post-body" className="min-w-0 lg:col-span-8 lg:col-start-5 xl:col-span-7 xl:col-start-5">
+            {p.takeaways?.length ? (
+              <aside aria-label="Key takeaways" className="mb-12 border border-ink bg-white p-6 sm:p-8">
+                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-cobalt">Key takeaways</p>
+                <ul className="mt-4 space-y-3">
+                  {p.takeaways.map((t) => (
+                    <li key={t} className="flex gap-3 text-[16.5px] leading-relaxed">
+                      <span aria-hidden className="mt-[9px] h-1.5 w-1.5 shrink-0 bg-cobalt" />
+                      <span><Inline text={t} /></span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            ) : null}
             <PostBody blocks={p.body} />
 
             <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-ink pt-6">

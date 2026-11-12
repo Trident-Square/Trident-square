@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { absoluteUrl, partnerProgram, site } from './site'
 import { services, type Faq, type Service } from './services'
-import type { Post } from './blog'
+import { author, type Post } from './blog'
 import type { Project } from './work'
 
 const ORG_ID = `${site.url}/#organization`
@@ -226,7 +226,7 @@ export function blogPostingSchema(p: Post) {
     articleSection: p.category,
     keywords: p.keywords.join(', '),
     inLanguage: 'en-IN',
-    author: { '@id': ORG_ID },
+    author: { '@type': 'Person', name: author.name, jobTitle: author.role, url: absoluteUrl('/about'), worksFor: { '@id': ORG_ID } },
     publisher: { '@id': ORG_ID },
   }
 }
