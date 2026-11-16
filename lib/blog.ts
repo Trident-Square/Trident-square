@@ -55,6 +55,198 @@ export const author = {
 
 export const posts: Post[] = [
   {
+    slug: 'ai-agents-for-business-india',
+    title: 'AI agents for business in India: cost, examples and why 40% fail (2026)',
+    excerpt:
+      'What an AI agent really is, how it differs from a chatbot, real examples for Indian businesses, what it costs, and how to avoid the projects that fail.',
+    category: 'AI agents',
+    date: '2026-11-16',
+    coverWord: 'AGENTS',
+    coverLine: 'What AI agents really do for an Indian business — and what they cost',
+    art: 'chatbot',
+    tone: 'signal',
+    service: 'ai-agent-development',
+    keywords: [
+      'AI agents for business',
+      'AI agent development cost India',
+      'AI agent vs chatbot',
+      'agentic AI for small business',
+      'what is an AI agent',
+      'AI agent examples for business',
+      'AI automation India',
+    ],
+    takeaways: [
+      'An **AI agent** reads a situation, decides the next step and **takes the action** in your tools — a chatbot only talks, and plain automation only follows fixed rules.',
+      'The best first projects for Indian businesses are narrow and repetitive: **WhatsApp lead replies, order-to-invoice, reading PDFs and follow-ups**.',
+      'A focused production agent usually costs **₹3–6 lakh** to build, plus a small running cost per task that you should know before launch.',
+      'Gartner expects **over 40% of agentic AI projects to be cancelled by end-2027** — mostly for unclear value and runaway costs, not because the AI is weak.',
+      'Use AI only where judgement is needed; most of the savings usually come from **plain automation around it**.',
+    ],
+    body: [
+      {
+        t: 'p',
+        text: '“AI agent” is the most used — and most misused — phrase in software this year. Every tool now calls itself one. This guide cuts through it: what an AI agent really is, where it pays off for an Indian business, what it costs, and the mistakes that sink most projects.',
+      },
+      {
+        t: 'p',
+        text: 'It is written from the build side. We design and run agents and automations for Indian companies — including a [dealer platform for a laminates brand](/work/rich-look-laminates) where orders, PDF order slips, stock and WhatsApp updates run without anyone touching them.',
+      },
+      {
+        t: 'stats',
+        items: [
+          { v: '40%+', l: 'agentic AI projects Gartner expects to be cancelled by 2027' },
+          { v: '₹3–6L', l: 'typical first production agent' },
+          { v: '3–5 wks', l: 'to a working agent on one workflow' },
+        ],
+      },
+      { t: 'h2', text: 'What is an AI agent?' },
+      {
+        t: 'p',
+        text: 'An AI agent is software that is given a **goal**, can **look things up**, **decides** what to do next, and **takes actions** in your systems — sending a message, creating an invoice, updating the CRM — while checking its own results. Under the hood it is a language model (GPT, Claude or Gemini) connected to **tools** (your APIs, WhatsApp, email, database), **memory** of the task so far, and **rules** about what it may and may not do.',
+      },
+      {
+        t: 'p',
+        text: 'The simplest test: a chatbot can tell a customer how to get a refund; an agent can **process the refund** — check the order, confirm it is eligible, raise the credit note and message the customer.',
+      },
+      { t: 'h2', text: 'AI agent vs chatbot vs automation' },
+      {
+        t: 'table',
+        head: ['', 'Automation', 'Chatbot', 'AI agent'],
+        rows: [
+          ['Who decides the steps', 'You, in advance', 'Mostly scripted', 'The agent, within your rules'],
+          ['Handles messy input', 'No — breaks on surprises', 'Understands questions', 'Understands and acts on them'],
+          ['Takes actions in your tools', 'Yes, fixed ones', 'Rarely', 'Yes, chooses which'],
+          ['Typical example', 'New order → invoice → WhatsApp', 'Answers FAQs on your website', 'Reads a lead, qualifies it, books the call, updates CRM'],
+          ['Best for', 'Repetitive, rule-based work', 'Answering questions', 'Work that needs judgement'],
+        ],
+        caption: 'Most real systems combine all three: automation for the fixed steps, an agent only where a decision is needed.',
+      },
+      {
+        t: 'callout',
+        tone: 'warn',
+        title: 'Watch out for “agent washing”',
+        text: 'Gartner estimates only about 130 of the thousands of vendors selling “agentic AI” offer real agent capabilities — the rest are rebranded chatbots and assistants. Ask any vendor to show the agent taking an action in a real system, with a log of what it did and why.',
+      },
+      { t: 'h2', text: 'AI agent examples for Indian businesses' },
+      { t: 'p', text: 'The projects that pay off fastest are narrow, frequent and boring. These are the ones we see work:' },
+      {
+        t: 'ol',
+        items: [
+          '**WhatsApp lead agent** — replies to every enquiry in seconds, asks the right questions in Hindi or English, scores the lead, books a call and logs it in the CRM.',
+          '**Order-to-invoice** — a new order creates the invoice, posts it to Tally or the ERP, sends a PDF slip to the party on WhatsApp and alerts your team.',
+          '**Document reader** — reads invoices, credit notes, purchase orders and KYC PDFs, checks them and enters the data; flags anything odd for a person.',
+          '**Payment follow-up** — chases overdue invoices on WhatsApp with the right ledger balance, and escalates only the difficult ones.',
+          '**Stock and order status** — dealers ask “is 7576 SF in stock?” or “where is my order?” and get a live answer from your system, any time.',
+          '**Support triage** — answers routine tickets from your knowledge base and hands the rest to a person with the full history attached.',
+        ],
+      },
+      { t: 'h2', text: 'What we learned running a live system' },
+      {
+        t: 'p',
+        text: 'On the laminates dealer platform we look after, the biggest wins were not “AI” at all: an order slip PDF to the party and the admin team on every order, stock reserved first-come-first-served from the live stock sheet, invoices and credit notes read straight from PDF, and a WhatsApp alert when reserved stock arrives.',
+      },
+      {
+        t: 'quote',
+        text: 'Most of the time saved comes from reliable automation. Put AI only at the steps that genuinely need judgement — that keeps the system cheap, fast and predictable.',
+        by: 'Trident Square engineering team',
+      },
+      { t: 'h2', text: 'How much does an AI agent cost in India?' },
+      {
+        t: 'table',
+        head: ['What you need', 'Typical build cost', 'Timeline'],
+        rows: [
+          ['One workflow with a few tools (e.g. WhatsApp lead agent + CRM)', '₹3–6 lakh', '3–5 weeks'],
+          ['Agent across several systems (CRM, ERP/Tally, WhatsApp, email)', '₹6–12 lakh', '6–10 weeks'],
+          ['Multiple agents with approvals, dashboards and audit logs', '₹12 lakh+', '10+ weeks'],
+        ],
+        caption: 'Indicative ranges for India-based engineering. The exact price depends on scope and integrations and is fixed after a free scoping call.',
+      },
+      {
+        t: 'p',
+        text: 'After launch you pay a **running cost**: AI model usage (charged per token), hosting, and messaging fees if the agent uses WhatsApp — see our breakdown of [WhatsApp Business API pricing in India](/blog/whatsapp-business-api-pricing-india-2026). A well-built agent shows the **cost per task** in its dashboard, so you always know what each lead, order or document costs to handle.',
+      },
+      {
+        t: 'callout',
+        tone: 'tip',
+        title: 'The integration is usually the biggest line item',
+        text: 'Connecting to Tally, an old ERP or a custom database typically takes more effort than the AI itself. Ask for the integration work to be listed separately in any quote.',
+      },
+      { t: 'h2', text: 'Why 40% of AI agent projects fail' },
+      {
+        t: 'p',
+        text: 'Gartner predicts that [over 40% of agentic AI projects will be cancelled by the end of 2027](https://analyticsindiamag.com/ai-news-updates/gartner-predicts-that-over-40-of-agentic-ai-projects-will-be-discontinued-by-2027), because of escalating costs, unclear business value and weak risk controls. In practice we see the same five mistakes:',
+      },
+      {
+        t: 'ol',
+        items: [
+          '**Starting with a big vision instead of one workflow.** “Automate the whole business” never ships. “Reply to every WhatsApp lead within a minute” does.',
+          '**No number to beat.** If you do not know today’s cost — hours per week, leads lost, errors per month — you cannot prove the agent is worth it.',
+          '**Letting the agent do everything.** Using a language model for steps a simple rule could handle makes the system slow, costly and unpredictable.',
+          '**No human hand-off.** Every production agent needs confidence limits and a clean way to pass a case to a person, with the full context.',
+          '**No logs or evaluation.** Without a record of what the agent did and a test set of real cases, nobody trusts it — and it quietly gets switched off.',
+        ],
+      },
+      { t: 'h2', text: 'How to start: a five-step plan' },
+      {
+        t: 'ol',
+        items: [
+          '**Pick one workflow** that costs your team hours every week and happens many times a day.',
+          '**Measure it today** — volume, time per case, error rate. This is the number the agent has to beat.',
+          '**Map the steps** and mark which need judgement. Automate the rest with plain rules.',
+          '**Build a pilot on real data** in 3–5 weeks, with guardrails, a hand-off to a person and a dashboard of every action and its cost.',
+          '**Run it alongside your team** for two weeks, compare against the baseline, then expand to the next workflow.',
+        ],
+      },
+      { t: 'h2', text: 'When you should not use an AI agent' },
+      {
+        t: 'ul',
+        items: [
+          'The task is fully rule-based — a normal automation is cheaper and never “hallucinates”.',
+          'It happens a few times a month — the build cost will not pay back.',
+          'A wrong action would be costly and cannot be reviewed — keep a person in charge and let AI only suggest.',
+          'Your data lives in someone’s head or WhatsApp chats — organise the process first, then automate it.',
+        ],
+      },
+      {
+        t: 'p',
+        text: 'Related reading: [what a business AI chatbot costs in India](/blog/ai-chatbot-cost-india), [what a voice AI agent is](/blog/what-is-a-voice-ai-agent) and [WhatsApp automation for business](/blog/whatsapp-automation-for-business).',
+      },
+      {
+        t: 'cta',
+        title: 'Have a workflow in mind?',
+        text: 'Tell us what eats your team’s week. We’ll tell you whether it needs an AI agent, plain automation or neither — with a price range — in a free 30-minute call.',
+        href: '/contact',
+        label: 'Book a free scoping call',
+      },
+    ],
+    faqs: [
+      {
+        q: 'What is an AI agent in simple words?',
+        a: 'An AI agent is software that is given a goal, looks up information, decides the next step and takes actions in your systems — like replying to a lead, creating an invoice or updating your CRM — within rules you set, handing over to a person when it is unsure.',
+      },
+      {
+        q: 'What is the difference between an AI agent and a chatbot?',
+        a: 'A chatbot answers questions. An AI agent also acts: it can check an order, raise a credit note, book a meeting or update records in your tools. Many products sold as agents are really chatbots, so ask to see the agent take a real action.',
+      },
+      {
+        q: 'How much does it cost to build an AI agent in India?',
+        a: 'A focused production agent for one workflow typically costs ₹3–6 lakh to build in India, agents spanning several systems ₹6–12 lakh, and multi-agent setups more. Running costs — AI model usage, hosting and messaging — are extra and should be estimated per task before launch.',
+      },
+      {
+        q: 'Can small businesses in India use AI agents?',
+        a: 'Yes, if they start small. The best first projects are frequent, repetitive workflows such as replying to WhatsApp leads, order-to-invoice, reading PDF invoices and payment follow-ups. Pick one, measure today’s cost, and expand only once it pays back.',
+      },
+      {
+        q: 'Why do AI agent projects fail?',
+        a: 'Gartner expects over 40% of agentic AI projects to be cancelled by end-2027, mainly due to rising costs, unclear business value and weak risk controls. Common causes are starting too big, having no baseline to beat, overusing AI where simple rules work, and missing human hand-offs and logs.',
+      },
+      {
+        q: 'Will an AI agent replace my staff?',
+        a: 'In most Indian businesses it removes repetitive work rather than people: staff stop copying data and chasing follow-ups and spend that time on customers and exceptions. The agent hands every unusual case to a person.',
+      },
+    ],
+  },
+  {
     slug: 'whatsapp-business-api-pricing-india-2026',
     title: 'WhatsApp Business API pricing in India: what changed on 1 October 2026',
     excerpt:
