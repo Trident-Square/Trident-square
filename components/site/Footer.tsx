@@ -69,7 +69,10 @@ export default function Footer() {
 
       <div className="border-t border-line">
         <div className="container flex flex-col gap-3 py-6 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {site.name}. All rights reserved. ·{' '}
+            <Link href="/privacy" className="link-underline">Privacy policy</Link>
+          </p>
           <p className="font-mono text-[11px] uppercase tracking-[0.14em]">AI &amp; software studio · Noida, India</p>
         </div>
       </div>

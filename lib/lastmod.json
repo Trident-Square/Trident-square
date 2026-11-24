@@ -36,56 +36,60 @@
     "date": "2026-11-12"
   },
   "/contact": {
-    "hash": "07469f932d88",
-    "date": "2026-10-24"
+    "hash": "c4ef2a6f6ba5",
+    "date": "2026-11-24"
   },
   "/partners": {
-    "hash": "40f1960f7aeb",
-    "date": "2026-11-06"
+    "hash": "e10dab5a5cf4",
+    "date": "2026-11-24"
+  },
+  "/privacy": {
+    "hash": "ecac5a639dce",
+    "date": "2026-11-24"
   },
   "/services": {
     "hash": "494f53a41a0b",
     "date": "2026-10-17"
   },
   "/services/ai-agent-development": {
-    "hash": "9d002b1df54b",
-    "date": "2026-10-17"
+    "hash": "b8f3aa728ea4",
+    "date": "2026-11-24"
   },
   "/services/ai-chatbot-development": {
-    "hash": "42896e69dd74",
-    "date": "2026-10-17"
+    "hash": "db1e36a8a1b4",
+    "date": "2026-11-24"
   },
   "/services/business-process-automation": {
-    "hash": "5c417464c91f",
-    "date": "2026-10-17"
+    "hash": "24bee7a0e6d2",
+    "date": "2026-11-24"
   },
   "/services/cloud-devops": {
-    "hash": "7cc29bab9738",
-    "date": "2026-10-17"
+    "hash": "c07b76429365",
+    "date": "2026-11-24"
   },
   "/services/custom-software-development": {
-    "hash": "c8db85843de5",
-    "date": "2026-10-17"
+    "hash": "c26da0417612",
+    "date": "2026-11-24"
   },
   "/services/ecommerce-development": {
-    "hash": "9c6cc870e3f0",
-    "date": "2026-10-17"
+    "hash": "86e6a78ab1ef",
+    "date": "2026-11-24"
   },
   "/services/mobile-app-development": {
-    "hash": "998f0d37f9cd",
-    "date": "2026-10-17"
+    "hash": "e69cedc9f7c5",
+    "date": "2026-11-24"
   },
   "/services/ui-ux-design": {
-    "hash": "7d7eec82f784",
-    "date": "2026-10-17"
+    "hash": "c4ba56cf8178",
+    "date": "2026-11-24"
   },
   "/services/voice-ai-agents": {
-    "hash": "577f61af179f",
-    "date": "2026-10-17"
+    "hash": "539183858f5f",
+    "date": "2026-11-24"
   },
   "/services/web-development": {
-    "hash": "2d5c67191fef",
-    "date": "2026-10-17"
+    "hash": "711e52397756",
+    "date": "2026-11-24"
   },
   "/work": {
     "hash": "066e8eeba9a3",

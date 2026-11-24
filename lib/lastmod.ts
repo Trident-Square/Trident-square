@@ -87,6 +87,7 @@ function sources(root: string): Record<string, Source> {
   page('/blog', 'app/blog/page.tsx', 'lib/blog.ts')
   page('/about', 'app/about/page.tsx')
   page('/contact', 'app/contact/page.tsx')
+  page('/privacy', 'app/privacy/page.tsx')
 
   const dynamic: [string, string, string][] = [
     ['/services/', 'lib/services.ts', 'app/services/[slug]/page.tsx'],

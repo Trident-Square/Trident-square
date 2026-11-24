@@ -8,7 +8,7 @@ import { pageDates } from '@/lib/lastmod'
 const at = (day: string) => new Date(`${day}T09:00:00+05:30`)
 const later = (a: string, b?: string) => (b && b > a ? b : a)
 
-const PRIORITY: [RegExp, number, 'weekly' | 'monthly'][] = [
+const PRIORITY: [RegExp, number, 'weekly' | 'monthly' | 'yearly'][] = [
   [/^\/$/, 1, 'weekly'],
   [/^\/services(\/|$)/, 0.9, 'monthly'],
   [/^\/(partners|blog)$/, 0.8, 'weekly'],
@@ -16,9 +16,10 @@ const PRIORITY: [RegExp, number, 'weekly' | 'monthly'][] = [
   [/^\/contact$/, 0.7, 'monthly'],
   [/^\/(work|blog)\//, 0.7, 'monthly'],
   [/^\/about$/, 0.6, 'monthly'],
+  [/^\/privacy$/, 0.3, 'yearly'],
 ]
 
-const ORDER = ['/', '/services', '/services/', '/partners', '/work', '/work/', '/blog', '/blog/', '/about', '/contact']
+const ORDER = ['/', '/services', '/services/', '/partners', '/work', '/work/', '/blog', '/blog/', '/about', '/contact', '/privacy']
 const rank = (p: string) => {
   const i = ORDER.findIndex((o) => (o.endsWith('/') && o !== '/' ? p.startsWith(o) : p === o))
   return i < 0 ? ORDER.length : i

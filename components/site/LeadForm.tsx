@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import Arrow from './Arrow'
 import { services } from '@/lib/services'
@@ -162,7 +163,8 @@ export default function LeadForm({ kind = 'project', defaultService }: { kind?: 
       <div className="mt-7 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-sm text-[12.5px] leading-relaxed text-muted">
           After you submit we’ll open WhatsApp with your details typed in, so you can talk to us directly. Your details are
-          used only to respond to you — never sold or shared.
+          used only to respond to you — never sold or shared. See our{' '}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">privacy policy</Link>.
         </p>
         <button type="submit" disabled={status === 'sending'} className={cn('btn-primary shrink-0', status === 'sending' && 'opacity-70')}>
           {status === 'sending' ? 'Sending…' : kind === 'partner' ? 'Apply on WhatsApp' : 'Send on WhatsApp'}
